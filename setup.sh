@@ -9,4 +9,5 @@ ln -sf ~/dotfiles/.zprezto/runcoms/zlogin ~/.zlogin
 
 ln -sf ~/dotfiles/.config/nvim/init.vim ~/.config/nvim/init.vim
 ln -sf ~/dotfiles/.vim ~/.vim
+ln -sf ~/dotfiles/.vimrc ~/.vimrc
 ln -sf ~/dotfiles/.config/nvim/plugins ~/.config/nvim/plugins
