@@ -8,6 +8,9 @@ repo = 'altercation/vim-colors-solarized'
 repo = 'ryanoasis/vim-devicons'
 
 [[plugins]]
+repo = 'jiangmiao/auto-pairs'
+
+[[plugins]]
 repo = 'Shougo/defx.nvim'
 depends = ['defx-git', 'defx-icons']
 hook_add = """

@@ -17,7 +17,12 @@ export PYENV_ROOT=/Users/iz/.pyenv
 # Customize to your needs...
 alias prezto-update="git pull && git submodule update --init --recursive"
 alias ls="ls -lt"
+alias vi="nvim" # this is benri
+
+eval "$(gh completion -s zsh)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export EDITOR=vi

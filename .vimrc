@@ -31,6 +31,13 @@ if dein#load_state(s:dein_dir)
   call dein#end()
   call dein#save_state()
 endif
+" plugin remove check {{{
+let s:removed_plugins = dein#check_clean()
+if len(s:removed_plugins) > 0
+  call map(s:removed_plugins, "delete(v:val, 'rf')")
+  call dein#recache_runtimepath()
+endif
+" }}}
 if dein#check_install()
   call dein#install()
 endif

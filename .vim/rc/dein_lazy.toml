@@ -16,6 +16,10 @@ repo = 'keith/swift.vim'
 on_ft = ['swift']
 
 [[plugins]]
+repo = 'hashivim/vim-terraform'
+on_ft = ['tf', 'tfstate']
+
+[[plugins]]
 repo = 'digitaltoad/vim-jade'
 on_ft = ['jade']
 
