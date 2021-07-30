@@ -16,7 +16,7 @@ export PYENV_ROOT=/Users/iz/.pyenv
 
 # Customize to your needs...
 alias prezto-update="git pull && git submodule update --init --recursive"
-alias ls="ls -lt"
+alias ls="lsd -al"
 alias vi="nvim" # this is benri
 
 eval "$(gh completion -s zsh)"

@@ -2,6 +2,9 @@ if &compatible
   set nocompatible " Be iMproved
 endif
 
+set termguicolors
+colorscheme NeoSolarized
+
 " Required:
 syntax enable
 
@@ -12,6 +15,7 @@ let s:dein_dir = expand('~/.cache/dein')
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
+
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')

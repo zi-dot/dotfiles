@@ -6,3 +6,5 @@ set tabstop=4
 set shiftwidth=4
 set splitright
 set hls
+
+runtime ./plug.vim
