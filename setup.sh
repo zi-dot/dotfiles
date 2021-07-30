@@ -1,9 +1,11 @@
 #!/bin/sh
 
+brew install neovim
 brew install tmux
 
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \                                                                             
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+brew install python3
 pip3 install --user pynvim
 
 ln -sf ~/dotfiles/.zprezto/runcoms/zshrc ~/.zshrc
