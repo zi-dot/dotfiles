@@ -108,7 +108,7 @@ autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 
 " Imports "{{{
 " ---------------------------------------------------------------------
-runtime! ./plug.vim
+runtime ./plug.vim
 if has("unix")
   let s:uname = system("uname -s")
   " Do Mac stuff
@@ -117,7 +117,7 @@ if has("unix")
   endif
 endif
 
-runtime! ./maps.vim
+runtime ./maps.vim
 "}}}
 
 " Syntax theme "{{{
@@ -143,8 +143,5 @@ endif
 " ---------------------------------------------------------------------
 set exrc
 "}}}
-
-runtime! ./plugins/*.vim
-
 
 " vim: set foldmethod=marker foldlevel=0:
