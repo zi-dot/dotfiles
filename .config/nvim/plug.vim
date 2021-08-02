@@ -24,6 +24,8 @@ if has("nvim")
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'itchyny/lightline.vim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'lewis6991/gitsigns.nvim'
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }
