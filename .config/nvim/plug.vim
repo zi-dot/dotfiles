@@ -9,7 +9,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'cohama/lexima.vim'
 
 if has("nvim")
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'hoob3rt/lualine.nvim'
   Plug 'kristijanhusak/defx-git'
   Plug 'kristijanhusak/defx-icons'
@@ -24,6 +23,7 @@ if has("nvim")
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'itchyny/lightline.vim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }
