@@ -29,6 +29,7 @@ if has("nvim")
   Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+  Plug 'alvan/vim-closetag'
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }
