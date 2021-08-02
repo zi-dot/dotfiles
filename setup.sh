@@ -2,6 +2,11 @@
 
 brew install neovim
 brew install tmux
+brew uninstall --force node
+brew install nodebrew
+nodebrew setup
+nodebrew install-binary latest
+
 npm install -g typescript-language-server
 brew install ripgrep
 
