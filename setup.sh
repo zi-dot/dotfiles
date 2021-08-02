@@ -2,6 +2,8 @@
 
 brew install neovim
 brew install tmux
+npm install -g typescript-language-server
+brew install ripgrep
 
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \                                                                             
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
