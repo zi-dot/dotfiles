@@ -13,6 +13,7 @@ fi
 export PATH=/opt/homebrew/bin:$PATH
 export PATH=/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby:$PATH
 export PYENV_ROOT=/Users/iz/.pyenv
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # Customize to your needs...
 alias prezto-update="git pull && git submodule update --init --recursive"
