@@ -28,9 +28,10 @@ if has("nvim")
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', 'php'] }
   Plug 'alvan/vim-closetag'
   Plug 'mattn/emmet-vim'
+  Plug 'jwalton512/vim-blade'
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }

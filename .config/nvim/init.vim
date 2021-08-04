@@ -23,6 +23,7 @@ set cmdheight=1
 set laststatus=2
 set scrolloff=10
 set expandtab
+set autoread
 "let loaded_matchparen = 1
 set shell=zsh
 set backupskip=/tmp/*,/private/tmp/*
