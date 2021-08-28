@@ -30,7 +30,8 @@ if has("nvim")
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
   Plug 'alvan/vim-closetag'
-  Plug 'mattn/emmet-vim'
+  Plug 'mattn/emmet-vim', { 'for': ['javascript', 'jsx', 'html', 'css'] }
+  Plug 'Galooshi/vim-import-js'
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }
