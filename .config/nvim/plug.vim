@@ -9,6 +9,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'cohama/lexima.vim'
 
 if has("nvim")
+  Plug 'prabirshrestha/vim-lsp'
   Plug 'hoob3rt/lualine.nvim'
   Plug 'kristijanhusak/defx-git'
   Plug 'kristijanhusak/defx-icons'
@@ -23,15 +24,15 @@ if has("nvim")
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'itchyny/lightline.vim'
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-lua/plenary.nvim'
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
+  \ 'do': 'npm install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', 'php'] }
   Plug 'alvan/vim-closetag'
   Plug 'mattn/emmet-vim'
   Plug 'jwalton512/vim-blade'
+  Plug 'kabouzeid/nvim-lspinstall'
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }

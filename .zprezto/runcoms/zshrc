@@ -40,3 +40,6 @@ if [ -f '/Users/ryoji.kouno/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ryo
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/ryoji.kouno/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ryoji.kouno/google-cloud-sdk/completion.zsh.inc'; fi
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+setopt prompt_cr
+setopt prompt_sp

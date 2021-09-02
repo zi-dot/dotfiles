@@ -15,6 +15,7 @@ set fileencodings=utf-8,sjis,euc-jp,latin
 set encoding=utf-8
 set title
 set autoindent
+set smartindent
 set background=dark
 set nobackup
 set hlsearch
@@ -50,9 +51,7 @@ set smarttab
 filetype plugin indent on
 set shiftwidth=4
 set tabstop=4
-set ai "Auto indent
-set si "Smart indent
-set nowrap "No Wrap lines
+set wrap "No Wrap lines
 set backspace=start,eol,indent
 " Finding files - Search down into subfolders
 set path+=**
@@ -146,4 +145,5 @@ endif
 set exrc
 "}}}
 
+:set iskeyword=@,48-57,_,192-255,$
 " vim: set foldmethod=marker foldlevel=0:
