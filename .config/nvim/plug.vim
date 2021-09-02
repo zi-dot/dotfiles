@@ -30,9 +30,10 @@ if has("nvim")
   \ 'do': 'npm install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', 'php'] }
   Plug 'alvan/vim-closetag'
-  Plug 'mattn/emmet-vim'
   Plug 'jwalton512/vim-blade'
   Plug 'kabouzeid/nvim-lspinstall'
+  Plug 'mattn/emmet-vim', { 'for': ['javascript', 'jsx', 'html', 'css'] }
+  Plug 'Galooshi/vim-import-js'
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }

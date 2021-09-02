@@ -15,6 +15,8 @@ nnoremap dw vb"_d
 " Select all
 nmap <C-a> gg<S-v>G
 
+inoremap <silent> jj <ESC>
+
 " Save with root permission
 command! W w !sudo tee > /dev/null %
 
@@ -63,4 +65,4 @@ nmap <C-w><down> <C-w>-
 
 " Nice to have
 nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
-nnoremap <silent> <Esc><Esc> :nohl<CR>
+nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
