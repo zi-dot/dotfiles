@@ -1,3 +1,5 @@
 # My dotfiles
-Give more dotfiles
 
+my settings
+
+nvim, zprezto, tmux

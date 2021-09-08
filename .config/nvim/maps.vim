@@ -65,4 +65,3 @@ nmap <C-w><down> <C-w>-
 
 " Nice to have
 nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
-nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
