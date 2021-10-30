@@ -146,4 +146,5 @@ set exrc
 "}}}
 
 :set iskeyword=@,48-57,_,192-255,$
+let mapleader = "\<space>"
 " vim: set foldmethod=marker foldlevel=0:

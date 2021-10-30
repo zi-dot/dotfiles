@@ -28,7 +28,7 @@ if has("nvim")
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'prettier/vim-prettier', {
   \ 'do': 'npm install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', 'php', 'pug'] }
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'typescriptreact', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', 'php', 'pug'] }
   Plug 'alvan/vim-closetag'
   Plug 'jwalton512/vim-blade'
   Plug 'kabouzeid/nvim-lspinstall'
