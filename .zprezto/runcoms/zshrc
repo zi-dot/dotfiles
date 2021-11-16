@@ -19,7 +19,7 @@ export PATH="/Users/ryoji.kouno/.deno/bin:$PATH"
 # Customize to your needs...
 alias prezto-update="git pull && git submodule update --init --recursive"
 alias ls="lsd -al"
-alias vi="nvim" # this is benri
+alias vi="~/Downloads/nvim-osx64/bin/nvim" # this is benri
 
 eval "$(gh completion -s zsh)"
 

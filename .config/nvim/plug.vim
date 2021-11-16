@@ -17,7 +17,6 @@ if has("nvim")
   Plug 'neovim/nvim-lspconfig'
   Plug 'glepnir/lspsaga.nvim'
   Plug 'folke/lsp-colors.nvim'
-  Plug 'nvim-lua/completion-nvim'
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'nvim-lua/popup.nvim'
@@ -34,9 +33,15 @@ if has("nvim")
   Plug 'kabouzeid/nvim-lspinstall'
   Plug 'mattn/emmet-vim', { 'for': ['javascript', 'jsx', 'html', 'css'] }
   Plug 'Galooshi/vim-import-js'
+  Plug 'github/copilot.vim'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'onsails/lspkind-nvim'
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 
 call plug#end()
