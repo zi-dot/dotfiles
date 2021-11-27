@@ -40,6 +40,8 @@ if has("nvim")
   Plug 'hrsh7th/cmp-cmdline'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'onsails/lspkind-nvim'
+  Plug 'L3MON4D3/LuaSnip'
+  Plug 'saadparwaiz1/cmp_luasnip'
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }
