@@ -15,6 +15,7 @@ if has("nvim")
   Plug 'kristijanhusak/defx-icons'
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'neovim/nvim-lspconfig'
+  Plug 'williamboman/nvim-lsp-installer'
   Plug 'glepnir/lspsaga.nvim'
   Plug 'folke/lsp-colors.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
@@ -30,7 +31,6 @@ if has("nvim")
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'typescriptreact', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', 'php', 'pug'] }
   Plug 'alvan/vim-closetag'
   Plug 'jwalton512/vim-blade'
-  Plug 'kabouzeid/nvim-lspinstall'
   Plug 'mattn/emmet-vim', { 'for': ['javascript', 'jsx', 'html', 'css'] }
   Plug 'Galooshi/vim-import-js'
   Plug 'github/copilot.vim'
