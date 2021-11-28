@@ -6,8 +6,8 @@ brew uninstall --force node
 brew install nodebrew
 nodebrew setup
 nodebrew install-binary latest
+npm install -g typescript typescript-language-server import-js
 
-npm install -g typescript-language-server
 brew install ripgrep
 
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \                                                                             
