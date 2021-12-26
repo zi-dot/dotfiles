@@ -20,6 +20,7 @@ export PATH="/Users/ryoji.kouno/.deno/bin:$PATH"
 alias prezto-update="git pull && git submodule update --init --recursive"
 alias ls="lsd -al"
 alias vi="nvim" # this is benri
+alias cdw="cd ~/Documents/workingon"
 
 eval "$(gh completion -s zsh)"
 

@@ -10,6 +10,7 @@ Plug 'cohama/lexima.vim'
 
 if has("nvim")
   Plug 'prabirshrestha/vim-lsp'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'hoob3rt/lualine.nvim'
   Plug 'kristijanhusak/defx-git'
   Plug 'kristijanhusak/defx-icons'

@@ -147,4 +147,14 @@ set exrc
 
 :set iskeyword=@,48-57,_,192-255,$
 let mapleader = "\<space>"
+nnoremap <Leader> <Nop>
+xnoremap <Leader> <Nop>
+nnoremap [dev]    <Nop>
+xnoremap [dev]    <Nop>
+nmap     m        [dev]
+xmap     m        [dev]
+nnoremap [ff]     <Nop>
+xnoremap [ff]     <Nop>
+nmap     z        [ff]
+xmap     z        [ff]
 " vim: set foldmethod=marker foldlevel=0:
