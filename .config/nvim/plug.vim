@@ -13,6 +13,8 @@ if has("nvim")
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/remote', 'do': ':UpdateRemotePlugins' }
   Plug 'ryanoasis/vim-devicons'
+  Plug 'romgrk/barbar.nvim'
+  Plug 'kyazdani42/nvim-web-devicons'
   Plug 'prabirshrestha/vim-lsp'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'hoob3rt/lualine.nvim'
