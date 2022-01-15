@@ -149,4 +149,9 @@ let g:python3_host_prog="~/.pyenv/shims/python"
 
 :set iskeyword=@,48-57,_,192-255,$
 let mapleader = "\<space>"
-" vim: set foldmethod=marker foldlevel=0:
+nnoremap <Leader> <Nop>
+xnoremap <Leader> <Nop>
+nnoremap [dev]    <Nop>
+xnoremap [dev]    <Nop>
+nmap     m        [dev]
+xmap     m        [dev]
