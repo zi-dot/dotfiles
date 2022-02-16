@@ -22,7 +22,6 @@ if has("nvim")
   Plug 'kristijanhusak/defx-icons'
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-  Plug 'kyazdani42/nvim-web-devicons'
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'itchyny/lightline.vim'
@@ -32,7 +31,6 @@ if has("nvim")
   \ 'do': 'npm install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'typescriptreact', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', 'php', 'pug'] }
   Plug 'alvan/vim-closetag'
-  Plug 'jwalton512/vim-blade'
   Plug 'mattn/emmet-vim', { 'for': ['javascript', 'jsx', 'html', 'css'] }
   Plug 'Galooshi/vim-import-js'
   Plug 'github/copilot.vim'
@@ -44,6 +42,7 @@ if has("nvim")
   Plug 'onsails/lspkind-nvim'
   Plug 'L3MON4D3/LuaSnip'
   Plug 'saadparwaiz1/cmp_luasnip'
+  Plug 'https://github.com/skanehira/jumpcursor.vim'
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }

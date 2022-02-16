@@ -153,3 +153,10 @@ nnoremap [dev]    <Nop>
 xnoremap [dev]    <Nop>
 nmap     m        [dev]
 xmap     m        [dev]
+:source $VIMRUNTIME/macros/matchit.vim
+command! Profile call s:command_profile()
+function! s:command_profile() abort
+  profile start ~/profile.txt
+  profile func *
+  profile file *
+endfunction
