@@ -26,4 +26,5 @@ ln -sf ~/dotfiles/.vim ~/.vim
 ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/.tmux.powerline.conf ~/.tmux.powerline.conf
 
+ln -sf ~/dotfiles/.config/fish/config.fish ~/.config/fish/config.fish
 ln -sf ~/dotfiles/.config/nvim ~/.config/nvim
