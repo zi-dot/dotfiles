@@ -35,6 +35,9 @@ fisher install jethrokuan/fzf
 ln -sf ~/dotfiles/.config/fish/config.fish ~/.config/fish/config.fish
 ln -sf ~/dotfiles/.config/nvim ~/.config/nvim
 
-ln -sf ~/dotfiles/.config/fish/fish_variables ~/.config/fish/fish_variables
+ln -sf ~/dotfiles/.config/fish/config-osx.fish ~/.config/fish/config-osx.fish
+
+ln -sf ~/dotfiles/hyper/.hyper.js ~/.hyper.js
+ln -sf ~/dotfiles/hyper/package.json ~/.hyper_plugins/package.json
 
 
