@@ -18,7 +18,7 @@ nmap     <silent> [dev]a  <Plug>(coc-codeaction-selected)iw
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 
 function! s:coc_typescript_settings() abort
-  nnoremap <silent> <buffer> [dev]f :<C-u>CocCommand eslint.executeAutofix<CR>:CocCommand prettier.formatFile<CR>
+  nnoremap <silent> <buffer> [dev]fi :<C-u>CocCommand eslint.executeAutofix<CR>:CocCommand prettier.formatFile<CR>
 endfunction
 
 augroup coc_ts

@@ -132,10 +132,6 @@ if exists("&termguicolors") && exists("&winblend")
   set wildoptions=pum
   set pumblend=5
   set background=dark
-  " Use NeoSolarized
-  let g:neosolarized_termtrans=1
-  runtime ./colors/NeoSolarized.vim
-  colorscheme NeoSolarized
 endif
 
 "}}}
@@ -155,3 +151,14 @@ nnoremap [dev]    <Nop>
 xnoremap [dev]    <Nop>
 nmap     m        [dev]
 xmap     m        [dev]
+:source $VIMRUNTIME/macros/matchit.vim
+command! Profile call s:command_profile()
+function! s:command_profile() abort
+  profile start ~/profile.txt
+  profile func *
+  profile file *
+endfunction
+
+let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox
+
