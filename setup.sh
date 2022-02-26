@@ -26,5 +26,13 @@ ln -sf ~/dotfiles/.vim ~/.vim
 ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/.tmux.powerline.conf ~/.tmux.powerline.conf
 
+brew install fish
+curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+fisher install ilancosman/tide
+fisher install jethrokuan/z
+fisher install jethrokuan/fzf
+
 ln -sf ~/dotfiles/.config/fish/config.fish ~/.config/fish/config.fish
 ln -sf ~/dotfiles/.config/nvim ~/.config/nvim
+
+

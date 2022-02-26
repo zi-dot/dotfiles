@@ -156,3 +156,7 @@ function! s:command_profile() abort
   profile func *
   profile file *
 endfunction
+
+let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox
+
