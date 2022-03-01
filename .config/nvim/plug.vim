@@ -43,6 +43,7 @@ if has("nvim")
   Plug 'L3MON4D3/LuaSnip'
   Plug 'saadparwaiz1/cmp_luasnip'
   Plug 'https://github.com/skanehira/jumpcursor.vim'
+  Plug 'rust-lang/rust.vim'
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }
