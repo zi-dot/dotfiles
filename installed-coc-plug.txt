@@ -1,0 +1,10 @@
+coc-eslint
+coc-eslint8
+coc-fzf-preview
+coc-git
+coc-json
+coc-lists
+coc-phpls
+coc-prettier
+coc-rust-analyzer
+coc-tsserver
