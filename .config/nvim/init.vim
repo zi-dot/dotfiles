@@ -107,17 +107,6 @@ autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 autocmd FileType liquid setlocal shiftwidth=4 tabstop=4
 "}}}
 
-" Imports "{{{
-" ---------------------------------------------------------------------
-runtime ./plug.vim
-if has("unix")
-  let s:uname = system("uname -s")
-  " Do Mac stuff
-  if s:uname == "Darwin\n"
-    runtime ./macos.vim
-  endif
-endif
-
 runtime ./maps.vim
 "}}}
 
@@ -161,4 +150,6 @@ endfunction
 
 let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
+
+lua require('plugins')
 
