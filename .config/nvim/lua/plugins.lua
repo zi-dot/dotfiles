@@ -135,4 +135,11 @@ return require('packer').startup(function()
 			require("pluginconfig/telescope")
 		end,
 	})
+    use({
+    "jose-elias-alvarez/null-ls.nvim",
+    config = function()
+        require("pluginconfig/null-ls")
+    end,
+    requires = { "nvim-lua/plenary.nvim" },
+})
 end)

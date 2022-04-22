@@ -298,6 +298,12 @@ _G.packer_plugins = {
     path = "/Users/ryoji.kouno/.local/share/nvim/site/pack/packer/start/nui.nvim",
     url = "https://github.com/MunifTanjim/nui.nvim"
   },
+  ["null-ls.nvim"] = {
+    config = { "\27LJ\2\n4\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\25pluginconfig/null-ls\frequire\0" },
+    loaded = true,
+    path = "/Users/ryoji.kouno/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
+  },
   ["nvim-autopairs"] = {
     after = { "nvim-cmp" },
     loaded = false,
@@ -307,7 +313,7 @@ _G.packer_plugins = {
     url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-nvim-lua", "cmp-omni", "cmp-nvim-lsp", "cmp-treesitter", "cmp_luasnip", "copilot-cmp", "cmp-buffer", "cmp-cmdline", "cmp-emoji", "cmp-path", "cmp-mocword", "cmp-nvim-lsp-signature-help", "cmp-nvim-lsp-document-symbol", "cmp-spell", "cmp-calc" },
+    after = { "cmp-cmdline", "cmp-mocword", "cmp-nvim-lsp-document-symbol", "cmp-nvim-lsp-signature-help", "cmp-nvim-lua", "cmp-nvim-lsp", "cmp-omni", "cmp-path", "cmp_luasnip", "copilot-cmp", "cmp-calc", "cmp-treesitter", "cmp-spell", "cmp-emoji", "cmp-buffer" },
     config = { "\27LJ\2\n5\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\26pluginconfig/nvim-cmp\frequire\0" },
     load_after = {
       LuaSnip = true,
@@ -332,7 +338,7 @@ _G.packer_plugins = {
     url = "https://github.com/williamboman/nvim-lsp-installer"
   },
   ["nvim-lspconfig"] = {
-    after = { "nlsp-settings.nvim", "nvim-lsp-installer" },
+    after = { "nvim-lsp-installer", "nlsp-settings.nvim" },
     config = { "\27LJ\2\n;\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0 pluginconfig/nvim-lspconfig\frequire\0" },
     load_after = {
       ["cmp-nvim-lsp"] = true
@@ -392,6 +398,10 @@ time([[Defining packer_plugins]], false)
 time([[Config for navigator.lua]], true)
 try_loadstring("\27LJ\2\n7\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\28/pluginconfig/navigator\frequire\0", "config", "navigator.lua")
 time([[Config for navigator.lua]], false)
+-- Config for: null-ls.nvim
+time([[Config for null-ls.nvim]], true)
+try_loadstring("\27LJ\2\n4\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\25pluginconfig/null-ls\frequire\0", "config", "null-ls.nvim")
+time([[Config for null-ls.nvim]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
@@ -402,7 +412,7 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au VimEnter * ++once lua require("packer.load")({'vim-illuminate', 'lspkind-nvim', 'nvim-autopairs', 'LuaSnip', 'neo-tree.nvim', 'telescope.nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au VimEnter * ++once lua require("packer.load")({'lspkind-nvim', 'LuaSnip', 'nvim-autopairs', 'neo-tree.nvim', 'vim-illuminate', 'telescope.nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end
