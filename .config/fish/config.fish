@@ -54,4 +54,3 @@ if status is-interactive
     set -x PATH ~/dotfiles/commands/ $PATH
 end
 
-source ~/.phpbrew/phpbrew.fish
