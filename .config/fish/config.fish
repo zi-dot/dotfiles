@@ -54,3 +54,6 @@ if status is-interactive
     set -x PATH ~/dotfiles/commands/ $PATH
 end
 
+set -gx DENO_INSTALL $HOME/.deno
+set -gx PATH $DENO_INSTALL/bin $PATH
+

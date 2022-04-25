@@ -1,4 +1,5 @@
 require 'navigator'.setup({
+    lsp_installer = true,
     lsp_signature_help = true,
     icons = {
         code_action_icon = "",
@@ -30,5 +31,8 @@ require 'navigator'.setup({
             type = ' ',
             field = '🏈',
         },
+    },
+    lsp = {
+        format_on_save = false,
     }
 })
