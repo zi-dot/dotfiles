@@ -77,7 +77,7 @@ require("neo-tree").setup({
             width = 30,
             mappings = {
                 ["<2-LeftMouse>"] = "open",
-                ["e"] = "open",
+                ["l"] = "open",
                 ["O"] = "open_split",
                 ["o"] = "open_vsplit",
                 ["C"] = "close_node",

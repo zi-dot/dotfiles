@@ -173,6 +173,9 @@ return require("packer").startup(function()
     use({
         "vuki656/package-info.nvim",
         requires = "MunifTanjim/nui.nvim",
+        config = function()
+            require("/pluginconfig/package")
+        end,
     })
     use({
         "bennypowers/nvim-regexplainer",
