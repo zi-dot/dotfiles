@@ -3,7 +3,13 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function()
     use({ 'wbthomason/packer.nvim', opt = true })
     -- Hilights
-    use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
+    use({
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+        config = function()
+            require('/pluginconfig/treesitter')
+        end
+    })
 
     -- pre dependency for many plugins
     use({ "nvim-lua/popup.nvim" })
@@ -19,8 +25,12 @@ return require('packer').startup(function()
 
     -- lsp & navigator
     use({ 'neovim/nvim-lspconfig' })
-    use({ 'williamboman/nvim-lsp-installer' })
-
+    use({
+        'williamboman/nvim-lsp-installer',
+        config = function()
+            require("/pluginconfig/nvim-lsp-installer")
+        end
+    })
     -- Auto Completion
     use({
         'windwp/nvim-autopairs', opt = true, event = "VimEnter",
@@ -45,10 +55,17 @@ return require('packer').startup(function()
             require("/pluginconfig/lspkind-nvim")
         end,
     })
+    use({
+        "folke/lsp-colors.nvim",
+        config = function()
+            require("/pluginconfig/lsp-colors")
+        end
+    })
 
 
     use({ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" })
     use({ "hrsh7th/cmp-nvim-lsp-document-symbol", after = "nvim-cmp" })
+    use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" })
     use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
     use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
     use({ "hrsh7th/cmp-omni", after = "nvim-cmp" })
@@ -68,11 +85,17 @@ return require('packer').startup(function()
         after = "copilot.vim",
     })
 
-    use({
-        'ray-x/navigator.lua',
-        requires = { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
+    use {
+        'tami5/lspsaga.nvim',
         config = function()
-            require('/pluginconfig/navigator')
+            require('/pluginconfig/lspsaga')
+        end
+    }
+
+    use({
+        'jose-elias-alvarez/null-ls.nvim',
+        config = function()
+            require('/pluginconfig/null-ls')
         end
     })
 

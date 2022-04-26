@@ -8,6 +8,11 @@ local has_words_before = function()
 end
 
 cmp.setup({
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end,
+    },
     formatting = {
         format = require("lspkind").cmp_format({
             with_text = true,
@@ -103,6 +108,7 @@ cmp.setup({
         { name = "emoji", insert = true, priority = 60 },
         { name = "nvim_lua", priority = 50 },
         { name = "nvim_lsp_signature_help", priority = 80 },
+        { name = "vsnip", priority = 80 },
     }, {
         { name = "buffer", priority = 50 },
         { name = "omni", priority = 40 },
@@ -139,6 +145,3 @@ cmp.setup.cmdline(":", {
     },
     sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
 })
-
-vim.cmd("autocmd FileType guihua lua require('cmp').setup.buffer { enabled = false }")
-vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")
