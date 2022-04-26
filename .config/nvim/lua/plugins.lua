@@ -1,42 +1,44 @@
-vim.cmd [[packadd packer.nvim]]
+vim.cmd([[packadd packer.nvim]])
 
-return require('packer').startup(function()
-    use({ 'wbthomason/packer.nvim', opt = true })
+return require("packer").startup(function()
+    use({ "wbthomason/packer.nvim", opt = true })
     -- Hilights
     use({
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate',
+        "nvim-treesitter/nvim-treesitter",
+        run = ":TSUpdate",
         config = function()
-            require('/pluginconfig/treesitter')
-        end
+            require("/pluginconfig/treesitter")
+        end,
     })
 
     -- pre dependency for many plugins
     use({ "nvim-lua/popup.nvim" })
-    use({ 'nvim-lua/plenary.nvim' })
+    use({ "nvim-lua/plenary.nvim" })
 
     -- telescope
     use({
-        'nvim-telescope/telescope.nvim',
+        "nvim-telescope/telescope.nvim",
         config = function()
-            require('/pluginconfig/telescope')
-        end
+            require("/pluginconfig/telescope")
+        end,
     })
 
     -- lsp & navigator
-    use({ 'neovim/nvim-lspconfig' })
+    use({ "neovim/nvim-lspconfig" })
     use({
-        'williamboman/nvim-lsp-installer',
+        "williamboman/nvim-lsp-installer",
         config = function()
             require("/pluginconfig/nvim-lsp-installer")
-        end
+        end,
     })
     -- Auto Completion
     use({
-        'windwp/nvim-autopairs', opt = true, event = "VimEnter",
+        "windwp/nvim-autopairs",
+        opt = true,
+        event = "VimEnter",
         config = function()
-            require('/pluginconfig/nvim-autopairs')
-        end
+            require("/pluginconfig/nvim-autopairs")
+        end,
     })
     use({
         "hrsh7th/nvim-cmp",
@@ -59,9 +61,8 @@ return require('packer').startup(function()
         "folke/lsp-colors.nvim",
         config = function()
             require("/pluginconfig/lsp-colors")
-        end
+        end,
     })
-
 
     use({ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" })
     use({ "hrsh7th/cmp-nvim-lsp-document-symbol", after = "nvim-cmp" })
@@ -83,20 +84,25 @@ return require('packer').startup(function()
     use({
         "zbirenbaum/copilot.lua",
         after = "copilot.vim",
+        config = function()
+            vim.schedule(function()
+                require("copilot")
+            end)
+        end,
     })
 
-    use {
-        'tami5/lspsaga.nvim',
+    use({
+        "tami5/lspsaga.nvim",
         config = function()
-            require('/pluginconfig/lspsaga')
-        end
-    }
+            require("/pluginconfig/lspsaga")
+        end,
+    })
 
     use({
-        'jose-elias-alvarez/null-ls.nvim',
+        "jose-elias-alvarez/null-ls.nvim",
         config = function()
-            require('/pluginconfig/null-ls')
-        end
+            require("/pluginconfig/null-ls")
+        end,
     })
 
     use({
@@ -108,7 +114,88 @@ return require('packer').startup(function()
             "MunifTanjim/nui.nvim",
         },
         config = function()
-            require('/pluginconfig/neo-tree')
-        end
+            require("/pluginconfig/neo-tree")
+        end,
+    })
+
+    -- buffer
+    use({ "akinsho/bufferline.nvim", tag = "*", requires = "kyazdani42/nvim-web-devicons" })
+
+    -- Hilights
+    use({
+        "norcalli/nvim-colorizer.lua",
+        config = function()
+            require("colorizer").setup()
+        end,
+    })
+
+    -- Scroll bar
+    use({
+        "petertriho/nvim-scrollbar",
+        config = function()
+            require("scrollbar").setup()
+        end,
+    })
+
+    -- Text Editting
+    use({ "machakann/vim-sandwich" })
+
+    -- Indent
+    use({ "lukas-reineke/indent-blankline.nvim" })
+
+    -- Git
+    use({
+        "lewis6991/gitsigns.nvim",
+        config = function()
+            require("/pluginconfig/gitsigns")
+        end,
+    })
+    use({ "tpope/vim-fugitive" })
+    use({
+        "akinsho/git-conflict.nvim",
+        config = function()
+            require("git-conflict").setup()
+        end,
+    })
+
+    -- JavaScript
+    use({
+        "vuki656/package-info.nvim",
+        requires = "MunifTanjim/nui.nvim",
+    })
+    use({
+        "bennypowers/nvim-regexplainer",
+        config = function()
+            require("regexplainer").setup()
+        end,
+        requires = {
+            "nvim-treesitter/nvim-treesitter",
+            "MunifTanjim/nui.nvim",
+        },
+    })
+    use({
+        "windwp/nvim-ts-autotag",
+        requires = { { "nvim-treesitter/nvim-treesitter", opt = true } },
+        after = { "nvim-treesitter" },
+        config = function()
+            require("/pluginconfig/nvim-ts-autotag")
+        end,
+    })
+
+    -- Terminal
+    use({
+        "akinsho/toggleterm.nvim",
+        config = function()
+            require("/pluginconfig/toggleterm")
+        end,
+    })
+
+    -- Activity
+    use({ "wakatime/vim-wakatime" })
+
+    -- Diff
+    use({
+        "AndrewRadev/linediff.vim",
+        cmd = { "Linediff" },
     })
 end)
