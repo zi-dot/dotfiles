@@ -78,7 +78,10 @@ return require("packer").startup(function()
     use({ "f3fora/cmp-spell", after = "nvim-cmp" })
     use({ "yutkat/cmp-mocword", after = "nvim-cmp" })
     use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" })
+    -- treesitter
     use({ "ray-x/cmp-treesitter", after = "nvim-cmp" })
+    use({ "nvim-treesitter/nvim-treesitter-textobjects", after = { "nvim-treesitter" } })
+    use({ "RRethy/nvim-treesitter-textsubjects", after = { "nvim-treesitter" } })
 
     use({ "github/copilot.vim", cmd = { "Copilot" } })
     use({
@@ -134,6 +137,14 @@ return require("packer").startup(function()
         "petertriho/nvim-scrollbar",
         config = function()
             require("scrollbar").setup()
+        end,
+    })
+
+    -- Cursor
+    use({
+        "ggandor/lightspeed.nvim",
+        config = function()
+            require("/pluginconfig/lightspeed")
         end,
     })
 
@@ -197,5 +208,39 @@ return require("packer").startup(function()
     use({
         "AndrewRadev/linediff.vim",
         cmd = { "Linediff" },
+    })
+
+    use({
+        "romgrk/barbar.nvim",
+        requires = { "kyazdani42/nvim-web-devicons" },
+        config = function()
+            require("/pluginconfig/barbar")
+        end,
+    })
+
+    -- zen
+    use({
+        "folke/zen-mode.nvim",
+        config = function()
+            require("/pluginconfig/zen")
+        end,
+    })
+    use({
+        "folke/twilight.nvim",
+        config = function()
+            require("twilight").setup({})
+        end,
+    })
+
+    -- notify
+    use({ "rcarriga/nvim-notify" })
+
+    -- line
+    use("folke/tokyonight.nvim")
+    use({
+        "feline-nvim/feline.nvim",
+        config = function()
+            require("/pluginconfig/feline")
+        end,
     })
 end)

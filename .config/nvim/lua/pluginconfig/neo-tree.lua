@@ -77,7 +77,7 @@ require("neo-tree").setup({
             width = 30,
             mappings = {
                 ["<2-LeftMouse>"] = "open",
-                ["l"] = "open",
+                ["e"] = "open",
                 ["O"] = "open_split",
                 ["o"] = "open_vsplit",
                 ["C"] = "close_node",
@@ -99,6 +99,6 @@ require("neo-tree").setup({
                 ["q"] = "close_window",
             },
         },
-    }
+    },
 })
-vim.api.nvim_set_keymap("n", "sf", "<Cmd>Neotree<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-e>", "<Cmd>:Neotree toggle<CR>", { noremap = true, silent = true })
