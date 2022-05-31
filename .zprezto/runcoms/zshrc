@@ -115,3 +115,5 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 setopt prompt_cr
 setopt prompt_sp
+
+eval "$(starship init zsh)"
