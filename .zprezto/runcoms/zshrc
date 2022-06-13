@@ -117,3 +117,4 @@ setopt prompt_cr
 setopt prompt_sp
 
 eval "$(starship init zsh)"
+export GPG_TTY=$(tty)

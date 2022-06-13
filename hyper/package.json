@@ -9,6 +9,8 @@
   "dependencies": {
     "hyper-search": "latest",
     "hyperlinks": "latest",
-    "hyper-pokemon": "latest"
+    "hyper-opacity": "latest",
+    "hyperborder": "latest",
+    "hyper-postprocessing": "latest"
   }
 }

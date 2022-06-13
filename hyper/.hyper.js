@@ -6,7 +6,7 @@ module.exports = {
   config: {
     // choose either `'stable'` for receiving highly polished,
     // or `'canary'` for less polished but more frequent updates
-    updateChannel: "canary",
+    updateChannel: "stable",
     // default font size in pixels for all tabs
     fontSize: 14,
     // font family with optional fallbacks
@@ -34,7 +34,7 @@ module.exports = {
     backgroundColor: "#000",
     opacity: {
       focus: 0.9,
-      blur: 0.8
+      blur: 0.8,
     },
     // terminal selection color
     selectionColor: "rgba(248,28,229,0.3)",
@@ -76,7 +76,7 @@ module.exports = {
       lightCyan: "#68FDFE",
       lightWhite: "#FFFFFF",
       limeGreen: "#32CD32",
-      lightCoral: "#F08080"
+      lightCoral: "#F08080",
     },
     pokemon: "gengar",
     poketab: "true",
@@ -138,8 +138,8 @@ module.exports = {
     preserveCWD: true,
     // for advanced config flags please refer to https://hyper.is/#cfg
     hyperBorder: {
-      borderWidth: "8px"
-    }
+      borderWidth: "8px",
+    },
   },
   // a list of plugins to fetch and install from npm
   // format: [@org/]project[#version]
@@ -153,7 +153,7 @@ module.exports = {
     "hyper-opacity",
     "hyperborder",
     "hyper-postprocessing",
-    "hyperpower"
+    // "hyperpower",
   ],
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
@@ -162,7 +162,7 @@ module.exports = {
   keymaps: {
     // Example
     // 'window:devtools': 'cmd+alt+o',
-  }
+  },
 };
 //# sourceMappingURL=config-default.js.map
 //# sourceMappingURL=config-default.js.map

@@ -4,8 +4,11 @@ brew install neovim
 brew install tmux
 brew uninstall --force node
 brew install nodebrew
+brew tap homebrew/cask-fonts
+brew install --cask font-hack-nerd-font
 nodebrew setup
 nodebrew install-binary latest
+nodebrew use latest
 npm install -g typescript typescript-language-server import-js
 
 brew install ripgrep
@@ -14,6 +17,15 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 brew install python3
 pip3 install --user pynvim
+
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+
+brew install lsd
+brew install wget
+brew install rust
 
 ln -sf ~/dotfiles/.zprezto/runcoms/zshrc ~/.zshrc
 ln -sf ~/dotfiles/.zprezto/runcoms/zshenv ~/.zshenv
@@ -25,6 +37,9 @@ ln -sf ~/dotfiles/.zprezto/runcoms/zlogin ~/.zlogin
 ln -sf ~/dotfiles/.vim ~/.vim
 ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/.tmux.powerline.conf ~/.tmux.powerline.conf
+
+npm install -g prettier
+cargo install stylua
 
 brew install fish
 curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher

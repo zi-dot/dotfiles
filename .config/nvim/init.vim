@@ -152,4 +152,4 @@ let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
 
 lua require('plugins')
-
+set clipboard+=unnamed
