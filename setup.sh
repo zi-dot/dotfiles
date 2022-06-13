@@ -6,6 +6,7 @@ brew uninstall --force node
 brew install nodebrew
 brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font
+brew install starship
 nodebrew setup
 nodebrew install-binary latest
 nodebrew use latest
@@ -43,9 +44,9 @@ cargo install stylua
 
 brew install fish
 curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-fisher install ilancosman/tide
-fisher install jethrokuan/z
-fisher install jethrokuan/fzf
+fish -c "fisher install ilancosman/tide"
+fish -c "fisher install jethrokuan/z"
+fish -c "fisher install jethrokuan/fzf"
 
 ln -sf ~/dotfiles/.config/fish/config.fish ~/.config/fish/config.fish
 ln -sf ~/dotfiles/.config/nvim ~/.config/nvim
