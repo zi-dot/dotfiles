@@ -5,6 +5,7 @@ brew install tmux
 brew uninstall --force node
 brew install nodebrew
 brew tap homebrew/cask-fonts
+brew install --cask homebrew/cask-fonts/font-hackgen
 brew install --cask font-hack-nerd-font
 brew install starship
 nodebrew setup
@@ -13,6 +14,17 @@ nodebrew use latest
 npm install -g typescript typescript-language-server import-js
 
 brew install ripgrep
+
+brew install deno
+brew install peco jq
+brew install --cask 1password
+brew tap wez/wezterm; brew install --cask wezterm-nightly --no-quarantine
+brew install --cask raycast
+brew install --cask docker
+brew install --cask visual-studio-code
+brew install --cask google-chrome
+brew install --cask firefox
+brew install --cask google-drive
 
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \                                                                             
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'

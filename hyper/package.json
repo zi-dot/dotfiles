@@ -7,10 +7,8 @@
   "license": "MIT",
   "homepage": "https://hyper.is",
   "dependencies": {
-    "hyper-search": "latest",
     "hyperlinks": "latest",
     "hyper-opacity": "latest",
-    "hyperborder": "latest",
-    "hyper-postprocessing": "latest"
+    "hyperborder": "latest"
   }
 }

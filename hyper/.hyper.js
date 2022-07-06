@@ -148,11 +148,11 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-    "hyper-search",
+    // "hyper-search",
     "hyperlinks",
     "hyper-opacity",
     "hyperborder",
-    "hyper-postprocessing",
+    // "hyper-postprocessing",
     // "hyperpower",
   ],
   // in development, you can create a directory under
