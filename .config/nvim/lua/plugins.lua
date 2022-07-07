@@ -247,6 +247,9 @@ return require("packer").startup(function()
 		end,
 	})
 
+	-- color schema
+	use("ayu-theme/ayu-vim")
+
 	-- silicon (screenshot)
 	use("segeljakt/vim-silicon")
 	use("rhysd/committia.vim")

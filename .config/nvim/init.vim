@@ -151,5 +151,10 @@ endfunction
 let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
 
+" for font setting for neovide
+set guifont=HackGenNerd
+let ayucolor="dark"
+colorscheme ayu
+
 lua require('plugins')
 set clipboard+=unnamed
