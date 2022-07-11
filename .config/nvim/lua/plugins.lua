@@ -83,7 +83,15 @@ return require("packer").startup(function()
 	use({ "nvim-treesitter/nvim-treesitter-textobjects", after = { "nvim-treesitter" } })
 	use({ "RRethy/nvim-treesitter-textsubjects", after = { "nvim-treesitter" } })
 
-	use({ "github/copilot.vim", cmd = { "Copilot" } })
+	use({
+		"github/copilot.vim",
+		cmd = { "Copilot" },
+		config = function()
+			vim.g.copilot_filetypes = {
+				["*"] = true,
+			}
+		end,
+	})
 	use({
 		"zbirenbaum/copilot.lua",
 		after = "copilot.vim",
@@ -105,6 +113,14 @@ return require("packer").startup(function()
 		"jose-elias-alvarez/null-ls.nvim",
 		config = function()
 			require("/pluginconfig/null-ls")
+		end,
+	})
+
+	use({ "rust-lang/rustfmt" })
+	use({
+		"rust-lang/rust.vim",
+		config = function()
+			vim.g.rustfmt_autosave = 1
 		end,
 	})
 
