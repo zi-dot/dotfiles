@@ -7,6 +7,7 @@ brew install nodebrew
 brew tap homebrew/cask-fonts
 brew install --cask homebrew/cask-fonts/font-hackgen
 brew install --cask font-hack-nerd-font
+brew install --cask slack
 brew install starship
 nodebrew setup
 nodebrew install-binary latest
