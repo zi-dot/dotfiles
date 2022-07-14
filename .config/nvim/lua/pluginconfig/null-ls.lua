@@ -4,7 +4,7 @@ local formatting = nullls.builtins.formatting
 local diagnostics = nullls.builtins.diagnostics
 
 local lsp_formatting = function(bufnr)
-	vim.lsp.buf.format({
+	vim.lsp.buf.formatting({
 		timeout_ms = 10000,
 		filter = function(client)
 			return client.name ~= "tsserver"

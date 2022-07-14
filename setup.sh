@@ -69,5 +69,5 @@ ln -sf ~/dotfiles/.config/fish/config-osx.fish ~/.config/fish/config-osx.fish
 ln -sf ~/dotfiles/hyper/.hyper.js ~/.hyper.js
 ln -sf ~/dotfiles/hyper/package.json ~/.hyper_plugins/package.json
 
-ln -sf ~/dotfiles/wezterm/wezter.lua ~/.config/wezterm/wezterm.lua
+ln -sf ~/dotfiles/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua
 
