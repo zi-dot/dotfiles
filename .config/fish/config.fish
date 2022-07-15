@@ -58,3 +58,8 @@ end
 set -gx DENO_INSTALL $HOME/.deno
 set -gx PATH $DENO_INSTALL/bin $PATH
 
+set -gx PYENV_ROOT $HOME/.pyenv
+set -gx PATH $PYENV_ROOT/bin $PATH
+eval "$(pyenv init -)"
+
+set -gx PATH $(brew --prefix asdf)/asdf.sh $PATH

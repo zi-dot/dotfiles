@@ -15,7 +15,6 @@ fi
 export PATH=/opt/homebrew/bin:$PATH
 export PATH=/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby:$PATH
 export PYENV_ROOT=/Users/iz/.pyenv
-export PATH=$HOME/.nodebrew/current/bin:$PATH
 export PATH="/Users/ryoji.kouno/.deno/bin:$PATH"
 
 # Customize to your needs...
@@ -113,7 +112,6 @@ if [ -f '/Users/ryoji.kouno/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ryo
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/ryoji.kouno/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ryoji.kouno/google-cloud-sdk/completion.zsh.inc'; fi
-export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 setopt prompt_cr
 setopt prompt_sp
@@ -123,3 +121,4 @@ export GPG_TTY=$(tty)
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
