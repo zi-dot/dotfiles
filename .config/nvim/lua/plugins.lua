@@ -31,6 +31,7 @@ return require("packer").startup(function()
 			require("/pluginconfig/nvim-lsp-installer")
 		end,
 	})
+	use({ "lukas-reineke/cmp-under-comparator", module = "cmp-under-comparator" })
 	-- Auto Completion
 	use({
 		"windwp/nvim-autopairs",
@@ -78,6 +79,13 @@ return require("packer").startup(function()
 	use({ "f3fora/cmp-spell", after = "nvim-cmp" })
 	use({ "yutkat/cmp-mocword", after = "nvim-cmp" })
 	use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" })
+
+	use({
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
+	})
 	-- treesitter
 	use({ "ray-x/cmp-treesitter", after = "nvim-cmp" })
 	use({ "nvim-treesitter/nvim-treesitter-textobjects", after = { "nvim-treesitter" } })
@@ -168,7 +176,12 @@ return require("packer").startup(function()
 	use({ "machakann/vim-sandwich" })
 
 	-- Indent
-	use({ "lukas-reineke/indent-blankline.nvim" })
+	use({
+		"lukas-reineke/indent-blankline.nvim",
+		config = function()
+			require("./pluginconfig/indent-blankline")
+		end,
+	})
 
 	-- Git
 	use({

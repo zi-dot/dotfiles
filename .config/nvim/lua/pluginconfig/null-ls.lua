@@ -1,11 +1,9 @@
 local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 local nullls = require("null-ls")
 local formatting = nullls.builtins.formatting
-local diagnostics = nullls.builtins.diagnostics
 
 local lsp_formatting = function(bufnr)
-	vim.lsp.buf.formatting({
-		timeout_ms = 10000,
+	vim.lsp.buf.formatting_sync({
 		filter = function(client)
 			return client.name ~= "tsserver"
 		end,

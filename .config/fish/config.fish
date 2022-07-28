@@ -62,4 +62,4 @@ set -gx PYENV_ROOT $HOME/.pyenv
 set -gx PATH $PYENV_ROOT/bin $PATH
 eval "$(pyenv init -)"
 
-set -gx PATH $(brew --prefix asdf)/asdf.sh $PATH
+source /opt/homebrew/opt/asdf/libexec/asdf.fish

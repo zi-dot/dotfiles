@@ -21,3 +21,5 @@ if [ -z "$GITHUB_REPO_URL" ]; then
 else
     git clone $GITHUB_REPO_URL $PROJECT_PATH/code
 fi
+
+echo -n "COMPOSE_PROJECT_NAME=$PROJECT_NAME" >> $PROJECT_PATH/code/.env
