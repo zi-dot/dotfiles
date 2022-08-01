@@ -15,6 +15,31 @@ mason.setup({
 local nvim_lsp = require("lspconfig")
 local mason_lspconfig = require("mason-lspconfig")
 
+local servers = {
+	"bashls",
+	"cssls",
+	"html",
+	"rust_analyzer",
+	"sumneko_lua",
+	"tailwindcss",
+	"tsserver",
+}
+
+local has_formatter = { "html", "rust_analyzer", "sumneko_lua", "tsserver" }
+-- for _, name in pairs(servers) do
+-- 	local found, server = require("mason").get_server(name)
+-- 	if found and not server:is_installed() then
+-- 		print("Installing " .. name)
+-- 		server:install()
+-- 	end
+-- end
+
+local setup_server = {
+	sumneko_lua = function(opts)
+		opts.settings = { Lua = { diagnostics = { globals = { "vim" } } } }
+	end,
+}
+
 local protocol = require("vim.lsp.protocol")
 
 local on_attach = function(client, bufnr)
@@ -66,15 +91,20 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 	buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
-	-- formatting
-	if client.name == "tsserver" then
-		client.server_capabilities.document_formatting = false
+	local should_format = true
+	for _, value in pairs(has_formatter) do
+		if client.name == value then
+			should_format = false
+		end
+	end
+	if not should_format then
+		client.resolved_capabilities.document_formatting = false
 	end
 
 	if client.server_capabilities.document_formatting then
 		vim.api.nvim_command([[augroup Format]])
 		vim.api.nvim_command([[autocmd! * <buffer>]])
-		vim.api.nvim_command([[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]])
+		vim.api.nvim_command([[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)]])
 		vim.api.nvim_command([[augroup END]])
 	end
 

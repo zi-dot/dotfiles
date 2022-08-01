@@ -1,29 +1,5 @@
-local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 local nullls = require("null-ls")
 local formatting = nullls.builtins.formatting
-
-local lsp_formatting = function(bufnr)
-	vim.lsp.buf.formatting_sync({
-		filter = function(client)
-			return client.name ~= "tsserver"
-		end,
-		bufnr = bufnr,
-	})
-end
-
-local on_attach = function(client, bufnr)
-	if client.supports_method("textDocument/formatting") then
-		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-		vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-			group = augroup,
-			buffer = bufnr,
-			callback = function()
-				lsp_formatting(bufnr)
-			end,
-			once = false,
-		})
-	end
-end
 
 nullls.setup({
 	sources = {
@@ -41,5 +17,4 @@ nullls.setup({
 		nullls.builtins.completion.spell,
 		nullls.builtins.code_actions.eslint,
 	},
-	on_attach = on_attach,
 })
