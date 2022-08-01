@@ -149,7 +149,8 @@ function! s:command_profile() abort
 endfunction
 
 let g:gruvbox_contrast_dark='hard'
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme tokyonight
 
 " for font setting for neovide
 set guifont=HackGenNerd

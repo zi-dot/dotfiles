@@ -24,11 +24,14 @@ return require("packer").startup(function()
 	})
 
 	-- lsp & navigator
-	use({ "neovim/nvim-lspconfig" })
 	use({
-		"williamboman/nvim-lsp-installer",
+		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
+	})
+	use({
+		"williamboman/mason.nvim",
 		config = function()
-			require("/pluginconfig/nvim-lsp-installer")
+			require("/pluginconfig/mason")
 		end,
 	})
 	use({ "lukas-reineke/cmp-under-comparator", module = "cmp-under-comparator" })
@@ -84,6 +87,13 @@ return require("packer").startup(function()
 		"numToStr/Comment.nvim",
 		config = function()
 			require("Comment").setup()
+		end,
+	})
+
+	use({
+		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		config = function()
+			require("/pluginconfig/lsp_lines")
 		end,
 	})
 	-- treesitter
@@ -252,9 +262,12 @@ return require("packer").startup(function()
 
 	-- zen
 	use({
-		"folke/zen-mode.nvim",
+		"Pocco81/true-zen.nvim",
 		config = function()
-			require("/pluginconfig/zen")
+			require("true-zen").setup({
+				-- your config goes here
+				-- or just leave it empty :)
+			})
 		end,
 	})
 	use({
@@ -268,7 +281,12 @@ return require("packer").startup(function()
 	use({ "rcarriga/nvim-notify" })
 
 	-- line
-	use("folke/tokyonight.nvim")
+	use({
+		"folke/tokyonight.nvim",
+		config = function()
+			require("/pluginconfig/tokyonight")
+		end,
+	})
 	use({
 		"feline-nvim/feline.nvim",
 		config = function()

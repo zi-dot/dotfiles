@@ -1,5 +1,20 @@
 --local capabilities = require("cmp-nvim-lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 --local lspconfig = require("lspconfig")
+print("Loading Mason...")
+local mason = require("mason")
+mason.setup({
+	ui = {
+		icons = {
+			package_installed = "✓",
+			package_pending = "➜",
+			package_uninstalled = "✗",
+		},
+	},
+})
+
+local nvim_lsp = require("lspconfig")
+local mason_lspconfig = require("mason-lspconfig")
+
 local protocol = require("vim.lsp.protocol")
 
 local on_attach = function(client, bufnr)
@@ -19,29 +34,40 @@ local on_attach = function(client, bufnr)
 
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+	-- buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+	buf_set_keymap("n", "gd", "<cmd>Lspsaga preview_definition<CR>", opts)
 	--buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+	buf_set_keymap("n", "K", "<Cmd>Lspsaga hover_doc<CR>", opts)
 	buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 	--buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+	--
+	buf_set_keymap("n", "<leader>k", "<Cmd>Lspsaga signature_help<CR>", opts)
 	buf_set_keymap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
 	buf_set_keymap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
 	buf_set_keymap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
 	buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
 	--buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-	buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	buf_set_keymap("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+	buf_set_keymap("n", "<space>rn", "<Cmd>Lspsaga rename<CR>", opts)
+
+	--buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+	buf_set_keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
+	buf_set_keymap("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", opts)
+	--buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+	buf_set_keymap("n", "gr", "<cmd>Lspsaga lsp_finder<CR>", opts)
+
+	buf_set_keymap("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
+	buf_set_keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
+	buf_set_keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
+	--buf_set_keymap("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
 	--buf_set_keymap('n', '<C-j>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-	buf_set_keymap("n", "<S-C-j>", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
+	--
+	buf_set_keymap("n", "<C-j>", "<Cmd>Lspsaga diagnostic_jump_next<CR>", opts)
+	-- buf_set_keymap("n", "<S-C-j>", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
 	buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 	buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
 	-- formatting
 	if client.name == "tsserver" then
-		client.server_capabilities.document_formatting = false
-	end
-
-	if client.name == "volar" then
 		client.server_capabilities.document_formatting = false
 	end
 
@@ -82,32 +108,25 @@ local on_attach = function(client, bufnr)
 	}
 end
 
-local server_configs = {
-	["sumneko_lua"] = {
-		settings = {
-			Lua = {
-				workspace = {
-					-- Make the server aware of Neovim runtime files
-					-- library = vim.api.nvim_get_runtime_file("", true),
-					preloadFileSize = 500,
-					-- very slow
-					-- library = vim.api.nvim_get_runtime_file("", true),
-				},
-				-- Do not send telemetry data containing a randomized but unique identifier
-				telemetry = { enable = false },
-			},
-		},
-	},
-}
+mason_lspconfig.setup_handlers({
+	function(server_name)
+		local opts = {}
+		opts.on_attach = on_attach
+		nvim_lsp[server_name].setup(opts)
+	end,
+})
 
-local lsp_installer = require("nvim-lsp-installer")
-
-lsp_installer.on_server_ready(function(server)
-	local opts = { on_attach = on_attach }
-	--    if server_configs[server.name] then
-	--        opts = vim.tbl_deep_extend("force", opts, server_configs[server.name])
-	--    end
-
-	server:setup(opts)
-	vim.cmd([[ do User LspAttachBuffers ]])
-end)
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+-- mason.on_server_ready(function(server)
+-- 	local opts = { on_attach = on_attach }
+-- 	--    if server_configs[server.name] then
+-- 	--        opts = vim.tbl_deep_extend("force", opts, server_configs[server.name])
+-- 	--    end
+--
+-- 	server:setup(opts)
+-- 	vim.cmd([[ do User LspAttachBuffers ]])
+-- end)
