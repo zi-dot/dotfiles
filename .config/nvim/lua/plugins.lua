@@ -22,6 +22,7 @@ return require("packer").startup(function()
 			require("/pluginconfig/telescope")
 		end,
 	})
+	use({ "nvim-telescope/telescope-file-browser.nvim" })
 
 	-- lsp & navigator
 	use({
@@ -281,16 +282,18 @@ return require("packer").startup(function()
 	use({ "rcarriga/nvim-notify" })
 
 	-- line
+	use({ "catppuccin/nvim", as = "catppuccin" })
 	use({
 		"folke/tokyonight.nvim",
 		config = function()
 			require("/pluginconfig/tokyonight")
 		end,
 	})
+
 	use({
-		"feline-nvim/feline.nvim",
+		"nvim-lualine/lualine.nvim",
 		config = function()
-			require("/pluginconfig/feline")
+			require("/pluginconfig/lualine")
 		end,
 	})
 

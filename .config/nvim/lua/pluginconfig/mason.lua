@@ -25,7 +25,7 @@ local servers = {
 	"tsserver",
 }
 
-local has_formatter = { "html", "rust_analyzer", "sumneko_lua", "tsserver" }
+local has_formatter = { "html", "rust_analyzer", "sumneko_lua", "tsserver", "denols", "stylelint_lsp" }
 -- for _, name in pairs(servers) do
 -- 	local found, server = require("mason").get_server(name)
 -- 	if found and not server:is_installed() then
@@ -35,8 +35,8 @@ local has_formatter = { "html", "rust_analyzer", "sumneko_lua", "tsserver" }
 -- end
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-    command = "lua vim.lsp.buf.formatting_sync(nil, 1000)",
-    pattern = "*.cpp,*.css,*.go,*.h,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.rs,*.ts,*.tsx,*.yaml"
+	command = "lua vim.lsp.buf.formatting_sync(nil, 1000)",
+	pattern = "*.cpp,*.css,*.scss,*.go,*.h,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.rs,*.ts,*.tsx,*.yaml",
 })
 
 local setup_server = {
@@ -147,9 +147,9 @@ mason_lspconfig.setup_handlers({
 	function(server_name)
 		local opts = {}
 		opts.on_attach = on_attach
-        if setup_server[server_name] then
-            setup_server[server_name](opts)
-        end
+		if setup_server[server_name] then
+			setup_server[server_name](opts)
+		end
 		nvim_lsp[server_name].setup(opts)
 	end,
 })

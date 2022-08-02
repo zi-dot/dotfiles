@@ -1,17 +1,22 @@
-vim.api.nvim_set_keymap("n", "[fuzzy-finder]", "<Nop>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "[fuzzy-finder]", "<Nop>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "z", "[fuzzy-finder]", {})
-vim.api.nvim_set_keymap("v", "z", "[fuzzy-finder]", {})
+vim.api.nvim_set_keymap("n", "<Leader>g", "<Cmd>Telescope live_grep<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>f", "<Cmd>Telescope find_files<CR>", { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap("n", "[fuzzy-finder]g", "<Cmd>Telescope live_grep<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "[fuzzy-finder]f", "<Cmd>Telescope find_files<CR>", { noremap = true, silent = true })
-
-local telescope = require('telescope')
+local telescope = require("telescope")
 
 telescope.setup({
-    pickers = {
-        find_files = {
-            hidden = true
-        }
-    }
+	defaults = {
+		file_ignore_patterns = { ".git/", "node_modules/", "target/" },
+		initial_mode = "normal",
+		hidden = true,
+	},
+	pickers = {
+		find_files = {
+			hidden = true,
+		},
+	},
+	extensions = {
+		file_browser = {},
+	},
 })
+
+require("telescope").load_extension("file_browser")

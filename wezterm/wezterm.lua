@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 
 return {
 	use_ime = true,
-	color_scheme = "MaterialDesignColors",
+	color_scheme = "Catppuccin Macchiato",
 	font = wezterm.font("Hack Nerd Font"),
 	animation_fps = 10,
 	window_padding = {
