@@ -34,6 +34,11 @@ local has_formatter = { "html", "rust_analyzer", "sumneko_lua", "tsserver" }
 -- 	end
 -- end
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+    command = "lua vim.lsp.buf.formatting_sync(nil, 1000)",
+    pattern = "*.cpp,*.css,*.go,*.h,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.rs,*.ts,*.tsx,*.yaml"
+})
+
 local setup_server = {
 	sumneko_lua = function(opts)
 		opts.settings = { Lua = { diagnostics = { globals = { "vim" } } } }
@@ -101,12 +106,12 @@ local on_attach = function(client, bufnr)
 		client.resolved_capabilities.document_formatting = false
 	end
 
-	if client.server_capabilities.document_formatting then
-		vim.api.nvim_command([[augroup Format]])
-		vim.api.nvim_command([[autocmd! * <buffer>]])
-		vim.api.nvim_command([[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)]])
-		vim.api.nvim_command([[augroup END]])
-	end
+	-- if client.server_capabilities.document_formatting then
+	-- 	vim.api.nvim_command([[augroup Format]])
+	-- 	vim.api.nvim_command([[autocmd! * <buffer>]])
+	-- 	vim.api.nvim_command([[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)]])
+	-- 	vim.api.nvim_command([[augroup END]])
+	-- end
 
 	--protocol.SymbolKind = { }
 	protocol.CompletionItemKind = {
@@ -142,6 +147,9 @@ mason_lspconfig.setup_handlers({
 	function(server_name)
 		local opts = {}
 		opts.on_attach = on_attach
+        if setup_server[server_name] then
+            setup_server[server_name](opts)
+        end
 		nvim_lsp[server_name].setup(opts)
 	end,
 })
