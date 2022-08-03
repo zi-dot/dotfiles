@@ -39,6 +39,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 require("plugins")
+-- require("maps")
 
 vim.g.catppuccin_flavour = "mocha"
 vim.cmd("colorscheme catppuccin")
