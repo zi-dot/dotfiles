@@ -15,6 +15,6 @@ nullls.setup({
 		}),
 		formatting.stylua,
 		nullls.builtins.completion.spell,
-		nullls.builtins.code_actions.eslint,
+		nullls.builtins.code_actions.eslint_d,
 	},
 })

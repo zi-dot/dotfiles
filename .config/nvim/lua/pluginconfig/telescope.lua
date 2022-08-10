@@ -1,5 +1,5 @@
-vim.api.nvim_set_keymap("n", "<Leader>g", "<Cmd>Telescope live_grep<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>f", "<Cmd>Telescope find_files<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<Leader>g", "<Cmd>Telescope live_grep<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<Leader>f", "<Cmd>Telescope find_files<CR>", { noremap = true, silent = true })
 
 local telescope = require("telescope")
 

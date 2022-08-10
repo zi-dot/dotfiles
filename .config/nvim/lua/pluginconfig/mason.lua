@@ -35,7 +35,7 @@ local has_formatter = { "html", "rust_analyzer", "sumneko_lua", "tsserver", "den
 -- end
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-	command = "lua vim.lsp.buf.formatting_sync(nil, 1000)",
+	command = "lua vim.lsp.buf.formatting_sync(nil, 10000)",
 	pattern = "*.cpp,*.css,*.scss,*.go,*.h,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.rs,*.ts,*.tsx,*.yaml",
 })
 

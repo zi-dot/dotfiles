@@ -16,8 +16,8 @@ vim.keymap.set("i", "jj", "<ESC>", { silent = true })
 vim.keymap.set("n", "k", 'v:count == 0 ? "gk" : "k"', { expr = true, silent = true })
 vim.keymap.set("n", "j", 'v:count == 0 ? "gj" : "j"', { expr = true, silent = true })
 
-vim.keymap.set("n", "<Leader>l", ":vsplit term://fish <CR>", { silent = true })
-vim.keymap.set("t", "<Leader><Esc>", "<C-\\><C-n>", { silent = true })
+vim.keymap.set("n", "<Leader>t", ":vsplit term://fish <CR>", { silent = true })
+vim.keymap.set("t", "jj", "<C-\\><C-n>", { silent = true })
 
 vim.keymap.set("n", "<Leader>v", ":edit ~/.config/nvim/init.lua<CR>", { silent = true })
 
@@ -32,9 +32,7 @@ vim.keymap.set("", "sk", "<C-w>k", { silent = true })
 vim.keymap.set("", "sj", "<C-w>j", { silent = true })
 vim.keymap.set("", "sl", "<C-w>l", { silent = true })
 
-vim.keymap.set("", "<Leader>l", "<C-w><")
-vim.keymap.set("", "<Leader>h", "<C-w>>")
-vim.keymap.set("", "<Leader>j", "<C-w>-")
-vim.keymap.set("", "<Leader>k", "<C-w>+")
-
-vim.keymap.set("n", "<Leader><Leader>", "zyiw:let @/ = '<' . @z . '>'<CR>:set hlsearch<CR>", {})
+--vim.keymap.set("", "<Leader>l", "<C-w><")
+--vim.keymap.set("", "<Leader>h", "<C-w>>")
+--vim.keymap.set("", "<Leader>j", "<C-w>-")
+--vim.keymap.set("", "<Leader>k", "<C-w>+")

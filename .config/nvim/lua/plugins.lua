@@ -122,7 +122,7 @@ return require("packer").startup(function()
 	})
 
 	use({
-		"tami5/lspsaga.nvim",
+		"glepnir/lspsaga.nvim",
 		config = function()
 			require("/pluginconfig/lspsaga")
 		end,
@@ -266,8 +266,7 @@ return require("packer").startup(function()
 		"Pocco81/true-zen.nvim",
 		config = function()
 			require("true-zen").setup({
-				-- your config goes here
-				-- or just leave it empty :)
+				vim.keymap.set("n", "<Leader>tr", ":TZFocus <CR>", { silent = true }),
 			})
 		end,
 	})
@@ -296,9 +295,6 @@ return require("packer").startup(function()
 			require("/pluginconfig/lualine")
 		end,
 	})
-
-	-- color schema
-	use("ayu-theme/ayu-vim")
 
 	-- silicon (screenshot)
 	use("segeljakt/vim-silicon")
