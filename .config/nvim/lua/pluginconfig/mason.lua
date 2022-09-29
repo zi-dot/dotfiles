@@ -15,30 +15,6 @@ mason.setup({
 local nvim_lsp = require("lspconfig")
 local mason_lspconfig = require("mason-lspconfig")
 
-local servers = {
-	"bashls",
-	"cssls",
-	"html",
-	"rust_analyzer",
-	"sumneko_lua",
-	"tailwindcss",
-	"tsserver",
-}
-
-local has_formatter = { "html", "rust_analyzer", "sumneko_lua", "tsserver", "denols", "stylelint_lsp" }
--- for _, name in pairs(servers) do
--- 	local found, server = require("mason").get_server(name)
--- 	if found and not server:is_installed() then
--- 		print("Installing " .. name)
--- 		server:install()
--- 	end
--- end
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-	command = "lua vim.lsp.buf.formatting_seq_sync(nil, 10000)",
-	pattern = "*.cpp,*.css,*.scss,*.go,*.h,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.rs,*.ts,*.tsx,*.yaml",
-})
-
 local setup_server = {
 	sumneko_lua = function(opts)
 		opts.settings = { Lua = { diagnostics = { globals = { "vim" } } } }
@@ -46,6 +22,18 @@ local setup_server = {
 }
 
 local protocol = require("vim.lsp.protocol")
+
+local lsp_formatting = function(bufnr)
+	vim.lsp.buf.format({
+		filter = function(client)
+			-- apply whatever logic you want (in this example, we'll only use null-ls)
+			return client.name == "null-ls"
+		end,
+		bufnr = bufnr,
+	})
+end
+
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
@@ -65,9 +53,9 @@ local on_attach = function(client, bufnr)
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	-- buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	buf_set_keymap("n", "gd", "<cmd>Lspsaga preview_definition<CR>", opts)
-	--buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-	buf_set_keymap("n", "K", "<Cmd>Lspsaga hover_doc<CR>", opts)
+	buf_set_keymap("n", "gd", "<cmd>Lspsaga peek_definition<CR>", opts)
+	buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+	-- buf_set_keymap("n", "K", "<Cmd>Lspsaga hover_doc<CR>", opts)
 	buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 	--buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 	--
@@ -96,14 +84,15 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 	buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
-	local should_format = true
-	for _, value in pairs(has_formatter) do
-		if client.name == value then
-			should_format = false
-		end
-	end
-	if not should_format then
-		client.server_capabilities.document_formatting = false
+	if client.supports_method("textDocument/formatting") then
+		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			group = augroup,
+			buffer = bufnr,
+			callback = function()
+				lsp_formatting(bufnr)
+			end,
+		})
 	end
 
 	-- if client.server_capabilities.document_formatting then

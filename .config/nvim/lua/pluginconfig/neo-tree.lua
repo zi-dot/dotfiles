@@ -63,7 +63,7 @@ require("neo-tree").setup({
 				--"thumbs.db"
 			},
 		},
-		follow_current_file = false, -- This will find and focus the file in the active buffer every
+		follow_current_file = true, -- This will find and focus the file in the active buffer every
 		-- time the current file is changed while the tree is open.
 		use_libuv_file_watcher = false, -- This will use the OS level file watchers
 		-- to detect changes instead of relying on nvim autocmd events.
@@ -101,4 +101,4 @@ require("neo-tree").setup({
 		},
 	},
 })
--- vim.api.nvim_set_keymap("n", "<C-e>", "<Cmd>:Neotree toggle<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-e>", "<Cmd>:Neotree toggle<CR>", { noremap = true, silent = true })
