@@ -27,7 +27,12 @@ return require("packer").startup(function()
 	-- lsp & navigator
 	use({
 		"williamboman/mason-lspconfig.nvim",
+	})
+	use({
 		"neovim/nvim-lspconfig",
+		config = function()
+			require("/pluginconfig/lspconfig")
+		end,
 	})
 	use({
 		"williamboman/mason.nvim",
@@ -71,7 +76,7 @@ return require("packer").startup(function()
 
 	use({ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" })
 	use({ "hrsh7th/cmp-nvim-lsp-document-symbol", after = "nvim-cmp" })
-	use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" })
+	use({ "hrsh7th/cmp-nvim-lsp" })
 	use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
 	use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
 	use({ "hrsh7th/cmp-omni", after = "nvim-cmp" })
