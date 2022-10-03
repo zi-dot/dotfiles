@@ -27,7 +27,12 @@ return require("packer").startup(function()
 	-- lsp & navigator
 	use({
 		"williamboman/mason-lspconfig.nvim",
+	})
+	use({
 		"neovim/nvim-lspconfig",
+		config = function()
+			require("/pluginconfig/lspconfig")
+		end,
 	})
 	use({
 		"williamboman/mason.nvim",
@@ -71,30 +76,24 @@ return require("packer").startup(function()
 
 	use({ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" })
 	use({ "hrsh7th/cmp-nvim-lsp-document-symbol", after = "nvim-cmp" })
-	use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" })
+	use({ "hrsh7th/cmp-nvim-lsp" })
 	use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
 	use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
 	use({ "hrsh7th/cmp-omni", after = "nvim-cmp" })
 	use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" })
 	use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" })
-	use({ "zbirenbaum/copilot-cmp", after = { "nvim-cmp", "copilot.lua" } })
 	use({ "hrsh7th/cmp-emoji", after = "nvim-cmp" })
 	use({ "hrsh7th/cmp-calc", after = "nvim-cmp" })
 	use({ "f3fora/cmp-spell", after = "nvim-cmp" })
 	use({ "yutkat/cmp-mocword", after = "nvim-cmp" })
 	use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" })
 
+	use("github/copilot.vim")
+
 	use({
 		"numToStr/Comment.nvim",
 		config = function()
 			require("Comment").setup()
-		end,
-	})
-
-	use({
-		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-		config = function()
-			require("/pluginconfig/lsp_lines")
 		end,
 	})
 	-- treesitter
@@ -103,26 +102,8 @@ return require("packer").startup(function()
 	use({ "RRethy/nvim-treesitter-textsubjects", after = { "nvim-treesitter" } })
 
 	use({
-		"github/copilot.vim",
-		cmd = { "Copilot" },
-		config = function()
-			vim.g.copilot_filetypes = {
-				["*"] = true,
-			}
-		end,
-	})
-	use({
-		"zbirenbaum/copilot.lua",
-		after = "copilot.vim",
-		config = function()
-			vim.schedule(function()
-				require("copilot")
-			end)
-		end,
-	})
-
-	use({
-		"tami5/lspsaga.nvim",
+		"glepnir/lspsaga.nvim",
+		branch = "main",
 		config = function()
 			require("/pluginconfig/lspsaga")
 		end,
@@ -157,7 +138,7 @@ return require("packer").startup(function()
 	})
 
 	-- buffer
-	use({ "akinsho/bufferline.nvim", tag = "*", requires = "kyazdani42/nvim-web-devicons" })
+	--use({ "akinsho/bufferline.nvim", tag = "*", requires = "kyazdani42/nvim-web-devicons" })
 
 	-- Hilights
 	use({
@@ -266,8 +247,7 @@ return require("packer").startup(function()
 		"Pocco81/true-zen.nvim",
 		config = function()
 			require("true-zen").setup({
-				-- your config goes here
-				-- or just leave it empty :)
+				vim.keymap.set("n", "<Leader>tr", ":TZFocus <CR>", { silent = true }),
 			})
 		end,
 	})
@@ -290,15 +270,22 @@ return require("packer").startup(function()
 		end,
 	})
 
+	-- use({
+	-- 	"nvim-lualine/lualine.nvim",
+	-- 	config = function()
+	-- 		require("/pluginconfig/lualine")
+	-- 	end,
+	-- })
 	use({
-		"nvim-lualine/lualine.nvim",
+		"folke/which-key.nvim",
 		config = function()
-			require("/pluginconfig/lualine")
+			require("which-key").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
 		end,
 	})
-
-	-- color schema
-	use("ayu-theme/ayu-vim")
 
 	-- silicon (screenshot)
 	use("segeljakt/vim-silicon")
