@@ -23,6 +23,8 @@ brew install --cask google-chrome
 brew install --cask firefox
 brew install --cask google-drive
 
+brew install direnv
+
 brew install asdf
 
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \                                                                             
