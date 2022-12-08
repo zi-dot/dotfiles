@@ -8,7 +8,13 @@ set -g fish_prompt_pwd_dir_length 1
 set -g theme_display_user yes
 set -g theme_hide_hostname no
 set -g theme_hostname always
-set -gx GPG_TTY $TTY
+set -gx GPG_TTY (tty)
+export GPG_AGENT_INFO="$HOME/.gnupg/S.gpg-agent:0:1"
+if [ ! (pgrep -x -u $USER "gpg-agent" | head -1) ]
+  set -el DISPLAY
+  echo "Invoking gpg-agent"
+  gpg-connect-agent /bye
+end
 
 # aliases
 alias ls "ls -p -G"
@@ -63,5 +69,6 @@ set -gx PATH $PYENV_ROOT/bin $PATH
 eval "$(pyenv init -)"
 
 source /opt/homebrew/opt/asdf/libexec/asdf.fish
+status --is-interactive; and rbenv init - fish | source
 
 direnv hook fish | source

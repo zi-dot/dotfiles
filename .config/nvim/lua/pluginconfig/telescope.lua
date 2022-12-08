@@ -2,6 +2,7 @@ local telescope = require("telescope")
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 local fb_actions = require("telescope").extensions.file_browser.actions
+local gitmoji = require("telescope").extensions.gitmoji.gitmoji
 
 local telescope_custom_actions = {}
 
@@ -15,15 +16,19 @@ function telescope_custom_actions._multiopen(prompt_bufnr, open_cmd)
 	actions.send_selected_to_qflist(prompt_bufnr)
 	vim.cmd("cfdo " .. open_cmd)
 end
+
 function telescope_custom_actions.multi_selection_open_vsplit(prompt_bufnr)
 	telescope_custom_actions._multiopen(prompt_bufnr, "vsplit")
 end
+
 function telescope_custom_actions.multi_selection_open_split(prompt_bufnr)
 	telescope_custom_actions._multiopen(prompt_bufnr, "split")
 end
+
 function telescope_custom_actions.multi_selection_open_tab(prompt_bufnr)
 	telescope_custom_actions._multiopen(prompt_bufnr, "tabe")
 end
+
 function telescope_custom_actions.multi_selection_open(prompt_bufnr)
 	telescope_custom_actions._multiopen(prompt_bufnr, "edit")
 end
@@ -90,6 +95,7 @@ end
 vim.keymap.set("n", "<Leader>g", "<Cmd>Telescope live_grep<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader>l", "<Cmd>Telescope find_files<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader>h", "<Cmd>Telescope help_tags<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<Leader>e", "<Cmd>Telescope gitmoji<CR>", { noremap = true, silent = true })
 -- vim.keymap.set("n", "<C-e>", function()
 -- 	telescope.extensions.file_browser.file_browser({
 -- 		path = "%:p:h",

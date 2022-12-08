@@ -23,6 +23,7 @@ return require("packer").startup(function()
 		end,
 	})
 	use({ "nvim-telescope/telescope-file-browser.nvim" })
+	use("olacin/telescope-gitmoji.nvim")
 
 	-- lsp & navigator
 	use({
@@ -199,16 +200,6 @@ return require("packer").startup(function()
 		end,
 	})
 	use({
-		"bennypowers/nvim-regexplainer",
-		config = function()
-			require("regexplainer").setup()
-		end,
-		requires = {
-			"nvim-treesitter/nvim-treesitter",
-			"MunifTanjim/nui.nvim",
-		},
-	})
-	use({
 		"windwp/nvim-ts-autotag",
 		requires = { { "nvim-treesitter/nvim-treesitter", opt = true } },
 		after = { "nvim-treesitter" },
@@ -242,33 +233,23 @@ return require("packer").startup(function()
 		end,
 	})
 
-	-- zen
-	use({
-		"Pocco81/true-zen.nvim",
-		config = function()
-			require("true-zen").setup({
-				vim.keymap.set("n", "<Leader>tr", ":TZFocus <CR>", { silent = true }),
-			})
-		end,
-	})
-	use({
-		"folke/twilight.nvim",
-		config = function()
-			require("twilight").setup({})
-		end,
-	})
-
 	-- notify
-	use({ "rcarriga/nvim-notify" })
+	-- use({ "rcarriga/nvim-notify" })
 
 	-- line
-	use({ "catppuccin/nvim", as = "catppuccin" })
 	use({
-		"folke/tokyonight.nvim",
+		"catppuccin/nvim",
+		as = "catppuccin",
 		config = function()
-			require("/pluginconfig/tokyonight")
+			require("/pluginconfig/catppuccin")
 		end,
 	})
+	-- use({
+	--   "folke/tokyonight.nvim",
+	--   config = function()
+	--     require("/pluginconfig/tokyonight")
+	--   end,
+	-- })
 
 	-- use({
 	-- 	"nvim-lualine/lualine.nvim",
@@ -276,18 +257,37 @@ return require("packer").startup(function()
 	-- 		require("/pluginconfig/lualine")
 	-- 	end,
 	-- })
+	-- use({
+	-- 	"folke/which-key.nvim",
+	-- 	config = function()
+	-- 		require("which-key").setup({
+	-- 			-- your configuration comes here
+	-- 			-- or leave it empty to use the default settings
+	-- 			-- refer to the configuration section below
+	-- 		})
+	-- 	end,
+	-- })
+	--
+	-- silicon (screenshot)
+	-- use("segeljakt/vim-silicon")
+	use("rhysd/committia.vim")
+
 	use({
-		"folke/which-key.nvim",
+		"gorbit99/codewindow.nvim",
 		config = function()
-			require("which-key").setup({
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			})
+			local codewindow = require("codewindow")
+			codewindow.setup({ auto_enable = true, exclude_filetypes = { "neo-tree", "packer" } })
+			codewindow.apply_default_keybinds()
 		end,
 	})
 
-	-- silicon (screenshot)
-	use("segeljakt/vim-silicon")
-	use("rhysd/committia.vim")
+	-- Japanese input
+	use({ "vim-denops/denops.vim" })
+	use({
+		"vim-skk/skkeleton",
+		config = function()
+			require("/pluginconfig/skkeleton")
+		end,
+		requires = { "vim-denops/denops.vim" },
+	})
 end)

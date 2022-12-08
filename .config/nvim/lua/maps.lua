@@ -32,4 +32,5 @@ vim.keymap.set("", "sk", "<C-w>k", { silent = true })
 vim.keymap.set("", "sj", "<C-w>j", { silent = true })
 vim.keymap.set("", "sl", "<C-w>l", { silent = true })
 
-vim.keymap.set({ "n", "i" }, "<D-v>", '"+p', { silent = true, remap = true })
+vim.keymap.set({ "n" }, "<D-v>", "p", { silent = true, remap = true })
+vim.keymap.set({ "i" }, "<D-v>", "<C-o>p", { silent = true, remap = true })

@@ -8,6 +8,7 @@ brew install --cask homebrew/cask-fonts/font-hackgen
 brew install --cask font-hack-nerd-font
 brew install --cask slack
 brew install starship
+brew install diff-so-fancy
 npm install -g typescript typescript-language-server import-js
 
 brew install ripgrep
@@ -71,3 +72,5 @@ ln -sf ~/dotfiles/hyper/package.json ~/.hyper_plugins/package.json
 
 ln -sf ~/dotfiles/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua
 
+git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+git config --global interactive.diffFilter "diff-so-fancy --patch"
