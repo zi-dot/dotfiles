@@ -271,13 +271,10 @@ return require("packer").startup(function()
 	-- silicon (screenshot)
 	-- use("segeljakt/vim-silicon")
 	use("rhysd/committia.vim")
-
 	use({
-		"gorbit99/codewindow.nvim",
+		"matbme/JABS.nvim",
 		config = function()
-			local codewindow = require("codewindow")
-			codewindow.setup({ auto_enable = true, exclude_filetypes = { "neo-tree", "packer" } })
-			codewindow.apply_default_keybinds()
+			require("/pluginconfig/jabs")
 		end,
 	})
 

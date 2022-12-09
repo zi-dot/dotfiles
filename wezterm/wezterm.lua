@@ -1,4 +1,14 @@
 local wezterm = require("wezterm")
+local act = wezterm.action
+
+local mykeys = {}
+for i = 1, 8 do
+	table.insert(mykeys, {
+		key = tostring(i),
+		mods = "ALT",
+		action = act.ActivateTab(i - 1),
+	})
+end
 
 return {
 	use_ime = true,
@@ -13,4 +23,5 @@ return {
 	},
 	adjust_window_size_when_changing_font_size = false,
 	tab_bar_at_bottom = true,
+	keys = mykeys,
 }
