@@ -1,6 +1,4 @@
 require("jabs").setup({
-	position = "center",
-	sort_mru = true,
-	split_filename = true,
+  sort_mru = true,
 })
 vim.keymap.set("n", "<leader>o", ":JABSOpen<CR>", { noremap = true })

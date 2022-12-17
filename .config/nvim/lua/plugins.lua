@@ -2,6 +2,15 @@ vim.cmd([[packadd packer.nvim]])
 
 return require("packer").startup(function()
 	use({ "wbthomason/packer.nvim", opt = true })
+
+	-- notify
+	use({
+		"rcarriga/nvim-notify",
+		config = function()
+			require("/pluginconfig/notify")
+		end,
+	})
+
 	-- Hilights
 	use({
 		"nvim-treesitter/nvim-treesitter",
@@ -10,6 +19,7 @@ return require("packer").startup(function()
 			require("/pluginconfig/treesitter")
 		end,
 	})
+	use("nvim-treesitter/nvim-treesitter-context")
 
 	-- pre dependency for many plugins
 	use({ "nvim-lua/popup.nvim" })
@@ -29,12 +39,7 @@ return require("packer").startup(function()
 	use({
 		"williamboman/mason-lspconfig.nvim",
 	})
-	use({
-		"neovim/nvim-lspconfig",
-		config = function()
-			require("/pluginconfig/lspconfig")
-		end,
-	})
+	use({ "neovim/nvim-lspconfig" })
 	use({
 		"williamboman/mason.nvim",
 		config = function()
@@ -117,7 +122,6 @@ return require("packer").startup(function()
 		end,
 	})
 
-	use({ "rust-lang/rustfmt" })
 	use({
 		"rust-lang/rust.vim",
 		config = function()
@@ -233,9 +237,6 @@ return require("packer").startup(function()
 		end,
 	})
 
-	-- notify
-	-- use({ "rcarriga/nvim-notify" })
-
 	-- line
 	use({
 		"catppuccin/nvim",
@@ -244,29 +245,6 @@ return require("packer").startup(function()
 			require("/pluginconfig/catppuccin")
 		end,
 	})
-	-- use({
-	--   "folke/tokyonight.nvim",
-	--   config = function()
-	--     require("/pluginconfig/tokyonight")
-	--   end,
-	-- })
-
-	-- use({
-	-- 	"nvim-lualine/lualine.nvim",
-	-- 	config = function()
-	-- 		require("/pluginconfig/lualine")
-	-- 	end,
-	-- })
-	-- use({
-	-- 	"folke/which-key.nvim",
-	-- 	config = function()
-	-- 		require("which-key").setup({
-	-- 			-- your configuration comes here
-	-- 			-- or leave it empty to use the default settings
-	-- 			-- refer to the configuration section below
-	-- 		})
-	-- 	end,
-	-- })
 	--
 	-- silicon (screenshot)
 	-- use("segeljakt/vim-silicon")
@@ -286,5 +264,12 @@ return require("packer").startup(function()
 			require("/pluginconfig/skkeleton")
 		end,
 		requires = { "vim-denops/denops.vim" },
+	})
+
+	use({
+		"feline-nvim/feline.nvim",
+		config = function()
+			require("/pluginconfig/feline")
+		end,
 	})
 end)
