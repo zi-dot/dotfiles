@@ -34,3 +34,6 @@ vim.keymap.set("", "sl", "<C-w>l", { silent = true })
 
 vim.keymap.set({ "n" }, "<D-v>", "p", { silent = true, remap = true })
 vim.keymap.set({ "i" }, "<D-v>", "<C-o>p", { silent = true, remap = true })
+
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)

@@ -32,6 +32,7 @@ return require("packer").startup(function()
 			require("/pluginconfig/telescope")
 		end,
 	})
+	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
 	use({ "nvim-telescope/telescope-file-browser.nvim" })
 	use("olacin/telescope-gitmoji.nvim")
 
@@ -39,7 +40,15 @@ return require("packer").startup(function()
 	use({
 		"williamboman/mason-lspconfig.nvim",
 	})
-	use({ "neovim/nvim-lspconfig" })
+	use({
+		"neovim/nvim-lspconfig",
+		requires = {
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+
+			"j-hui/fidget.nvim",
+		},
+	})
 	use({
 		"williamboman/mason.nvim",
 		config = function()
@@ -106,6 +115,8 @@ return require("packer").startup(function()
 	use({ "ray-x/cmp-treesitter", after = "nvim-cmp" })
 	use({ "nvim-treesitter/nvim-treesitter-textobjects", after = { "nvim-treesitter" } })
 	use({ "RRethy/nvim-treesitter-textsubjects", after = { "nvim-treesitter" } })
+
+	use("tpope/vim-sleuth") -- Detect tabstop and shiftwidth automatically
 
 	use({
 		"glepnir/lspsaga.nvim",
