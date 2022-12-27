@@ -102,4 +102,4 @@ vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { de
 vim.keymap.set("n", "<leader>sf", require("telescope.builtin").find_files, { desc = "[S]earch [F]iles" })
 vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
 vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "[S]earch [W]ord" })
-vim.keymap.set("n", "<leader>se", "<Cmd>Telescope gitmoji<CR>", { desc = "[S]earch [E]moji" })
+vim.keymap.set("n", "<leader>se", require("telescope").extensions.gitmoji.gitmoji, { desc = "[S]earch [E]moji" })
