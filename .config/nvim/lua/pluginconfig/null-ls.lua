@@ -19,13 +19,13 @@ local augroup_format = vim.api.nvim_create_augroup("Format", { clear = true })
 
 null_ls.setup({
   sources = {
-    null_ls.builtins.diagnostics.eslint_d.with({
+    null_ls.builtins.diagnostics.eslint.with({
       diagnostics_format = "[eslint] #{m}\n(#{c})",
     }),
     null_ls.builtins.diagnostics.fish,
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.prettier,
-    null_ls.builtins.formatting.eslint_d,
+    null_ls.builtins.formatting.eslint,
   },
   on_attach = function(client, bufnr)
     if client.server_capabilities.documentFormattingProvider then
@@ -34,7 +34,7 @@ null_ls.setup({
         group = augroup_format,
         buffer = 0,
         callback = function()
-          vim.lsp.buf.format()
+          vim.lsp.buf.format({ timeout_ms = 5000 })
         end,
       })
     end

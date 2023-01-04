@@ -258,7 +258,7 @@ return require("packer").startup(function()
 	})
 	--
 	-- silicon (screenshot)
-	-- use("segeljakt/vim-silicon")
+	use({ "krivahtoo/silicon.nvim", run = "./install.sh" })
 	use("rhysd/committia.vim")
 	use({
 		"matbme/JABS.nvim",

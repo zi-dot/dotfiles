@@ -10,7 +10,28 @@ end
 
 local types = require("cmp.types")
 
+local border = {
+	{ "╭", "CmpBorder" },
+	{ "─", "CmpBorder" },
+	{ "╮", "CmpBorder" },
+	{ "│", "CmpBorder" },
+	{ "╯", "CmpBorder" },
+	{ "─", "CmpBorder" },
+	{ "╰", "CmpBorder" },
+	{ "│", "CmpBorder" },
+}
+
 cmp.setup({
+	window = {
+		documentation = {
+			border = border,
+			winhighlight = "Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None",
+		},
+		completion = {
+			border = border,
+			winhighlight = "Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None",
+		},
+	},
 	snippet = {
 		expand = function(args)
 			require("luasnip").lsp_expand(args.body)
@@ -107,4 +128,6 @@ cmp.setup.cmdline(":", {
 vim.cmd([[
   set completeopt=menu,noinsert,noselect
   highlight! default link CmpItemKind CmpItemMenuDefault
+  highlight! link CmpPmenu         Pmenu
+  highlight! link CmpPmenuBorder   Pmenu
 ]])

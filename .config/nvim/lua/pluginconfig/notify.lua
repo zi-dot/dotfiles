@@ -25,7 +25,7 @@ local function update_spinner(client_id, token)
 	local notif_data = get_notif_data(client_id, token)
 
 	if notif_data.spinner then
-		local new_spinner = (notif_data.spinner + 1) % #spinner_frames
+		local new_spinner = math.max((notif_data.spinner + 1) % (#spinner_frames + 1), 1)
 		notif_data.spinner = new_spinner
 
 		notif_data.notification = vim.notify(nil, nil, {
