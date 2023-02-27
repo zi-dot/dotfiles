@@ -16,7 +16,7 @@ return require("lazy").setup({
 	{
 		"rcarriga/nvim-notify",
 		config = function()
-			require("/pluginconfig/notify")
+			require("pluginconfig/notify")
 		end,
 	},
 
@@ -25,8 +25,11 @@ return require("lazy").setup({
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		config = function()
-			require("/pluginconfig/treesitter")
+			require("pluginconfig/treesitter")
 		end,
+	},
+	{
+		"nvim-treesitter/playground",
 	},
 	"nvim-treesitter/nvim-treesitter-context",
 	-- pre dependency for many plugins
@@ -37,10 +40,14 @@ return require("lazy").setup({
 	{
 		"nvim-telescope/telescope.nvim",
 		config = function()
-			require("/pluginconfig/telescope")
+			require("pluginconfig/telescope")
 		end,
 	},
-	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make", cond = vim.fn.executable("make") == 1 },
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "make",
+		cond = vim.fn.executable("make") == 1,
+	},
 	{ "nvim-telescope/telescope-file-browser.nvim" },
 	"olacin/telescope-gitmoji.nvim",
 	-- lsp & navigator
@@ -59,17 +66,17 @@ return require("lazy").setup({
 	{
 		"williamboman/mason.nvim",
 		config = function()
-			require("/pluginconfig/mason")
+			require("pluginconfig/mason")
 		end,
 	},
-	{ "lukas-reineke/cmp-under-comparator", module = "cmp-under-comparator" },
+	{ "lukas-reineke/cmp-under-comparator",        module = "cmp-under-comparator" },
 	-- Auto Completion
 	{
 		"windwp/nvim-autopairs",
 		lazy = true,
 		event = "VimEnter",
 		config = function()
-			require("/pluginconfig/nvim-autopairs")
+			require("pluginconfig/nvim-autopairs")
 		end,
 	},
 	{
@@ -81,36 +88,36 @@ return require("lazy").setup({
 			"nvim-autopairs",
 		},
 		config = function()
-			require("/pluginconfig/nvim-cmp")
+			require("pluginconfig/nvim-cmp")
 		end,
 	},
 	{
 		"onsails/lspkind-nvim",
 		event = "VimEnter",
 		config = function()
-			require("/pluginconfig/lspkind-nvim")
+			require("pluginconfig/lspkind-nvim")
 		end,
 	},
 	{
 		"folke/lsp-colors.nvim",
 		config = function()
-			require("/pluginconfig/lsp-colors")
+			require("pluginconfig/lsp-colors")
 		end,
 	},
 
-	{ "hrsh7th/cmp-nvim-lsp-signature-help", dependencies = { "nvim-cmp" } },
+	{ "hrsh7th/cmp-nvim-lsp-signature-help",  dependencies = { "nvim-cmp" } },
 	{ "hrsh7th/cmp-nvim-lsp-document-symbol", dependencies = { "nvim-cmp" } },
 	{ "hrsh7th/cmp-nvim-lsp" },
-	{ "hrsh7th/cmp-buffer", dependencies = { "nvim-cmp" } },
-	{ "hrsh7th/cmp-path", dependencies = { "nvim-cmp" } },
-	{ "hrsh7th/cmp-omni", dependencies = { "nvim-cmp" } },
-	{ "hrsh7th/cmp-nvim-lua", dependencies = { "nvim-cmp" } },
-	{ "hrsh7th/cmp-cmdline", dependencies = { "nvim-cmp" } },
-	{ "hrsh7th/cmp-emoji", dependencies = { "nvim-cmp" } },
-	{ "hrsh7th/cmp-calc", dependencies = { "nvim-cmp" } },
-	{ "f3fora/cmp-spell", dependencies = { "nvim-cmp" } },
-	{ "yutkat/cmp-mocword", dependencies = { "nvim-cmp" } },
-	{ "saadparwaiz1/cmp_luasnip", dependencies = { "nvim-cmp" } },
+	{ "hrsh7th/cmp-buffer",                   dependencies = { "nvim-cmp" } },
+	{ "hrsh7th/cmp-path",                     dependencies = { "nvim-cmp" } },
+	{ "hrsh7th/cmp-omni",                     dependencies = { "nvim-cmp" } },
+	{ "hrsh7th/cmp-nvim-lua",                 dependencies = { "nvim-cmp" } },
+	{ "hrsh7th/cmp-cmdline",                  dependencies = { "nvim-cmp" } },
+	{ "hrsh7th/cmp-emoji",                    dependencies = { "nvim-cmp" } },
+	{ "hrsh7th/cmp-calc",                     dependencies = { "nvim-cmp" } },
+	{ "f3fora/cmp-spell",                     dependencies = { "nvim-cmp" } },
+	{ "yutkat/cmp-mocword",                   dependencies = { "nvim-cmp" } },
+	{ "saadparwaiz1/cmp_luasnip",             dependencies = { "nvim-cmp" } },
 
 	"github/copilot.vim",
 	{
@@ -120,23 +127,23 @@ return require("lazy").setup({
 		end,
 	},
 	-- treesitter
-	{ "ray-x/cmp-treesitter", dependencies = { "nvim-cmp" } },
+	-- { "ray-x/cmp-treesitter", dependencies = { "nvim-cmp" } },
 	{ "nvim-treesitter/nvim-treesitter-textobjects", dependencies = { "nvim-treesitter" } },
-	{ "RRethy/nvim-treesitter-textsubjects", dependencies = { "nvim-treesitter" } },
-
+	{ "RRethy/nvim-treesitter-textsubjects",         dependencies = { "nvim-treesitter" } },
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 	{
 		"glepnir/lspsaga.nvim",
+		event = "BufRead",
 		branch = "main",
 		config = function()
-			require("/pluginconfig/lspsaga")
+			require("pluginconfig/lspsaga")
 		end,
 	},
 
 	{
 		"jose-elias-alvarez/null-ls.nvim",
 		config = function()
-			require("/pluginconfig/null-ls")
+			require("pluginconfig/null-ls")
 		end,
 	},
 
@@ -156,7 +163,7 @@ return require("lazy").setup({
 			"MunifTanjim/nui.nvim",
 		},
 		config = function()
-			require("/pluginconfig/neo-tree")
+			require("pluginconfig/neo-tree")
 		end,
 	},
 
@@ -180,7 +187,7 @@ return require("lazy").setup({
 	{
 		"ggandor/lightspeed.nvim",
 		config = function()
-			require("/pluginconfig/lightspeed")
+			require("pluginconfig/lightspeed")
 		end,
 	},
 
@@ -191,7 +198,7 @@ return require("lazy").setup({
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		config = function()
-			require("./pluginconfig/indent-blankline")
+			require("pluginconfig/indent-blankline")
 		end,
 	},
 
@@ -199,7 +206,7 @@ return require("lazy").setup({
 	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
-			require("/pluginconfig/gitsigns")
+			require("pluginconfig/gitsigns")
 		end,
 	},
 	{ "tpope/vim-fugitive" },
@@ -215,14 +222,14 @@ return require("lazy").setup({
 		"vuki656/package-info.nvim",
 		dependencies = "MunifTanjim/nui.nvim",
 		config = function()
-			require("/pluginconfig/package")
+			require("pluginconfig/package")
 		end,
 	},
 	{
 		"windwp/nvim-ts-autotag",
 		dependencies = { { "nvim-treesitter/nvim-treesitter", lazy = true } },
 		config = function()
-			require("/pluginconfig/nvim-ts-autotag")
+			require("pluginconfig/nvim-ts-autotag")
 		end,
 	},
 
@@ -230,7 +237,7 @@ return require("lazy").setup({
 	{
 		"akinsho/toggleterm.nvim",
 		config = function()
-			require("/pluginconfig/toggleterm")
+			require("pluginconfig/toggleterm")
 		end,
 	},
 
@@ -247,7 +254,7 @@ return require("lazy").setup({
 		"romgrk/barbar.nvim",
 		dependencies = { "kyazdani42/nvim-web-devicons" },
 		config = function()
-			require("/pluginconfig/barbar")
+			require("pluginconfig/barbar")
 		end,
 	},
 
@@ -256,26 +263,20 @@ return require("lazy").setup({
 		"catppuccin/nvim",
 		name = "catppuccin",
 		config = function()
-			require("/pluginconfig/catppuccin")
+			require("pluginconfig/catppuccin")
 		end,
 	},
-	--
+
 	-- silicon (screenshot)
 	{ "krivahtoo/silicon.nvim", build = "./install.sh" },
 	"rhysd/committia.vim",
-	{
-		"matbme/JABS.nvim",
-		config = function()
-			require("/pluginconfig/jabs")
-		end,
-	},
 
 	-- Japanese input
 	{ "vim-denops/denops.vim" },
 	{
 		"vim-skk/skkeleton",
 		config = function()
-			require("/pluginconfig/skkeleton")
+			require("pluginconfig/skkeleton")
 		end,
 		dependencies = { "vim-denops/denops.vim" },
 	},
@@ -283,7 +284,7 @@ return require("lazy").setup({
 	{
 		"feline-nvim/feline.nvim",
 		config = function()
-			require("/pluginconfig/feline")
+			require("pluginconfig/feline")
 		end,
 	},
 })

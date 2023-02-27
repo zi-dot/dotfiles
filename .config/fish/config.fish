@@ -69,6 +69,6 @@ set -gx PATH $PYENV_ROOT/bin $PATH
 eval "$(pyenv init -)"
 
 source /opt/homebrew/opt/asdf/libexec/asdf.fish
-status --is-interactive; and rbenv init - fish | source
+# status --is-interactive; and rbenv init - fish | source
 
 direnv hook fish | source

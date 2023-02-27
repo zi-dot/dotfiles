@@ -37,3 +37,5 @@ vim.keymap.set({ "i" }, "<D-v>", "<C-o>p", { silent = true, remap = true })
 
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
+
+vim.keymap.set("n", "<leader>cp", ":let @* = expand('%:p')<CR>", { silent = true })

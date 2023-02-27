@@ -1,7 +1,7 @@
 require("nvim-treesitter.configs").setup({
+	auto_install = true,
 	highlight = {
 		enable = true,
-		disable = {},
 	},
 	indent = {
 		enable = true,
@@ -18,9 +18,10 @@ require("nvim-treesitter.configs").setup({
 		"html",
 		"scss",
 		"rust",
-	},
-	autotag = {
-		enable = true,
+		"markdown",
+		"lua",
+		"graphql",
+		"bash",
 	},
 	incremental_selection = {
 		enable = true,
@@ -76,8 +77,3 @@ require("nvim-treesitter.configs").setup({
 		},
 	},
 })
-
-require("nvim-treesitter.install").update({ with_sync = true })
-
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
