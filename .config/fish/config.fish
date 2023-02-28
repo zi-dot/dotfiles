@@ -66,6 +66,10 @@ set -gx PATH $DENO_INSTALL/bin $PATH
 
 set -gx PYENV_ROOT $HOME/.pyenv
 set -gx PATH $PYENV_ROOT/bin $PATH
+
+set -gx PNPM_HOME $HOME/Library/pnpm
+set -gx PATH $PNPM_HOME $PATH
+
 eval "$(pyenv init -)"
 
 source /opt/homebrew/opt/asdf/libexec/asdf.fish

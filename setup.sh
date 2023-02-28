@@ -42,6 +42,11 @@ brew install lsd
 brew install wget
 brew install rust
 
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+
+export PNPM_HOME="/Users/zi/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
 ln -sf ~/dotfiles/.zprezto/runcoms/zshrc ~/.zshrc
 ln -sf ~/dotfiles/.zprezto/runcoms/zshenv ~/.zshenv
 ln -sf ~/dotfiles/.zprezto/runcoms/zprofile ~/.zprofile
