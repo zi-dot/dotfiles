@@ -2,6 +2,9 @@ local status, mason = pcall(require, "mason")
 if not status then
 	return
 end
+
+mason.setup({})
+
 local status2, mason_lspconfig = pcall(require, "mason-lspconfig")
 if not status2 then
 	return
@@ -10,11 +13,10 @@ local status3, nvim_lsp = pcall(require, "lspconfig")
 if not status3 then
 	return
 end
+
 -- Utility functions shared between progress reports for LSP and DAP
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-mason.setup({})
 
 mason_lspconfig.setup_handlers({
 	function(server_name)

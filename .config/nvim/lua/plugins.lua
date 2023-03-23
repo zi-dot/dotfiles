@@ -28,9 +28,6 @@ return require("lazy").setup({
 			require("pluginconfig/treesitter")
 		end,
 	},
-	{
-		"nvim-treesitter/playground",
-	},
 	"nvim-treesitter/nvim-treesitter-context",
 	-- pre dependency for many plugins
 	{ "nvim-lua/popup.nvim" },
@@ -175,14 +172,14 @@ return require("lazy").setup({
 		end,
 	},
 
-	-- Scroll bar
-	{
-		"petertriho/nvim-scrollbar",
-		config = function()
-			require("scrollbar").setup()
-		end,
-	},
-
+	-- -- Scroll bar
+	-- {
+	-- 	"petertriho/nvim-scrollbar",
+	-- 	config = function()
+	-- 		require("scrollbar").setup()
+	-- 	end,
+	-- },
+	--
 	-- Cursor
 	{
 		"ggandor/lightspeed.nvim",
@@ -285,6 +282,18 @@ return require("lazy").setup({
 		"feline-nvim/feline.nvim",
 		config = function()
 			require("pluginconfig/feline")
+		end,
+	},
+
+	{
+		"cbochs/portal.nvim",
+		-- Optional dependencies
+		dependencies = {
+			"cbochs/grapple.nvim",
+			"ThePrimeagen/harpoon",
+		},
+		config = function()
+			require("pluginconfig/portal")
 		end,
 	},
 })
