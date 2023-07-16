@@ -1,7 +1,6 @@
 #!/bin/sh
 
 brew install neovim
-brew install tmux
 brew uninstall --force node
 brew tap homebrew/cask-fonts
 brew install --cask homebrew/cask-fonts/font-hackgen
@@ -16,7 +15,8 @@ brew install ripgrep
 brew install deno
 brew install peco jq
 brew install --cask 1password
-brew tap wez/wezterm; brew install --cask wezterm-nightly --no-quarantine
+brew tap wez/wezterm
+brew install --cask wezterm-nightly --no-quarantine
 brew install --cask raycast
 brew install --cask docker
 brew install --cask visual-studio-code
@@ -75,7 +75,7 @@ ln -sf ~/dotfiles/.config/fish/config-osx.fish ~/.config/fish/config-osx.fish
 ln -sf ~/dotfiles/hyper/.hyper.js ~/.hyper.js
 ln -sf ~/dotfiles/hyper/package.json ~/.hyper_plugins/package.json
 
-ln -sf ~/dotfiles/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua
+ln -sf ~/dotfiles/wezterm/wezterm.lua ~/.wezterm.lua
 
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 git config --global interactive.diffFilter "diff-so-fancy --patch"

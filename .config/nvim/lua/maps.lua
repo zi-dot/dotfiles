@@ -1,6 +1,8 @@
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-vim.keymap.set({ "n", "v" }, "m", "[dev]", { silent = true, remap = true })
 vim.keymap.set({ "n", "v" }, "[dev]", "<Nop>", { silent = true })
+
+vim.keymap.set("", "<Tab>", "<Nop>") -- special case
+vim.keymap.set("n", "<C-s>", "<Nop>")
 
 -- Delete or paste without yank
 vim.keymap.set({ "n", "v" }, "<Leader>d", '"_d', { silent = true })

@@ -1,3 +1,11 @@
+-- vim.loader = false
+if vim.loader then
+	vim.loader.enable()
+	vim.schedule(function()
+		vim.notify("nvim loader is enabled")
+	end)
+end
+
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.ignorecase = true
@@ -29,14 +37,27 @@ vim.g.mapleader = " "
 
 vim.o.cursorline = true
 
-require("plugins")
 require("maps")
+
+require("config.lazy")({
+	debug = false,
+	defaults = {
+		lazy = true,
+	},
+	performance = {
+		cache = {
+			enabled = true,
+		},
+	},
+})
 
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = "*",
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+	group = highlight_group,
+	pattern = "*",
 })
+
+vim.cmd.colorscheme("catppuccin")
