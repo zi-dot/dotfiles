@@ -39,3 +39,11 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
 vim.keymap.set("n", "<leader>cp", ":let @* = expand('%:p')<CR>", { silent = true })
+
+vim.keymap.set("n", "<leader>es", ":!eslint_d %:p --fix<CR>", { silent = true })
+
+-- quickfix
+vim.keymap.set("n", "<leader>qo", ":copen<CR>", { silent = true })
+vim.keymap.set("n", "<leader>qc", ":cclose<CR>", { silent = true })
+vim.keymap.set("n", "<leader>qn", ":cnext<CR>", { silent = true })
+vim.keymap.set("n", "<leader>qp", ":cprev<CR>", { silent = true })
