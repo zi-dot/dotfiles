@@ -7,9 +7,8 @@ if vim.loader then
 end
 
 vim.o.number = true
-vim.o.relativenumber = true
 vim.o.ignorecase = true
-vim.o.lazyredraw = true
+-- vim.o.lazyredraw = true
 vim.o.clipboard = "unnamedplus"
 vim.o.autoindent = true
 vim.o.smartindent = true
@@ -61,3 +60,4 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.cmd.colorscheme("catppuccin")
+vim.o.relativenumber = false

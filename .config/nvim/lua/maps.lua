@@ -23,8 +23,8 @@ vim.keymap.set("t", "jj", "<C-\\><C-n>", { silent = true })
 
 vim.keymap.set("n", "<Leader>v", ":edit ~/.config/nvim/init.lua<CR>", { silent = true })
 
-vim.keymap.set("n", "ss", ":split<Return><C-w>w", { silent = true, remap = true })
-vim.keymap.set("n", "sv", ":vsplit<Return><C-w>w", { silent = true, remap = true })
+vim.keymap.set("n", "ss", ":split<Return>", { silent = true, remap = true })
+vim.keymap.set("n", "sv", ":vsplit<Return>", { silent = true, remap = true })
 
 vim.keymap.set("", "s", "<Nop>", { silent = true, remap = true })
 vim.keymap.set("", ";", "<Nop>", { silent = true, remap = true })
