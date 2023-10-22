@@ -130,7 +130,6 @@ return {
 			require("copilot").setup(opts)
 			local copilot_suggestion = require("copilot.suggestion")
 			vim.keymap.set("i", "<Tab>", function()
-				print("Tab pressed")
 				if copilot_suggestion.is_visible() then
 					copilot_suggestion.accept()
 				else

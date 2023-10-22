@@ -149,37 +149,18 @@ return {
 	},
 
 	{
-		"jose-elias-alvarez/null-ls.nvim",
-		opts = function(_, opts)
-			local nls = require("null-ls")
-			vim.list_extend(opts.sources, {
-				nls.builtins.diagnostics.eslint_d.with({
-					diagnostics_format = "[eslint] #{m}\n(#{c})",
-				}),
-				nls.builtins.diagnostics.fish,
-				nls.builtins.diagnostics.markdownlint,
-				nls.builtins.diagnostics.luacheck.with({
-					condition = function(utils)
-						return utils.root_has_file({ ".luacheckrc" })
-					end,
-				}),
-				nls.builtins.formatting.stylua,
-				nls.builtins.formatting.prettier,
-				nls.builtins.formatting.eslint_d,
-			})
-			opts.on_attach = function(client, bufnr)
-				local augroup_format = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
-				if client.supports_method("textDocument/formatting") then
-					vim.api.nvim_clear_autocmds({ buffer = bufnr, group = augroup_format })
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						group = augroup_format,
-						buffer = 0,
-						callback = function()
-							vim.lsp.buf.format({ bufnr = bufnr })
-						end,
-					})
-				end
-			end
+		"stevearc/conform.nvim",
+		opts = function()
+			local opts = {
+				formatters_by_ft = {
+					javascript = { "eslint", "prettier"},
+          typescript = { "eslint", "prettier" },
+					typescriptreact = { "eslint", "prettier" },
+					css = { "stylelint", "prettier" },
+				},
+			}
+
+			return opts
 		end,
 	},
 
