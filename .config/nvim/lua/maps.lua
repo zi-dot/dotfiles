@@ -6,7 +6,7 @@ vim.keymap.set("n", "<C-s>", "<Nop>")
 
 -- Delete or paste without yank
 vim.keymap.set({ "n", "v" }, "<Leader>d", '"_d', { silent = true })
-vim.keymap.set("v", "<Leader>p", '"_dP', { silent = true })
+vim.keymap.set("v", "p", '"_dP', { silent = true })
 
 vim.keymap.set("n", "+", "<C-a>", { silent = true })
 vim.keymap.set("n", "-", "<C-x>", { silent = true })
@@ -41,3 +41,5 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
 vim.keymap.set("n", "<leader>cp", ":let @* = expand('%:p')<CR>", { silent = true })
+
+vim.keymap.set("n", "<leader>bd", ":bd | bd #", { silent = true })
