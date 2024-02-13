@@ -10,11 +10,19 @@ set -g theme_hide_hostname no
 set -g theme_hostname always
 
 # aliases
-alias ls "ls -p -G"
-alias la "ls -A"
-alias ll "ls -l"
-alias lla "ll -A"
-alias g git
+abbr ls "ls -p -G"
+abbr la "ls -A"
+abbr ll "ls -l"
+abbr lla "ll -A"
+abbr g git
+abbr v nvim
+abbr gc "git commit"
+abbr gs "git status"
+abbr gsw "git switch"
+abbr gst "git stash"
+abbr gomen "git commit --amend"
+abbr "git pull" "git pull -p"
+
 command -qv nvim && alias vim nvim
 
 set -gx EDITOR nvim
@@ -32,12 +40,12 @@ set -gx PATH $GOPATH/bin $PATH
 
 # NVM
 function __check_rvm --on-variable PWD --description 'Do nvm stuff'
-  status --is-command-substitution; and return
+    status --is-command-substitution; and return
 
-  if test -f .nvmrc; and test -r .nvmrc;
-    nvm use
-  else
-  end
+    if test -f .nvmrc; and test -r .nvmrc
+        nvm use
+    else
+    end
 end
 
 if status is-interactive

@@ -1,8 +1,10 @@
 return {
+  "nvim-telescope/telescope.nvim",
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			"nvim-telescope/telescope-fzf-native.nvim",
+			"nvim-lua/plenary.nvim",
 			build = "make",
 			config = function()
 				require("telescope").load_extension("fzf")
@@ -21,9 +23,19 @@ return {
 				live_grep = {
 					hidden = true,
 				},
+				buffers = {
+					sort_lastused = true,
+					show_all_buffers = true,
+					previewer = true,
+					mappings = {
+						i = {
+							["<C-a>"] = "select_all",
+							["<leader>bd"] = "delete_buffer",
+						},
+					},
+				},
 			},
 		},
-
 		keys = {
 			{
 				"<leader>?",

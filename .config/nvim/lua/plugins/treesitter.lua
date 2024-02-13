@@ -58,7 +58,7 @@ return {
 				"yaml",
 				-- "wgsl",
 				"json",
-				-- "markdown",
+				"markdown",
 			},
 			matchup = {
 				enable = true,

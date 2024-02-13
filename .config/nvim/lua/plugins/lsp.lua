@@ -150,18 +150,15 @@ return {
 
 	{
 		"stevearc/conform.nvim",
-		opts = function()
-			local opts = {
-				formatters_by_ft = {
-					javascript = { "eslint", "prettier"},
-          typescript = { "eslint", "prettier" },
-					typescriptreact = { "eslint", "prettier" },
-					css = { "stylelint", "prettier" },
-				},
-			}
-
-			return opts
-		end,
+		opts = {
+			formatters_by_ft = {
+				javascript = { "eslint", "prettier" },
+				typescript = { "eslint", "prettier" },
+				typescriptreact = { "eslint", "prettier" },
+				css = { "stylelint", "prettier" },
+				lua = { "stylua" },
+			},
+		},
 	},
 
 	{
