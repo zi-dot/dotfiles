@@ -21,7 +21,8 @@ abbr gs "git status"
 abbr gsw "git switch"
 abbr gst "git stash"
 abbr gomen "git commit --amend"
-abbr "git pull" "git pull -p"
+abbr gp "git pull -p"
+abbr master "git switch master && git pull && git switch - && git rebase master"
 
 command -qv nvim && alias vim nvim
 
