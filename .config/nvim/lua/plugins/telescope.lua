@@ -1,5 +1,35 @@
+local changed_on_branch = function()
+	local previewers = require("telescope.previewers")
+	local pickers = require("telescope.pickers")
+	local sorters = require("telescope.sorters")
+	local finders = require("telescope.finders")
+	pickers
+		.new({}, {
+			results_title = "Modified in current branch",
+			finder = finders.new_oneshot_job({
+				"git",
+				"diff",
+				"--name-only",
+				"--diff-filter=ACMR",
+			}, {}),
+			sorter = sorters.get_fuzzy_file(),
+			previewer = previewers.new_termopen_previewer({
+				get_command = function(entry)
+					return {
+						"git",
+						"diff",
+						"--diff-filter=ACMR",
+						"--",
+						entry.value,
+					}
+				end,
+			}),
+		})
+		:find()
+end
+
 return {
-  "nvim-telescope/telescope.nvim",
+	"nvim-telescope/telescope.nvim",
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
@@ -56,6 +86,13 @@ return {
 			{ "<leader>sg", require("telescope.builtin").live_grep, desc = "[S]earch by [G]rep" },
 			{ "<leader>sd", require("telescope.builtin").diagnostics, desc = "[S]earch [D]iagnostics" },
 			{ "<leader>sf", require("telescope.builtin").find_files, desc = "[S]earch [F]iles" },
+			{
+				"<leader>gm",
+				function()
+					changed_on_branch()
+				end,
+				desc = "[G]it [M]odified files",
+			},
 			{ "<leader>sh", require("telescope.builtin").help_tags, desc = "[S]earch [H]elp" },
 		},
 	},
