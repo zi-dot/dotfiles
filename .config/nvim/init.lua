@@ -1,9 +1,6 @@
 -- vim.loader = false
 if vim.loader then
 	vim.loader.enable()
-	vim.schedule(function()
-		vim.notify("nvim loader is enabled")
-	end)
 end
 
 vim.o.number = true
@@ -59,7 +56,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	pattern = "*",
 })
 
--- vim.cmd.colorscheme("catppuccin")
+-- vim.cmdhttps://docs.google.com/document/d/1Co63hMjSN3p6YGEI8kb_8tofx0fVWt0gJmBfrxy_chQ/edit.colorscheme("catppuccin")
 vim.o.relativenumber = false
 
 local augroup = vim.api.nvim_create_augroup("strdr4605", { clear = true })
