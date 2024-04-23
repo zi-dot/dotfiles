@@ -146,4 +146,11 @@ return {
 			end)
 		end,
 	},
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("lualine").hide()
+		end,
+	},
 }
