@@ -84,38 +84,6 @@ local color_off = title_color_bg:lighten(0.4)
 local color_on = color_off:lighten(0.4)
 wezterm.on("update-right-status", function(window)
 	local bat = ""
-	local b = wezterm.battery_info()[1]
-	bat = wezterm.format({
-		{ Foreground = {
-			Color = b.state_of_charge > 0.2 and color_on or color_off,
-		} },
-		{ Text = "▉" },
-		{ Foreground = {
-			Color = b.state_of_charge > 0.4 and color_on or color_off,
-		} },
-		{ Text = "▉" },
-		{ Foreground = {
-			Color = b.state_of_charge > 0.6 and color_on or color_off,
-		} },
-		{ Text = "▉" },
-		{ Foreground = {
-			Color = b.state_of_charge > 0.8 and color_on or color_off,
-		} },
-		{ Text = "▉" },
-		{ Background = {
-			Color = b.state_of_charge > 0.98 and color_on or color_off,
-		} },
-		{
-			Foreground = {
-				Color = b.state == "Charging" and color_on:lighten(0.3):complement()
-					or (b.state_of_charge < 0.2 and wezterm.GLOBAL.count % 2 == 0) and color_on
-						:lighten(0.1)
-						:complement()
-					or color_off:darken(0.1),
-			},
-		},
-		{ Text = " ⚡ " },
-	})
 
 	local time = wezterm.strftime("%-l:%M %P")
 
@@ -242,7 +210,7 @@ return {
 	window_frame = {
 		active_titlebar_bg = title_color_bg,
 		inactive_titlebar_bg = title_color_bg,
-		font_size = 10.0,
+		font_size = 14.0,
 	},
 
 	window_decorations = "RESIZE",
