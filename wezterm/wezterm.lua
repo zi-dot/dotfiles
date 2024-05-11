@@ -1,75 +1,22 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
---
--- wezterm.on("gui-startup", function()
--- 	local _, _, window = wezterm.mux.spawn_window({})
--- 	local w = window:gui_window()
--- 	w:maximize()
--- 	w:toggle_fullscreen()
--- end)
---
+
 wezterm.on("window-config-reloaded", function(window)
 	window:toast_notification("wezterm", "Configuration reloaded!", nil, 4000)
 end)
 
-local color_default_fg_light = wezterm.color.parse("#cacaca") -- 💩
-local color_default_fg_dark = wezterm.color.parse("#303030")
+local color_default_fg_light = wezterm.color.parse("e5ffff") -- 💩
 
 local color = (function()
 	local COLOR = {
-		VERIDIAN = {
-			bg = wezterm.color.parse("#4D8060"),
-			fg = color_default_fg_light,
-		},
-		PAYNE = {
-			bg = wezterm.color.parse("#385F71"),
-			fg = color_default_fg_light,
-		},
-		INDIGO = {
-			bg = wezterm.color.parse("#7C77B9"),
-			fg = color_default_fg_light,
-		},
-		CAROLINA = {
-			bg = wezterm.color.parse("#8FBFE0"),
-			fg = color_default_fg_dark,
-		},
-		FLAME = {
-			bg = wezterm.color.parse("#D36135"),
-			fg = color_default_fg_dark,
-		},
-		JET = {
-			bg = wezterm.color.parse("#282B28"),
-			fg = color_default_fg_light,
-		},
-		TAUPE = {
-			bg = wezterm.color.parse("#785964"),
-			fg = color_default_fg_light,
-		},
-		ECRU = {
-			bg = wezterm.color.parse("#C6AE82"),
-			fg = color_default_fg_dark,
-		},
-		VIOLET = {
-			bg = wezterm.color.parse("#685F74"),
-			fg = color_default_fg_light,
-		},
-		VERDIGRIS = {
-			bg = wezterm.color.parse("#28AFB0"),
+		OBRADINN = {
+			bg = wezterm.color.parse("333319"),
 			fg = color_default_fg_light,
 		},
 	}
 
 	local coolors = {
-		COLOR.VERIDIAN,
-		COLOR.PAYNE,
-		COLOR.INDIGO,
-		COLOR.CAROLINA,
-		COLOR.FLAME,
-		COLOR.JET,
-		COLOR.TAUPE,
-		COLOR.ECRU,
-		COLOR.VIOLET,
-		COLOR.VERDIGRIS,
+		COLOR.OBRADINN,
 	}
 
 	return coolors[math.random(#coolors)]
@@ -80,8 +27,6 @@ local color_primary = color
 local title_color_bg = color_primary.bg
 local title_color_fg = color_primary.fg
 
-local color_off = title_color_bg:lighten(0.4)
-local color_on = color_off:lighten(0.4)
 wezterm.on("update-right-status", function(window)
 	local bat = ""
 
@@ -113,26 +58,12 @@ wezterm.on("gui-startup", function(cmd)
 	local screenWidth = 2560
 	local screenHeight = 1600
 
-	local tab, pane, window = mux.spawn_window(cmd or {
+	local tab, window = mux.spawn_window(cmd or {
 		workspace = "main",
 	})
 
 	local icons = {
-		"🌞",
-		"🍧",
-		"🫠",
-		"🏞️",
-		"📑",
-		"🪁",
-		"🧠",
-		"🦥",
-		"🦉",
-		"📀",
-		"🌮",
-		"🍜",
-		"🧋",
-		"🥝",
-		"🍊",
+		"⚓︎",
 	}
 
 	tab:set_title("  " .. icons[math.random(#icons)] .. "  ")
@@ -217,9 +148,7 @@ return {
 	win32_system_backdrop = "Acrylic",
 	show_tab_index_in_tab_bar = false,
 	show_new_tab_button_in_tab_bar = false,
-	-- }
-	--
-	-- return {
+
 	use_ime = true,
 	color_scheme = "Catppuccin Mocha",
 	font = wezterm.font("Hack Nerd Font"),
