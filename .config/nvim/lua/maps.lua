@@ -48,3 +48,5 @@ vim.keymap.set("n", "<leader>deleteswap", ":!rm ~/.local/state/nvim/swap/*", { s
 
 vim.keymap.set("n", "]q", ":cnext<CR>", { silent = true })
 vim.keymap.set("n", "[q", ":cprev<CR>", { silent = true })
+
+vim.keymap.set("n", "<leader>l", "<Cmd>:Lazy<CR>", { silent = true })

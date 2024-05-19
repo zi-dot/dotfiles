@@ -65,3 +65,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = augroup,
 	command = "compiler tsc | setlocal makeprg=pnpm\\ run\\ check",
 })
+
+vim.diagnostic.config({
+	virtual_text = true,
+	signs = true,
+	underline = true,
+})
