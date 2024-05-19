@@ -1,5 +1,5 @@
 return {
-  {
+	{
 		"nvim-treesitter/nvim-treesitter-context",
 		event = "BufReadPre",
 		enabled = true,
@@ -92,6 +92,16 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
 			{ "windwp/nvim-ts-autotag", opts = {} },
+		},
+	},
+
+	{
+		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
 		},
 	},
 }

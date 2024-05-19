@@ -93,7 +93,11 @@ return {
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
-				javascript = { { "prettierd", "prettier" } },
+				css = { "stylelint", "prettierd", "prettier" },
+				javascript = { { "eslint", "prettierd", "prettier" } },
+				typescript = { { "eslint", "prettierd", "prettier" } },
+				typescriptreact = { { "eslint", "prettierd", "prettier" } },
+				rust = { "rustfmt" },
 			},
 			format_on_save = {
 				timeout_ms = 500,
