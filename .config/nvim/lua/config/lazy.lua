@@ -9,10 +9,6 @@ vim.opt.rtp:prepend(lazypath)
 return function(opts)
 	opts = vim.tbl_deep_extend("force", {
 		spec = {
-			-- {
-			-- 	"LazyVim/LazyVim",
-			-- 	import = "lazyvim.plugins",
-			-- },
 			{
 				import = "plugins.editor",
 			},

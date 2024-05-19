@@ -2,7 +2,7 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		version = false, -- last release is way too old
-		event = "InsertEnter",
+		event = "BufEnter",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
@@ -84,7 +84,7 @@ return {
 
 	{
 		"hrsh7th/cmp-cmdline",
-		event = "InsertEnter",
+		event = "BufEnter",
 		config = function()
 			local cmp = require("cmp")
 			cmp.setup.cmdline("/", {

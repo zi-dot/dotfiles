@@ -59,7 +59,7 @@ return {
 			},
 			{ "K", vim.lsp.buf.hover, desc = "Hover" },
 			{ "gK", vim.lsp.buf.signature_help, desc = "Signature Help" },
-			{ "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help" },
+			{ "<C-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help" },
 			{ "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" } },
 			{ "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" } },
 			{ "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" } },
