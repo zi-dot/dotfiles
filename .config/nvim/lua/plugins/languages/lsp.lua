@@ -19,16 +19,10 @@ return {
 			mason_lspconfig.setup()
 			mason_lspconfig.setup_handlers({
 				function(server_name)
-					require("lspconfig")[server_name].setup({
-						inlay_hints = {
-							enable = true,
-						},
-						codelens = {
-							enabled = true,
-						},
-					})
+					require("lspconfig")[server_name].setup({})
 				end,
 			})
+			vim.lsp.inlay_hint.enable(true)
 			vim.lsp.handlers["textDocument/publishDiagnostics"] =
 				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false })
 		end,
@@ -94,15 +88,19 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				css = { "stylelint", "prettierd", "prettier" },
-				javascript = { { "eslint", "prettierd", "prettier" } },
-				typescript = { { "eslint", "prettierd", "prettier" } },
-				typescriptreact = { { "eslint", "prettierd", "prettier" } },
+				javascript = { { "eslint", "eslint_d" }, { "prettierd", "prettier" } },
+				typescript = { { "eslint", "eslint_d" }, { "prettierd", "prettier" } },
+				typescriptreact = { { "eslint", "eslint_d" }, { "prettierd", "prettier" } },
 				rust = { "rustfmt" },
 			},
 			format_on_save = {
-				timeout_ms = 500,
+				timeout_ms = 5000,
 				lsp_fallback = true,
 			},
+			format_after_save = {
+				lsp_fallback = true,
+			},
+			notify_on_error = true,
 		},
 		keys = {
 			{

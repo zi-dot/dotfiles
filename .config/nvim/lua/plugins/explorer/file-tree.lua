@@ -1,5 +1,5 @@
 return {
-  {
+	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
 		dependencies = {
@@ -10,6 +10,8 @@ return {
 		cmd = "Neotree",
 		opts = {
 			close_if_last_window = true,
+			enable_git_status = true,
+			enable_diagnostics = true,
 			filesystem = {
 				filtered_items = {
 					visible = true,
@@ -17,11 +19,29 @@ return {
 					hide_gitignored = false,
 					hide_hidden = false,
 				},
+				follow_current_file = {
+					enabled = true,
+				},
+			},
+			git_status = {
+				symbols = {
+					-- Change type
+					added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+					modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
+					deleted = "✖", -- this can only be used in the git_status source
+					renamed = "󰁕", -- this can only be used in the git_status source
+					-- Status type
+					untracked = "",
+					ignored = "",
+					unstaged = "󰄱",
+					staged = "",
+					conflict = "",
+				},
 			},
 			event_handlers = {
 				{
 					event = "file_opened",
-					handler = function(file_path)
+					handler = function()
 						require("neo-tree.command").execute({ action = "close" })
 					end,
 				},

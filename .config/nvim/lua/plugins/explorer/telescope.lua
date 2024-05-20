@@ -31,6 +31,7 @@ end
 return {
 	"nvim-telescope/telescope.nvim",
 	tag = "0.1.6",
+	event = "BufEnter",
 	dependencies = {
 		"nvim-telescope/telescope-fzf-native.nvim",
 		"nvim-lua/plenary.nvim",
