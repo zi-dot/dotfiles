@@ -5,6 +5,7 @@ brew uninstall --force node
 brew tap homebrew/cask-fonts
 brew install --cask homebrew/cask-fonts/font-hackgen
 brew install --cask font-hack-nerd-font
+brew install --cask font-zed-mono
 brew install --cask slack
 brew install starship
 brew install diff-so-fancy

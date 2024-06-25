@@ -18,7 +18,7 @@ vim.keymap.set("i", "jj", "<ESC>", { silent = true })
 vim.keymap.set("n", "k", 'v:count == 0 ? "gk" : "k"', { expr = true, silent = true })
 vim.keymap.set("n", "j", 'v:count == 0 ? "gj" : "j"', { expr = true, silent = true })
 
-vim.keymap.set("n", "<Leader>t", ":split term://fish <CR>", { silent = true })
+-- vim.keymap.set("n", "<Leader>t", ":split term://fish <CR>", { silent = true })
 vim.keymap.set("t", "jj", "<C-\\><C-n>", { silent = true })
 
 vim.keymap.set("n", "<Leader>v", ":edit ~/.config/nvim/init.lua<CR>", { silent = true })

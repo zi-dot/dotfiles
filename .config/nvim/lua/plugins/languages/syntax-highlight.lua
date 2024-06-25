@@ -1,6 +1,9 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter-context",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+		},
 		event = "BufReadPre",
 		enabled = true,
 		opts = { mode = "cursor" },
@@ -8,6 +11,9 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
+		dependencies = {
+			{ "windwp/nvim-ts-autotag", opts = {} },
+		},
 		opts = {
 			ensure_installed = {
 				"astro",
@@ -86,15 +92,17 @@ return {
 					show_help = "?",
 				},
 			},
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					init_selection = "<CR>",
+					node_incremental = "<CR>",
+					scope_incremental = false,
+					node_decremental = "<bs>",
+				},
+			},
 		},
 	},
-	{
-		"nvim-treesitter/nvim-treesitter",
-		dependencies = {
-			{ "windwp/nvim-ts-autotag", opts = {} },
-		},
-	},
-
 	{
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },

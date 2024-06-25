@@ -1,12 +1,13 @@
 return {
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		priority = 1000,
+		"Shatur/neovim-ayu",
 		config = function()
-			require("catppuccin").setup({
-				flavour = "mocha",
+			require("ayu").setup({
+				mirage = true,
 			})
 		end,
+	},
+	{
+		"joshdick/onedark.vim",
 	},
 }

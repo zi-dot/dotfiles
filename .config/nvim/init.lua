@@ -58,7 +58,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- vim.cmdhttps://docs.google.com/document/d/1Co63hMjSN3p6YGEI8kb_8tofx0fVWt0gJmBfrxy_chQ/edit.colorscheme("catppuccin")
 vim.o.relativenumber = false
-vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme("onedark")
 
 local augroup = vim.api.nvim_create_augroup("strdr4605", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {

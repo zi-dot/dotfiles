@@ -150,8 +150,8 @@ return {
 	show_new_tab_button_in_tab_bar = false,
 
 	use_ime = true,
-	color_scheme = "Catppuccin Mocha",
-	font = wezterm.font("Hack Nerd Font"),
+	color_scheme = "Ayu Mirage (Gogh)",
+	font = wezterm.font("Zed Mono Extended"),
 	window_padding = {
 		left = 5,
 		right = 5,
@@ -172,5 +172,5 @@ return {
 	animation_fps = 60,
 	cursor_blink_ease_in = "Constant",
 	cursor_blink_ease_out = "Constant",
-	scroll_backlines = 350000,
+	scrollback_lines = 350000,
 }

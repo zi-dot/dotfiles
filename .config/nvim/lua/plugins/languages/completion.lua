@@ -5,6 +5,7 @@ return {
 		event = "BufEnter",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 		},
@@ -13,6 +14,14 @@ return {
 			local cmp = require("cmp")
 			local defaults = require("cmp.config.default")()
 			return {
+				window = {
+					completion = cmp.config.window.bordered({
+						winhighlight = "Normal:Normal,FloatBorder:Comment,CursorLine:Visual,Search:None",
+					}),
+					documentation = cmp.config.window.bordered({
+						winhighlight = "Normal:Normal,FloatBorder:Comment,CursorLine:Visual,Search:None",
+					}),
+				},
 				auto_brackets = {}, -- configure any filetype to auto add brackets
 				completion = {
 					completeopt = "menu,menuone,noinsert",
@@ -43,6 +52,7 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
+					{ name = "nvim_lsp_signature_help" },
 					{ name = "path" },
 				}, {
 					{ name = "buffer" },
@@ -54,31 +64,6 @@ return {
 				},
 				sorting = defaults.sorting,
 			}
-		end,
-		---@param opts cmp.ConfigSchema | {auto_brackets?: string[]}
-		config = function(_, opts)
-			for _, source in ipairs(opts.sources) do
-				source.group_index = source.group_index or 1
-			end
-			local cmp = require("cmp")
-			local Kind = cmp.lsp.CompletionItemKind
-			cmp.setup(opts)
-			cmp.event:on("confirm_done", function(event)
-				if not vim.tbl_contains(opts.auto_brackets or {}, vim.bo.filetype) then
-					return
-				end
-				local entry = event.entry
-				local item = entry:get_completion_item()
-				if vim.tbl_contains({ Kind.Function, Kind.Method }, item.kind) and item.insertTextFormat ~= 2 then
-					local cursor = vim.api.nvim_win_get_cursor(0)
-					local prev_char =
-						vim.api.nvim_buf_get_text(0, cursor[1] - 1, cursor[2], cursor[1] - 1, cursor[2] + 1, {})[1]
-					if prev_char ~= "(" and prev_char ~= ")" then
-						local keys = vim.api.nvim_replace_termcodes("()<left>", false, false, true)
-						vim.api.nvim_feedkeys(keys, "i", true)
-					end
-				end
-			end)
 		end,
 	},
 
