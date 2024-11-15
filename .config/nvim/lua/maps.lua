@@ -50,3 +50,11 @@ vim.keymap.set("n", "]q", ":cnext<CR>", { silent = true })
 vim.keymap.set("n", "[q", ":cprev<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>l", "<Cmd>:Lazy<CR>", { silent = true })
+
+vim.keymap.set("n", "cp", ":cprev<CR>", { silent = true })
+vim.keymap.set("n", "cn", ":cnext<CR>", { silent = true })
+
+vim.keymap.set("n", "<leader>reset", function()
+	vim.cmd("bufdo w")
+	vim.cmd("bufdo bwipeout! %")
+end, { desc = "Close all buffers except current" })

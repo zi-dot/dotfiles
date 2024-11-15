@@ -34,10 +34,14 @@ return {
 	event = "BufEnter",
 	dependencies = {
 		"nvim-telescope/telescope-fzf-native.nvim",
+		"nvim-telescope/telescope-live-grep-args.nvim",
+		"nvim-telescope/telescope-frecency.nvim",
 		"nvim-lua/plenary.nvim",
 		build = "make",
 		config = function()
 			require("telescope").load_extension("fzf")
+			require("telescope").load_extension("live_grep_args")
+			require("telescope").load_extension("frecency")
 		end,
 	},
 	opts = {
@@ -77,7 +81,7 @@ return {
 		{
 			"<leader><space>",
 			function()
-				require("telescope.builtin").buffers()
+				require("telescope").extensions.frecency.frecency()
 			end,
 			desc = "[ ] find existing buffers",
 		},
@@ -94,7 +98,7 @@ return {
 		{
 			"<leader>sg",
 			function()
-				require("telescope.builtin").live_grep()
+				require("telescope").extensions.live_grep_args.live_grep_args()
 			end,
 			desc = "[s]earch by [g]rep",
 		},

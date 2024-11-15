@@ -3,7 +3,6 @@ set fish_greeting "Hello! I am a fish."
 set -gx TERM xterm-256color
 
 # theme
-set -g theme_color_scheme terminal-dark
 set -g fish_prompt_pwd_dir_length 1
 set -g theme_display_user yes
 set -g theme_hide_hostname no
@@ -23,6 +22,7 @@ abbr gst "git stash"
 abbr gomen "git commit --amend"
 abbr gp "git pull -p"
 abbr master "git switch master && git pull && git switch - && git rebase master"
+abbr nv "/Users/ryoji.kono/Documents/dev/nvim-macos-arm64/bin/nvim"
 
 command -qv nvim && alias vim nvim
 
@@ -59,7 +59,6 @@ set -gx PATH $DENO_INSTALL/bin $PATH
 
 set -gx PNPM_HOME $HOME/Library/pnpm
 set -gx PATH $PNPM_HOME $PATH
-
 
 source /opt/homebrew/opt/asdf/libexec/asdf.fish
 # status --is-interactive; and rbenv init - fish | source

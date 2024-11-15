@@ -22,7 +22,7 @@ return {
 					local lspconfig = require("lspconfig")
 					if server_name == "tsserver" then
 						lspconfig["tsserver"].setup({
-							init_options = {
+							initialization_options = {
 								maxTsServerMemory = 16384,
 							},
 						})
@@ -31,7 +31,6 @@ return {
 					end
 				end,
 			})
-			vim.lsp.inlay_hint.enable(true)
 			vim.lsp.handlers["textDocument/publishDiagnostics"] =
 				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false })
 		end,
@@ -96,17 +95,14 @@ return {
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
-				css = { "stylelint", "prettierd", "prettier" },
-				-- javascript = { { "eslint", "eslint_d" }, { "prettierd", "prettier" } },
-				-- typescript = { { "eslint", "eslint_d" }, { "prettierd", "prettier" } },
-				-- typescriptreact = { { "eslint", "eslint_d" }, { "prettierd", "prettier" } },
+				css = { "stylelint", "prettier" },
+				javascript = { "eslint", "prettier" },
+				typescript = { "eslint", "prettier" },
+				typescriptreact = { "eslint", "prettier" },
 				rust = { "rustfmt" },
 			},
 			format_on_save = {
 				timeout_ms = 5000,
-				lsp_fallback = true,
-			},
-			format_after_save = {
 				lsp_fallback = true,
 			},
 			notify_on_error = true,

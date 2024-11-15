@@ -5,7 +5,6 @@ end
 
 vim.o.number = true
 vim.o.ignorecase = true
--- vim.o.lazyredraw = true
 vim.o.clipboard = "unnamedplus"
 vim.o.autoindent = true
 vim.o.smartindent = true
@@ -56,16 +55,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	pattern = "*",
 })
 
+vim.cmd([[colorscheme ayu]])
 -- vim.cmdhttps://docs.google.com/document/d/1Co63hMjSN3p6YGEI8kb_8tofx0fVWt0gJmBfrxy_chQ/edit.colorscheme("catppuccin")
 vim.o.relativenumber = false
-vim.cmd.colorscheme("onedark")
-
-local augroup = vim.api.nvim_create_augroup("strdr4605", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "typescript,typescriptreact",
-	group = augroup,
-	command = "compiler tsc | setlocal makeprg=pnpm\\ run\\ check",
-})
 
 vim.diagnostic.config({
 	virtual_text = true,
