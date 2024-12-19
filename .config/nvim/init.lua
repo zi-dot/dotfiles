@@ -12,7 +12,7 @@ vim.o.smarttab = true
 vim.o.showcmd = true
 
 vim.o.cmdheight = 1
-vim.o.laststatus = 2
+vim.o.laststatus = 3
 
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
@@ -64,3 +64,5 @@ vim.diagnostic.config({
 	signs = true,
 	underline = true,
 })
+
+vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#ced6cf", bg = "NONE", bold = true })

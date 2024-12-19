@@ -58,3 +58,7 @@ vim.keymap.set("n", "<leader>reset", function()
 	vim.cmd("bufdo w")
 	vim.cmd("bufdo bwipeout! %")
 end, { desc = "Close all buffers except current" })
+
+vim.keymap.set("n", "<leader>m", ":wincmd |<CR>:wincmd _<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>o", ":only<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>r", ":wincmd =<CR>", { noremap = true, silent = true })

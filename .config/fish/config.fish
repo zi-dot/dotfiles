@@ -21,7 +21,7 @@ abbr gsw "git switch"
 abbr gst "git stash"
 abbr gomen "git commit --amend"
 abbr gp "git pull -p"
-abbr master "git switch master && git pull && git switch - && git rebase master"
+abbr master "git fetch && git rebase origin/master"
 abbr nv "/Users/ryoji.kono/Documents/dev/nvim-macos-arm64/bin/nvim"
 
 command -qv nvim && alias vim nvim

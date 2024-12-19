@@ -21,7 +21,7 @@ return {
 						link = "FloatBorder",
 					},
 				},
-				direction = "float",
+				direction = "horizontal",
 				shell = "fish",
 			})
 		end,

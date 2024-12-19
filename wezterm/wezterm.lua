@@ -1,11 +1,12 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
+local config = {}
 
 wezterm.on("window-config-reloaded", function(window)
 	window:toast_notification("wezterm", "Configuration reloaded!", nil, 4000)
 end)
 
-return {
+config = {
 	colors = {},
 	window_frame = {
 		font_size = 16.0,
@@ -30,6 +31,8 @@ return {
 	keys = {
 		{ key = "h", mods = "ALT", action = act.ActivateTabRelative(-1) },
 		{ key = "l", mods = "ALT", action = act.ActivateTabRelative(1) },
+		{ key = "h", mods = "ALT|CMD", action = act.MoveTabRelative(-1) },
+		{ key = "l", mods = "ALT|CMD", action = act.MoveTabRelative(1) },
 
 		{ key = "f", mods = "SHIFT|META", action = wezterm.action.ToggleFullScreen },
 	},
@@ -38,3 +41,5 @@ return {
 	cursor_blink_ease_out = "Constant",
 	scrollback_lines = 350000,
 }
+
+return config

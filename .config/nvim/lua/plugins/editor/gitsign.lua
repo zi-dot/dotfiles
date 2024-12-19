@@ -12,5 +12,14 @@ return {
 				untracked = { text = "▎" },
 			},
 		},
+		keys = {
+			{
+				"<leader>ph",
+				function()
+					require("gitsigns").preview_hunk()
+				end,
+				desc = "Preview Hunk",
+			},
+		},
 	},
 }

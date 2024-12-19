@@ -1,5 +1,4 @@
 return {
-	{ "folke/neodev.nvim", opts = {} },
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
@@ -25,6 +24,9 @@ return {
 							initialization_options = {
 								maxTsServerMemory = 16384,
 							},
+							inlay_hints = {
+								enabled = true,
+							},
 						})
 					else
 						lspconfig[server_name].setup({})
@@ -35,7 +37,6 @@ return {
 				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false })
 		end,
 		keys = {
-			{ "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
 			{
 				"gd",
 				function()
@@ -57,9 +58,15 @@ return {
 				function()
 					require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
 				end,
-				desc = "Goto T[y]pe Definition",
+				desc = "Goto Type Definition",
 			},
-			{ "K", vim.lsp.buf.hover, desc = "Hover" },
+			{
+				"K",
+				function()
+					vim.lsp.buf.hover()
+				end,
+				desc = "Hover",
+			},
 			{ "gK", vim.lsp.buf.signature_help, desc = "Signature Help" },
 			{ "<C-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help" },
 			{ "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" } },
@@ -67,6 +74,49 @@ return {
 			{ "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" } },
 			{ "<leader>rn", vim.lsp.buf.rename, desc = "Rename", mode = { "n" } },
 			{ "<C-j>", vim.diagnostic.goto_next, desc = "Go to Next Diagnostic", mode = { "n" } },
+		},
+	},
+	{
+		"folke/trouble.nvim",
+		opts = {
+			modes = {
+				symbols = {
+					win = { position = "bottom" },
+				},
+			},
+		}, -- for default options, refer to the configuration section for custom setup.
+		cmd = "Trouble",
+		keys = {
+			{
+				"<leader>td",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "Diagnostics (Trouble)",
+			},
+			{
+				"<leader>tdb",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "Buffer Diagnostics (Trouble)",
+			},
+			{
+				"<leader>cs",
+				"<cmd>Trouble symbols toggle focus=false<cr>",
+				desc = "Symbols (Trouble)",
+			},
+			{
+				"<leader>cl",
+				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+				desc = "LSP Definitions / references / ... (Trouble)",
+			},
+			{
+				"<leader>xL",
+				"<cmd>Trouble loclist toggle<cr>",
+				desc = "Location List (Trouble)",
+			},
+			{
+				"<leader>xQ",
+				"<cmd>Trouble qflist toggle<cr>",
+				desc = "Quickfix List (Trouble)",
+			},
 		},
 	},
 	{
