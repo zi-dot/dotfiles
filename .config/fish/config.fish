@@ -9,10 +9,6 @@ set -g theme_hide_hostname no
 set -g theme_hostname always
 
 # aliases
-abbr ls "ls -p -G"
-abbr la "ls -A"
-abbr ll "ls -l"
-abbr lla "ll -A"
 abbr g git
 abbr v nvim
 abbr gc "git commit"
