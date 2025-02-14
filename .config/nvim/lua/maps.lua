@@ -27,7 +27,6 @@ vim.keymap.set("n", "ss", ":split<Return>", { silent = true, remap = true })
 vim.keymap.set("n", "sv", ":vsplit<Return>", { silent = true, remap = true })
 
 vim.keymap.set("", "s", "<Nop>", { silent = true, remap = true })
-vim.keymap.set("", ";", "<Nop>", { silent = true, remap = true })
 
 vim.keymap.set("", "sh", "<C-w>h", { silent = true })
 vim.keymap.set("", "sk", "<C-w>k", { silent = true })

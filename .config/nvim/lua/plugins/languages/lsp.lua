@@ -4,7 +4,6 @@ return {
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		dependencies = {
 			{ "folke/neodev.nvim", opts = {} },
-			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 		},
 	},
@@ -18,19 +17,40 @@ return {
 			mason_lspconfig.setup()
 			mason_lspconfig.setup_handlers({
 				function(server_name)
-					local lspconfig = require("lspconfig")
-					if server_name == "tsserver" then
-						lspconfig["tsserver"].setup({
-							initialization_options = {
-								maxTsServerMemory = 16384,
-							},
-							inlay_hints = {
-								enabled = true,
-							},
-						})
-					else
-						lspconfig[server_name].setup({})
-					end
+          local lspconfig = require("lspconfig")
+					-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+          -- local util = require("lspconfig.util")
+          local ts_ls_pkg = require("mason-registry").get_package("typescript-language-server")
+          -- local ts_ls_path = ts_ls_pkg:get_install_path()
+          if server_name == "ts_ls" then
+            -- lspconfig["ts_ls"].setup({
+              -- cmd = {
+              --   "node",
+              --   "--max_old_space_size=16384",
+              --   ts_ls_path .. "/node_modules/typescript-language-server/lib/cli.mjs",
+              --   "--stdio",
+              -- },
+              -- on_attach = function(client)
+              --   client.server_capabilities.documentFormattingProvider = false
+              --   client.server_capabilities.documentRangeFormattingProvider = false
+              -- end,
+              -- capabilities = capabilities,
+              -- root_dir = util.root_pattern("package.json", "tsconfig.json", ".git"),
+              -- initialization_options = {
+              --   hostInfo = "neovim",
+              --   preferences = {
+              --     includeInlayParameterNameHints = "all",
+              --     includeInlayFunctionParameterTypeHints = true,
+              --     includeInlayVariableTypeHints = true,
+              --     includeInlayPropertyDeclarationTypeHints = true,
+              --     includeInlayFunctionLikeReturnTypeHints = true,
+              --     includeInlayEnumMemberValueHints = true,
+              --   },
+              -- },
+            -- })
+          else
+            lspconfig[server_name].setup({})
+          end
 				end,
 			})
 			vim.lsp.handlers["textDocument/publishDiagnostics"] =
@@ -76,6 +96,16 @@ return {
 			{ "<C-j>", vim.diagnostic.goto_next, desc = "Go to Next Diagnostic", mode = { "n" } },
 		},
 	},
+  {
+    "pmizio/typescript-tools.nvim",
+    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {
+      settings = {
+        expose_as_code_action = "all",
+      },
+    },
+  },
 	{
 		"folke/trouble.nvim",
 		opts = {
