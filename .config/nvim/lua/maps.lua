@@ -4,34 +4,27 @@ vim.keymap.set({ "n", "v" }, "[dev]", "<Nop>", { silent = true })
 vim.keymap.set("", "<Tab>", "<Nop>") -- special case
 vim.keymap.set("n", "<C-s>", "<Nop>")
 
--- Delete or paste without yank
-vim.keymap.set({ "n", "v" }, "<Leader>d", '"_d', { silent = true })
 vim.keymap.set("v", "p", '"_dP', { silent = true })
 
 vim.keymap.set("n", "+", "<C-a>", { silent = true })
 vim.keymap.set("n", "-", "<C-x>", { silent = true })
-
-vim.keymap.set("n", "dw", 'vb"_d', { silent = true })
 
 vim.keymap.set("i", "jj", "<ESC>", { silent = true })
 
 vim.keymap.set("n", "k", 'v:count == 0 ? "gk" : "k"', { expr = true, silent = true })
 vim.keymap.set("n", "j", 'v:count == 0 ? "gj" : "j"', { expr = true, silent = true })
 
--- vim.keymap.set("n", "<Leader>t", ":split term://fish <CR>", { silent = true })
 vim.keymap.set("t", "jj", "<C-\\><C-n>", { silent = true })
 
-vim.keymap.set("n", "<Leader>v", ":edit ~/.config/nvim/init.lua<CR>", { silent = true })
+vim.keymap.set("n", "s", "<Nop>", { silent = true })
 
 vim.keymap.set("n", "ss", ":split<Return>", { silent = true, remap = true })
 vim.keymap.set("n", "sv", ":vsplit<Return>", { silent = true, remap = true })
 
-vim.keymap.set("", "s", "<Nop>", { silent = true, remap = true })
-
-vim.keymap.set("", "sh", "<C-w>h", { silent = true })
-vim.keymap.set("", "sk", "<C-w>k", { silent = true })
-vim.keymap.set("", "sj", "<C-w>j", { silent = true })
-vim.keymap.set("", "sl", "<C-w>l", { silent = true })
+vim.keymap.set({ "n" }, "sh", "<C-w>h", { silent = true })
+vim.keymap.set({ "n" }, "sk", "<C-w>k", { silent = true })
+vim.keymap.set({ "n" }, "sj", "<C-w>j", { silent = true })
+vim.keymap.set({ "n" }, "sl", "<C-w>l", { silent = true })
 
 vim.keymap.set({ "n" }, "<D-v>", "p", { silent = true, remap = true })
 vim.keymap.set({ "i" }, "<D-v>", "<C-o>p", { silent = true, remap = true })
@@ -48,8 +41,6 @@ vim.keymap.set("n", "<leader>deleteswap", ":!rm ~/.local/state/nvim/swap/*", { s
 vim.keymap.set("n", "]q", ":cnext<CR>", { silent = true })
 vim.keymap.set("n", "[q", ":cprev<CR>", { silent = true })
 
-vim.keymap.set("n", "<leader>l", "<Cmd>:Lazy<CR>", { silent = true })
-
 vim.keymap.set("n", "cp", ":cprev<CR>", { silent = true })
 vim.keymap.set("n", "cn", ":cnext<CR>", { silent = true })
 
@@ -61,3 +52,7 @@ end, { desc = "Close all buffers except current" })
 vim.keymap.set("n", "<leader>m", ":wincmd |<CR>:wincmd _<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>o", ":only<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>r", ":wincmd =<CR>", { noremap = true, silent = true })
+
+vim.keymap.set({ "n" }, "n", "nzz", { noremap = true, silent = true })
+vim.keymap.set({ "n" }, "N", "Nzz", { noremap = true, silent = true })
+vim.keymap.set({ "n" }, "*", "*zz", { noremap = true, silent = true })

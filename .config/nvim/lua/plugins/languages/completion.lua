@@ -2,25 +2,37 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		version = false, -- last release is way too old
-		event = "BufEnter",
+		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
+			"onsails/lspkind-nvim",
 		},
 		opts = function()
-			vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 			local cmp = require("cmp")
 			local defaults = require("cmp.config.default")()
 			return {
 				window = {
 					completion = cmp.config.window.bordered({
 						winhighlight = "Normal:Normal,FloatBorder:Comment,CursorLine:Visual,Search:None",
+						col_offset = 1,
+						side_padding = 0,
 					}),
 					documentation = cmp.config.window.bordered({
 						winhighlight = "Normal:Normal,FloatBorder:Comment,CursorLine:Visual,Search:None",
 					}),
+				},
+				formatting = {
+					fields = { "abbr", "kind", "menu" },
+					format = function(entry, vim_item)
+						local kind = require("lspkind").cmp_format({
+							mode = "symbol_text",
+							maxwidth = 50,
+							ellipsis_char = "…",
+						})(entry, vim_item)
+						return kind
+					end,
 				},
 				auto_brackets = {}, -- configure any filetype to auto add brackets
 				completion = {
@@ -52,16 +64,10 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "nvim_lsp_signature_help" },
 					{ name = "path" },
 				}, {
 					{ name = "buffer" },
 				}),
-				experimental = {
-					ghost_text = {
-						hl_group = "CmpGhostText",
-					},
-				},
 				sorting = defaults.sorting,
 			}
 		end,

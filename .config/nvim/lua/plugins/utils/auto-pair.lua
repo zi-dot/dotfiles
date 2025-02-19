@@ -4,18 +4,16 @@ return {
 		event = "InsertEnter",
 		config = true,
 	},
+
 	{
-		"kylechui/nvim-surround",
-		version = "*", -- Use for stability; omit to use `main` branch for the latest features
+		"echasnovski/mini.surround",
 		event = "VeryLazy",
+		version = false,
 		config = function()
-			require("nvim-surround").setup({
-				keymaps = {
-					normal = "sr",
-					normal_cur = "srr",
-					normal_line = "sR",
-					normal_line_cur = "sRR",
-					visual = "sr",
+			require("mini.surround").setup({
+				mappings = {
+					highlight = "<Nop>",
+					update_n_lines = "<Nop>",
 				},
 			})
 		end,

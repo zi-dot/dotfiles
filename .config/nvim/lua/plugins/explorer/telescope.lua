@@ -41,7 +41,6 @@ return {
 	build = "make",
 	config = function()
 		local actions = require("telescope.actions")
-		local open_with_trouble = require("trouble.sources.telescope").open
 
 		require("telescope").setup({
 			defaults = {
@@ -57,17 +56,17 @@ return {
 
 				mappings = {
 					i = {
-						["<c-t>"] = open_with_trouble,
 						["<S-down>"] = actions.preview_scrolling_down,
 						["<S-up>"] = actions.preview_scrolling_up,
+						["<c-q>"] = actions.send_selected_to_qflist,
 					},
 					n = {
-						["<c-t>"] = open_with_trouble,
 						["q"] = actions.close,
 						["<C-p>"] = actions.move_selection_previous,
 						["<C-n>"] = actions.move_selection_next,
 						["<S-down>"] = actions.preview_scrolling_down,
 						["<S-up>"] = actions.preview_scrolling_up,
+						["<c-q>"] = actions.send_selected_to_qflist,
 					},
 				},
 			},
@@ -98,6 +97,9 @@ return {
 			},
 
 			extensions = {
+				live_grep_args = {
+					auto_quoting = true,
+				},
 				frecency = {
 					matcher = "fuzzy",
 					show_scores = true,
@@ -113,13 +115,6 @@ return {
 		require("telescope").load_extension("frecency")
 	end,
 	keys = {
-		{
-			"<leader>?",
-			function()
-				require("telescope.builtin").oldfiles()
-			end,
-			desc = "Find recently opened files",
-		},
 		{
 			"<leader><space>",
 			function()

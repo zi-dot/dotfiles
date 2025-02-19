@@ -1,3 +1,48 @@
+local function find_nearest_dir(patterns)
+	local fpath = vim.api.nvim_buf_get_name(0)
+	local dir = vim.fn.fnamemodify(fpath, ":p:h")
+
+	while dir ~= "/" do
+		for _, pattern in ipairs(patterns) do
+			local target = dir .. "/" .. pattern
+			if vim.fn.filereadable(target) == 1 then
+				return dir
+			end
+		end
+		dir = vim.fn.fnamemodify(dir, ":h")
+	end
+
+	return nil
+end
+
+local function on_init(client)
+	if client.server_capabilities then
+		client.server_capabilities.semanticTokensProvider = false
+	end
+end
+
+local function on_attach()
+	vim.keymap.set({ "n" }, "gd", vim.lsp.buf.definition, { noremap = true, silent = true })
+	vim.keymap.set({ "n" }, "gr", vim.lsp.buf.references, { noremap = true, silent = true })
+	vim.keymap.set({ "n" }, "gD", vim.lsp.buf.declaration, { noremap = true, silent = true })
+	vim.keymap.set({ "n" }, "gI", function()
+		require("telescope.builtin").lsp_implementations({ reuse_win = true })
+	end, { noremap = true, silent = true })
+	vim.keymap.set({ "n" }, "gy", function()
+		require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
+	end, { noremap = true, silent = true })
+	vim.keymap.set({ "n" }, "K", function()
+		vim.cmd("Lspsaga hover_doc")
+	end, { noremap = true, silent = true })
+	vim.keymap.set({ "n" }, "gK", vim.lsp.buf.signature_help, { noremap = true, silent = true })
+	vim.keymap.set({ "i" }, "<C-k>", vim.lsp.buf.signature_help, { noremap = true, silent = true })
+	vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true })
+	vim.keymap.set({ "n" }, "<leader>cc", vim.lsp.codelens.run, { noremap = true, silent = true })
+	vim.keymap.set({ "n" }, "<leader>cC", vim.lsp.codelens.refresh, { noremap = true, silent = true })
+	vim.keymap.set({ "n" }, "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true })
+	vim.keymap.set({ "n" }, "<C-j>", vim.diagnostic.goto_next, { noremap = true, silent = true })
+end
+
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -6,146 +51,122 @@ return {
 			{ "folke/neodev.nvim", opts = {} },
 			"williamboman/mason-lspconfig.nvim",
 		},
+		lazy = false,
+		init = function()
+			require("lspconfig.ui.windows").default_options.border = "rounded"
+
+			local signs = {
+				{ name = "DiagnosticSignError", text = "•" },
+				{ name = "DiagnosticSignWarn", text = "•" },
+				{ name = "DiagnosticSignHint", text = "•" },
+				{ name = "DiagnosticSignInfo", text = "•" },
+			}
+
+			for _, sign in ipairs(signs) do
+				vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+			end
+
+			vim.diagnostic.config({
+				float = { border = "rounded" },
+			})
+
+			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+
+			vim.lsp.handlers["textDocument/publishDiagnostics"] =
+				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+					virtual_text = {
+						spacing = 2,
+					},
+					signs = {
+						active = signs,
+					},
+				})
+		end,
+	},
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		cmd = {
+			"MasonToolsInstall",
+			"MasonToolsInstallSync",
+			"MasonToolsUpdate",
+			"MasonToolsUpdateSync",
+			"MasonToolsClean",
+		},
+		dependencies = {
+			{ "williamboman/mason.nvim" },
+		},
+		opts = {
+			ensure_installed = {
+				"actionlint",
+				"astro",
+				"eslint_d",
+				"goimports",
+				"gopls",
+				"lua_ls",
+				"prettierd",
+				"rust_analyzer",
+				"stylelint",
+				"stylua",
+				"terraformls",
+				"textlint",
+				"ts_ls",
+				"typos-lsp",
+				"vimls",
+			},
+			run_on_start = false,
+		},
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
 		dependencies = {
 			"williamboman/mason.nvim",
+			"nvimdev/lspsaga.nvim",
 		},
 		config = function()
 			local mason_lspconfig = require("mason-lspconfig")
+			local lspconfig = require("lspconfig")
+			local opts = {
+				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+				on_init = on_init,
+				on_attach = on_attach,
+			}
+
 			mason_lspconfig.setup()
 			mason_lspconfig.setup_handlers({
-				function(server_name)
-          local lspconfig = require("lspconfig")
-					-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-          -- local util = require("lspconfig.util")
-          local ts_ls_pkg = require("mason-registry").get_package("typescript-language-server")
-          -- local ts_ls_path = ts_ls_pkg:get_install_path()
-          if server_name == "ts_ls" then
-            -- lspconfig["ts_ls"].setup({
-              -- cmd = {
-              --   "node",
-              --   "--max_old_space_size=16384",
-              --   ts_ls_path .. "/node_modules/typescript-language-server/lib/cli.mjs",
-              --   "--stdio",
-              -- },
-              -- on_attach = function(client)
-              --   client.server_capabilities.documentFormattingProvider = false
-              --   client.server_capabilities.documentRangeFormattingProvider = false
-              -- end,
-              -- capabilities = capabilities,
-              -- root_dir = util.root_pattern("package.json", "tsconfig.json", ".git"),
-              -- initialization_options = {
-              --   hostInfo = "neovim",
-              --   preferences = {
-              --     includeInlayParameterNameHints = "all",
-              --     includeInlayFunctionParameterTypeHints = true,
-              --     includeInlayVariableTypeHints = true,
-              --     includeInlayPropertyDeclarationTypeHints = true,
-              --     includeInlayFunctionLikeReturnTypeHints = true,
-              --     includeInlayEnumMemberValueHints = true,
-              --   },
-              -- },
-            -- })
-          else
-            lspconfig[server_name].setup({})
-          end
+				function(name)
+					lspconfig[name].setup(opts)
 				end,
+				["typos_lsp"] = function()
+					lspconfig.typos_lsp.setup({
+						init_options = {
+							diagnosticSeverity = "Info",
+						},
+					})
+				end,
+				["ts_ls"] = function() end,
 			})
-			vim.lsp.handlers["textDocument/publishDiagnostics"] =
-				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false })
 		end,
-		keys = {
-			{
-				"gd",
-				function()
-					require("telescope.builtin").lsp_definitions({ reuse_win = true })
-				end,
-				desc = "Goto Definition",
-			},
-			{ "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
-			{ "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-			{
-				"gI",
-				function()
-					require("telescope.builtin").lsp_implementations({ reuse_win = true })
-				end,
-				desc = "Goto Implementation",
-			},
-			{
-				"gy",
-				function()
-					require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
-				end,
-				desc = "Goto Type Definition",
-			},
-			{
-				"K",
-				function()
-					vim.lsp.buf.hover()
-				end,
-				desc = "Hover",
-			},
-			{ "gK", vim.lsp.buf.signature_help, desc = "Signature Help" },
-			{ "<C-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help" },
-			{ "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" } },
-			{ "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" } },
-			{ "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" } },
-			{ "<leader>rn", vim.lsp.buf.rename, desc = "Rename", mode = { "n" } },
-			{ "<C-j>", vim.diagnostic.goto_next, desc = "Go to Next Diagnostic", mode = { "n" } },
+	},
+	{
+		"nvimdev/lspsaga.nvim",
+		config = function()
+			require("lspsaga").setup({})
+		end,
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter", -- optional
+			"nvim-tree/nvim-web-devicons", -- optional
 		},
 	},
-  {
-    "pmizio/typescript-tools.nvim",
-    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {
-      settings = {
-        expose_as_code_action = "all",
-      },
-    },
-  },
 	{
-		"folke/trouble.nvim",
+		"pmizio/typescript-tools.nvim",
+		ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 		opts = {
-			modes = {
-				symbols = {
-					win = { position = "bottom" },
-				},
-			},
-		}, -- for default options, refer to the configuration section for custom setup.
-		cmd = "Trouble",
-		keys = {
-			{
-				"<leader>td",
-				"<cmd>Trouble diagnostics toggle<cr>",
-				desc = "Diagnostics (Trouble)",
-			},
-			{
-				"<leader>tdb",
-				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-				desc = "Buffer Diagnostics (Trouble)",
-			},
-			{
-				"<leader>cs",
-				"<cmd>Trouble symbols toggle focus=false<cr>",
-				desc = "Symbols (Trouble)",
-			},
-			{
-				"<leader>cl",
-				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-				desc = "LSP Definitions / references / ... (Trouble)",
-			},
-			{
-				"<leader>xL",
-				"<cmd>Trouble loclist toggle<cr>",
-				desc = "Location List (Trouble)",
-			},
-			{
-				"<leader>xQ",
-				"<cmd>Trouble qflist toggle<cr>",
-				desc = "Quickfix List (Trouble)",
+			on_init = on_init,
+			on_attach = on_attach,
+			settings = {
+				expose_as_code_action = "all",
+				tsserver_max_memory = 8192,
 			},
 		},
 	},
@@ -170,29 +191,119 @@ return {
 	},
 
 	{
-		"stevearc/conform.nvim",
-		event = "BufEnter",
-		opts = {
-			formatters_by_ft = {
-				lua = { "stylua" },
-				css = { "stylelint", "prettier" },
-				javascript = { "eslint", "prettier" },
-				typescript = { "eslint", "prettier" },
-				typescriptreact = { "eslint", "prettier" },
-				rust = { "rustfmt" },
-			},
-			format_on_save = {
-				timeout_ms = 5000,
-				lsp_fallback = true,
-			},
-			notify_on_error = true,
+		"mfussenegger/nvim-lint",
+		event = {
+			"BufReadPost",
+			"BufWritePost",
+			"InsertLeave",
+			"TextChanged",
 		},
+		config = function()
+			local lint = require("lint")
+
+			local eslint_d = lint.linters.eslint_d
+			lint.linters.eslint_d = vim.tbl_extend("force", eslint_d, {
+				parser = function(output, bufnr)
+					-- Suppress "No ESLint found" error
+					local result = eslint_d.parser(output, bufnr)
+					if #result == 1 then
+						local msg = result[1].message
+						if string.match(msg, "No ESLint found") then
+							return {}
+						end
+						if string.match(msg, "Could not find config file") then
+							return {}
+						end
+					end
+					return result
+				end,
+			})
+
+			local actionlint = lint.linters.actionlint
+			lint.linters.actionlint = vim.tbl_extend("force", actionlint, {
+				parser = function(output, bufnr)
+					-- Only GHA files
+					local fpath = vim.api.nvim_buf_get_name(bufnr)
+					if fpath:match("^.*%.github/.+%.y[a]?ml$") == nil then
+						return {}
+					end
+					return actionlint.parser(output, bufnr)
+				end,
+			})
+
+			lint.linters_by_ft = {
+				javascript = { "eslint_d" },
+				typescript = { "eslint_d" },
+				javascriptreact = { "eslint_d" },
+				typescriptreact = { "eslint_d" },
+				css = { "stylelint" },
+				yaml = { "actionlint" },
+				terraform = { "tflint" },
+			}
+
+			local check_local = {
+				"eslint_d",
+				"stylelint",
+			}
+
+			local function contains(table, elements)
+				for _, value in ipairs(table) do
+					for _, element in ipairs(elements) do
+						if value == element then
+							return true
+						end
+					end
+				end
+				return false
+			end
+
+			vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" }, {
+				callback = function()
+					local names = lint.linters_by_ft[vim.bo.filetype]
+					if names and contains(names, check_local) then
+						lint.try_lint(nil, {
+							cwd = find_nearest_dir({ "package.json" }),
+						})
+					else
+						lint.try_lint()
+					end
+				end,
+			})
+		end,
+	},
+
+	{
+		"stevearc/conform.nvim",
+		event = "BufWritePre",
+		config = function()
+			local conform = require("conform")
+			conform.setup({
+				formatters_by_ft = {
+					lua = { "stylua" },
+					css = { "stylelint", "prettier" },
+					javascript = { "eslint_d", "prettier" },
+					typescript = { "eslint_d", "prettier" },
+					typescriptreact = { "eslint", "prettier" },
+					rust = { "rustfmt" },
+				},
+				format_on_save = {
+					timeout_ms = 5000,
+					lsp_fallback = true,
+				},
+				notify_on_error = true,
+			})
+		end,
 		keys = {
 			{
 				"<leader>fmt",
 				function()
-					require("conform").format()
+					require("conform").format({
+						async = true,
+					})
 				end,
+				mode = { "n" },
+				noremap = true,
+				silent = true,
 				desc = "format by conform",
 			},
 		},

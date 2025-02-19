@@ -9,6 +9,7 @@ vim.opt.rtp:prepend(lazypath)
 return function(opts)
 	opts = vim.tbl_deep_extend("force", {
 		spec = {
+			-- { "LazyVim/LazyVim", import = "lazyvim.plugins" },
 			{
 				import = "plugins.editor",
 			},
@@ -26,11 +27,39 @@ return function(opts)
 			},
 		},
 		defaults = { lazy = true },
-		checker = { enabled = true },
+		checker = { enabled = true, notify = false },
 		performance = {
 			cache = {
 				enable = true,
 			},
+			reset_packpath = true,
+			rtp = {
+				reset = true,
+				disabled_plugins = {
+					"gzip",
+					"man",
+					"matchit",
+					"matchparen",
+					"netrwPlugin",
+					"shada",
+					"spellfile",
+					"tarPlugin",
+					"tohtml",
+					"tutor",
+					"zipPlugin",
+				},
+			},
+		},
+		rocks = {
+			enabled = false,
+		},
+		profiling = {
+			loader = false,
+			require = false,
+		},
+		ui = {
+			border = "rounded",
+			backdrop = 100,
 		},
 	}, opts or {})
 	require("lazy").setup(opts)
