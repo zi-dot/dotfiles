@@ -1,13 +1,9 @@
 return {
 	{
-		"Shatur/neovim-ayu",
-		config = function()
-			require("ayu").setup({
-				mirage = true,
-			})
+		"catppuccin/nvim",
+		name = "catppuccin",
+		init = function()
+			vim.cmd.colorscheme("catppuccin")
 		end,
-	},
-	{
-		"joshdick/onedark.vim",
 	},
 }

@@ -9,7 +9,7 @@ vim.keymap.set("v", "p", '"_dP', { silent = true })
 vim.keymap.set("n", "+", "<C-a>", { silent = true })
 vim.keymap.set("n", "-", "<C-x>", { silent = true })
 
-vim.keymap.set("i", "jj", "<ESC>", { silent = true })
+-- vim.keymap.set("i", "jj", "<ESC>", { silent = true })
 
 vim.keymap.set("n", "k", 'v:count == 0 ? "gk" : "k"', { expr = true, silent = true })
 vim.keymap.set("n", "j", 'v:count == 0 ? "gj" : "j"', { expr = true, silent = true })

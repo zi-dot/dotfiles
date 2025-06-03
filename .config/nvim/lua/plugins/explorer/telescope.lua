@@ -110,6 +110,7 @@ return {
 			},
 		})
 
+		-- fzfはデフォルトの検索で使用されるため、先に読み込む
 		require("telescope").load_extension("fzf")
 		require("telescope").load_extension("live_grep_args")
 		require("telescope").load_extension("frecency")
@@ -167,6 +168,13 @@ return {
 				require("telescope.builtin").find_files()
 			end,
 			desc = "Search files",
+		},
+		{
+			"<leader>gs",
+			function()
+				require("telescope.builtin").git_status()
+			end,
+			desc = "Git status",
 		},
 		{
 			"<leader>gm",

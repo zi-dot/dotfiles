@@ -16,9 +16,11 @@ abbr gs "git status"
 abbr gsw "git switch"
 abbr gst "git stash"
 abbr gomen "git commit --amend"
-abbr gp "git pull -p"
+abbr gpl "git pull"
+abbr gps "git push"
 abbr master "git fetch && git rebase origin/master"
-abbr nv "/Users/ryoji.kono/Documents/dev/nvim-macos-arm64/bin/nvim"
+abbr mcp "pnpm format && git add . && git commit -m 'make code `prettier`' && git push"
+abbr "pci" "pnpm clean && pnpm install"
 
 command -qv nvim && alias vim nvim
 
@@ -61,3 +63,4 @@ source /opt/homebrew/opt/asdf/libexec/asdf.fish
 
 # cargo
 set -gx PATH $HOME/.cargo/bin $PATH
+eval "$(mise activate)"

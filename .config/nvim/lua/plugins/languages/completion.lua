@@ -1,18 +1,85 @@
 return {
+	-- {
+	-- 	"saghen/blink.cmp",
+	-- 	event = { "InsertEnter", "CmdlineEnter" },
+	-- 	-- optional: provides snippets for the snippet source
+	-- 	dependencies = "rafamadriz/friendly-snippets",
+	--
+	-- 	completion = {
+	-- 		menu = { border = "round" },
+	-- 		documentation = { window = { border = "round" } },
+	-- 	},
+	-- 	signature = { window = { border = "round" } },
+	--
+	-- 	-- use a release tag to download pre-built binaries
+	-- 	version = "*",
+	-- 	-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+	-- 	-- build = 'cargo build --release',
+	-- 	-- If you use nix, you can build from source using latest nightly rust with:
+	-- 	-- build = 'nix run .#build-plugin',
+	--
+	-- 	---@module 'blink.cmp'
+	-- 	---@type blink.cmp.Config
+	-- 	opts = {
+	-- 		-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept, C-n/C-p for up/down)
+	-- 		-- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys for up/down)
+	-- 		-- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
+	-- 		--
+	-- 		-- All presets have the following mappings:
+	-- 		-- C-space: Open menu or open docs if already open
+	-- 		-- C-e: Hide menu
+	-- 		-- C-k: Toggle signature help
+	-- 		--
+	-- 		-- See the full "keymap" documentation for information on defining your own keymap.
+	-- 		keymap = {
+	-- 			preset = "default",
+	-- 			["<C-n>"] = { "select_next" },
+	-- 			["<C-p>"] = { "select_prev" },
+	-- 			["<C-b>"] = { "scroll_documentation_up" },
+	-- 			["<C-f>"] = { "scroll_documentation_down" },
+	-- 			["<C-e>"] = { "hide", "fallback" },
+	-- 			["<CR>"] = { "accept", "fallback" },
+	-- 			["<C-CR>"] = { "hide", "fallback" },
+	-- 		},
+	--
+	-- 		signature = {
+	-- 			enabled = true,
+	-- 			trigger = {
+	-- 				enabled = true,
+	-- 			},
+	-- 		},
+	--
+	-- 		appearance = {
+	-- 			-- Sets the fallback highlight groups to nvim-cmp's highlight groups
+	-- 			-- Useful for when your theme doesn't support blink.cmp
+	-- 			-- Will be removed in a future release
+	-- 			use_nvim_cmp_as_default = true,
+	-- 			-- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+	-- 			-- Adjusts spacing to ensure icons are aligned
+	-- 			nerd_font_variant = "mono",
+	-- 		},
+	--
+	-- 		sources = {
+	-- 			default = { "lsp", "path", "snippets", "buffer" },
+	-- 		},
+	--
+	-- 		fuzzy = { implementation = "prefer_rust_with_warning" },
+	-- 	},
+	-- 	opts_extend = { "sources.default" },
+	-- },
 	{
 		"hrsh7th/nvim-cmp",
 		version = false, -- last release is way too old
 		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-path",
 			"onsails/lspkind-nvim",
 		},
-		opts = function()
+		config = function()
 			local cmp = require("cmp")
-			local defaults = require("cmp.config.default")()
-			return {
+			cmp.setup({
 				window = {
 					completion = cmp.config.window.bordered({
 						winhighlight = "Normal:Normal,FloatBorder:Comment,CursorLine:Visual,Search:None",
@@ -33,10 +100,7 @@ return {
 						})(entry, vim_item)
 						return kind
 					end,
-				},
-				auto_brackets = {}, -- configure any filetype to auto add brackets
-				completion = {
-					completeopt = "menu,menuone,noinsert",
+					expandable_indicator = true,
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -65,19 +129,16 @@ return {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "path" },
-				}, {
 					{ name = "buffer" },
 				}),
-				sorting = defaults.sorting,
-			}
-		end,
-	},
+				performance = {
+					throttle = 50, -- 補完結果の表示を遅延させる間隔(ms)。デフォルト30ms
+					debounce = 20, -- 入力後の候補収集をグループ化する待ち時間(ms)。デフォルト60ms
+					fetching_timeout = 200, -- ソースからの取得待ちタイムアウト(ms)
+					max_view_entries = 20, -- 一度に表示する補完項目数の上限
+				},
+			})
 
-	{
-		"hrsh7th/cmp-cmdline",
-		event = "BufEnter",
-		config = function()
-			local cmp = require("cmp")
 			cmp.setup.cmdline("/", {
 				completion = { completeopt = "menu,menuone,noselect" },
 				mapping = cmp.mapping.preset.cmdline(),
@@ -85,6 +146,16 @@ return {
 					{ name = "buffer" },
 				},
 			})
+
+			cmp.setup.filetype("gitcommit", {
+				completion = { completeopt = "menu,menuone,noselect" },
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = "path" },
+					{ name = "buffer" },
+				}),
+			})
+
 			cmp.setup.cmdline(":", {
 				completion = { completeopt = "menu,menuone,noselect" },
 				mapping = cmp.mapping.preset.cmdline(),

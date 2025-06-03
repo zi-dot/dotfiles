@@ -22,8 +22,12 @@ local function on_init(client)
 end
 
 local function on_attach()
-	vim.keymap.set({ "n" }, "gd", vim.lsp.buf.definition, { noremap = true, silent = true })
-	vim.keymap.set({ "n" }, "gr", vim.lsp.buf.references, { noremap = true, silent = true })
+	vim.keymap.set({ "n" }, "gd", function()
+		require("telescope.builtin").lsp_definitions()
+	end, { noremap = true, silent = true })
+	vim.keymap.set({ "n" }, "gr", function()
+		require("telescope.builtin").lsp_references()
+	end, { noremap = true, silent = true })
 	vim.keymap.set({ "n" }, "gD", vim.lsp.buf.declaration, { noremap = true, silent = true })
 	vim.keymap.set({ "n" }, "gI", function()
 		require("telescope.builtin").lsp_implementations({ reuse_win = true })
@@ -44,45 +48,6 @@ local function on_attach()
 end
 
 return {
-	{
-		"neovim/nvim-lspconfig",
-		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-		dependencies = {
-			{ "folke/neodev.nvim", opts = {} },
-			"williamboman/mason-lspconfig.nvim",
-		},
-		lazy = false,
-		init = function()
-			require("lspconfig.ui.windows").default_options.border = "rounded"
-
-			local signs = {
-				{ name = "DiagnosticSignError", text = "•" },
-				{ name = "DiagnosticSignWarn", text = "•" },
-				{ name = "DiagnosticSignHint", text = "•" },
-				{ name = "DiagnosticSignInfo", text = "•" },
-			}
-
-			for _, sign in ipairs(signs) do
-				vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-			end
-
-			vim.diagnostic.config({
-				float = { border = "rounded" },
-			})
-
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-
-			vim.lsp.handlers["textDocument/publishDiagnostics"] =
-				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-					virtual_text = {
-						spacing = 2,
-					},
-					signs = {
-						active = signs,
-					},
-				})
-		end,
-	},
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		cmd = {
@@ -121,34 +86,54 @@ return {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"nvimdev/lspsaga.nvim",
+			"neovim/nvim-lspconfig",
 		},
-		config = function()
-			local mason_lspconfig = require("mason-lspconfig")
-			local lspconfig = require("lspconfig")
-			local opts = {
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
-				on_init = on_init,
-				on_attach = on_attach,
+		init = function()
+			require("lspconfig.ui.windows").default_options.border = "rounded"
+
+			local signs = {
+				{ name = "DiagnosticSignError", text = "•" },
+				{ name = "DiagnosticSignWarn", text = "•" },
+				{ name = "DiagnosticSignHint", text = "•" },
+				{ name = "DiagnosticSignInfo", text = "•" },
 			}
 
-			mason_lspconfig.setup()
-			mason_lspconfig.setup_handlers({
-				function(name)
-					lspconfig[name].setup(opts)
-				end,
-				["typos_lsp"] = function()
-					lspconfig.typos_lsp.setup({
-						init_options = {
-							diagnosticSeverity = "Info",
-						},
-					})
-				end,
-				["ts_ls"] = function() end,
+			for _, sign in ipairs(signs) do
+				vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+			end
+
+			vim.diagnostic.config({
+				float = { border = "rounded" },
 			})
+
+			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+
+			vim.lsp.handlers["textDocument/publishDiagnostics"] =
+				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+					virtual_text = {
+						spacing = 2,
+					},
+					signs = {
+						active = signs,
+					},
+				})
+
+			local cmp_nvim_lsp = require("cmp_nvim_lsp")
+			local default_capabilities = vim.lsp.protocol.make_client_capabilities()
+			local opts = {
+				on_init = on_init,
+				on_attach = on_attach,
+				capabilities = cmp_nvim_lsp.default_capabilities(default_capabilities),
+			}
+
+			vim.lsp.config("*", opts)
+			vim.lsp.enable(require("mason-lspconfig").get_installed_servers())
 		end,
 	},
 	{
 		"nvimdev/lspsaga.nvim",
+		lazy = true,
+		event = { "LspAttach" },
 		config = function()
 			require("lspsaga").setup({})
 		end,
@@ -157,19 +142,18 @@ return {
 			"nvim-tree/nvim-web-devicons", -- optional
 		},
 	},
-	{
-		"pmizio/typescript-tools.nvim",
-		ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		opts = {
-			on_init = on_init,
-			on_attach = on_attach,
-			settings = {
-				expose_as_code_action = "all",
-				tsserver_max_memory = 8192,
-			},
-		},
-	},
+	-- {
+	-- 	"pmizio/typescript-tools.nvim",
+	-- 	ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+	-- 	dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+	-- 	opts = {
+	-- 		on_init = on_init,
+	-- 		on_attach = on_attach,
+	-- 		settings = {
+	-- 			expose_as_code_action = "all",
+	-- 		},
+	-- 	},
+	-- },
 	{
 		"williamboman/mason.nvim",
 		cmd = "Mason",
@@ -283,7 +267,7 @@ return {
 					css = { "stylelint", "prettier" },
 					javascript = { "eslint_d", "prettier" },
 					typescript = { "eslint_d", "prettier" },
-					typescriptreact = { "eslint", "prettier" },
+					typescriptreact = { "eslint_d", "prettier" },
 					rust = { "rustfmt" },
 				},
 				format_on_save = {

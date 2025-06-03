@@ -103,4 +103,12 @@ return {
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
+	{
+		"echasnovski/mini.statusline",
+		version = false,
+		event = "VeryLazy",
+		config = function()
+			require("mini.statusline").setup()
+		end,
+	},
 }

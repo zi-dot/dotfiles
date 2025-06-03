@@ -1,7 +1,4 @@
--- vim.loader = false
-if vim.loader then
-	vim.loader.enable()
-end
+vim.loader.enable()
 
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_node_provider = 0
@@ -16,8 +13,8 @@ vim.o.showmatch = true
 vim.o.showmode = false
 vim.o.signcolumn = "yes"
 vim.o.wildmenu = true
-vim.opt.wildmode = { "longest", "full" }
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.wildmode = "longest:full,full"
+vim.opt.completeopt = "menuone,noselect"
 vim.o.autoindent = true
 vim.o.smartindent = true
 vim.o.smarttab = true
@@ -29,7 +26,7 @@ vim.o.laststatus = 3
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
 
-vim.o.updatetime = 100
+vim.o.updatetime = 300
 
 vim.o.expandtab = true
 
@@ -43,6 +40,7 @@ vim.o.hlsearch = true
 vim.o.termguicolors = true
 
 vim.g.mapleader = " "
+vim.o.visualbell = true
 
 vim.o.cursorline = true
 
@@ -60,17 +58,15 @@ require("config.lazy")({
 	},
 })
 
--- local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
--- vim.api.nvim_create_autocmd("TextYankPost", {
--- 	callback = function()
--- 		vim.highlight.on_yank()
--- 	end,
--- 	group = highlight_group,
--- 	pattern = "*",
--- })
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+	group = highlight_group,
+	pattern = "*",
+})
 
-vim.cmd([[colorscheme ayu]])
--- vim.cmdhttps://docs.google.com/document/d/1Co63hMjSN3p6YGEI8kb_8tofx0fVWt0gJmBfrxy_chQ/edit.colorscheme("catppuccin")
 vim.o.relativenumber = false
 
 vim.diagnostic.config({
