@@ -34,8 +34,6 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
 vim.keymap.set("n", "<leader>cp", ":let @* = expand('%:p')<CR>", { silent = true })
 
-vim.keymap.set("n", "<leader>bd", ":bd<CR>", { silent = true })
-
 vim.keymap.set("n", "<leader>deleteswap", ":!rm ~/.local/state/nvim/swap/*", { silent = true })
 
 vim.keymap.set("n", "]q", ":cnext<CR>", { silent = true })

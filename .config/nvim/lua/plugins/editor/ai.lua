@@ -19,7 +19,7 @@ return {
 	-- 		"nvim-lua/plenary.nvim",
 	-- 		"MunifTanjim/nui.nvim",
 	-- 		"echasnovski/mini.pick",
-	-- 		"nvim-telescope/telescope.nvim",
+	-- 		"folke/snacks.nvim",
 	-- 		"hrsh7th/nvim-cmp",
 	-- 		"ibhagwan/fzf-lua",
 	-- 		"nvim-tree/nvim-web-devicons",
@@ -94,8 +94,5 @@ return {
 	{
 		"github/copilot.vim",
 		lazy = false,
-		config = function()
-			vim.g.copilot_node_command = "~/.asdf/shims/node"
-		end,
 	},
 }

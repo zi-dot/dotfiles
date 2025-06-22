@@ -14,6 +14,8 @@ abbr v nvim
 abbr gc "git commit"
 abbr gs "git status"
 abbr gsw "git switch"
+abbr gswms "git switch master"
+abbr gswm "git switch main"
 abbr gst "git stash"
 abbr gomen "git commit --amend"
 abbr gpl "git pull"
@@ -21,6 +23,7 @@ abbr gps "git push"
 abbr master "git fetch && git rebase origin/master"
 abbr mcp "pnpm format && git add . && git commit -m 'make code `prettier`' && git push"
 abbr "pci" "pnpm clean && pnpm install"
+abbr ghpr "gh pr create --assignee zi-dot --draft --fill"
 
 command -qv nvim && alias vim nvim
 
@@ -58,7 +61,6 @@ set -gx PATH $DENO_INSTALL/bin $PATH
 set -gx PNPM_HOME $HOME/Library/pnpm
 set -gx PATH $PNPM_HOME $PATH
 
-source /opt/homebrew/opt/asdf/libexec/asdf.fish
 # status --is-interactive; and rbenv init - fish | source
 
 # cargo
