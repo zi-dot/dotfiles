@@ -119,8 +119,6 @@ setopt prompt_sp
 eval "$(starship init zsh)"
 export GPG_TTY=$(tty)
 
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
-
 # direnv settings
 eval "$(direnv hook zsh)"
 

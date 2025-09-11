@@ -21,14 +21,9 @@ return {
 						link = "FloatBorder",
 					},
 				},
-				direction = "horizontal",
+				direction = "float",
 				shell = "fish",
 			})
 		end,
-		keys = {
-			{ "<C-t>v", ":ToggleTerm direction=vertical<CR>", { noremap = true, silent = true } },
-			{ "<C-t>h", ":ToggleTerm direction=horizontal<CR>", { noremap = true, silent = true } },
-			{ "<C-t>f", ":ToggleTerm direction=float<CR>", { noremap = true, silent = true } },
-		},
 	},
 }

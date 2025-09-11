@@ -87,6 +87,7 @@ return {
 			"williamboman/mason.nvim",
 			"nvimdev/lspsaga.nvim",
 			"neovim/nvim-lspconfig",
+			"saghen/blink.cmp",
 		},
 		init = function()
 			require("lspconfig.ui.windows").default_options.border = "rounded"
@@ -118,12 +119,12 @@ return {
 					},
 				})
 
-			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 			local default_capabilities = vim.lsp.protocol.make_client_capabilities()
 			local opts = {
 				on_init = on_init,
 				on_attach = on_attach,
-				capabilities = cmp_nvim_lsp.default_capabilities(default_capabilities),
+				capabilities = require("blink.cmp").get_lsp_capabilities(default_capabilities),
+				-- capabilities = require("cmp_nvim_lsp").default_capabilities(default_capabilities),
 			}
 
 			vim.lsp.config("*", opts)

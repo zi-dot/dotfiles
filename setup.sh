@@ -27,7 +27,7 @@ brew install --cask google-drive
 
 brew install direnv
 
-brew install asdf
+brew install mise
 
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \                                                                             
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -73,10 +73,10 @@ ln -sf ~/dotfiles/.config/nvim ~/.config/nvim
 
 ln -sf ~/dotfiles/.config/fish/config-osx.fish ~/.config/fish/config-osx.fish
 
-ln -sf ~/dotfiles/hyper/.hyper.js ~/.hyper.js
-ln -sf ~/dotfiles/hyper/package.json ~/.hyper_plugins/package.json
-
 ln -sf ~/dotfiles/wezterm/wezterm.lua ~/.wezterm.lua
+
+ln -sf ~/dotfiles/.config/zellij/config.kdl ~/.config/zellij/config.kdl
+ln -sf ~/dotfiles/.config/ghostty/config ~/.config/ghostty/config
 
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 git config --global interactive.diffFilter "diff-so-fancy --patch"

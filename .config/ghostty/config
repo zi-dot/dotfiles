@@ -1,0 +1,6 @@
+macos-option-as-alt = true
+
+font-family = HackGen35 Console
+font-feature = -dlig
+
+alpha-blending = linear

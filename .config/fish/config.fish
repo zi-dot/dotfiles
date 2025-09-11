@@ -66,3 +66,8 @@ set -gx PATH $PNPM_HOME $PATH
 # cargo
 set -gx PATH $HOME/.cargo/bin $PATH
 eval "$(mise activate)"
+
+# Gemini
+set -gx GOOGLE_GENAI_USE_VERTEXAI true
+set -gx GOOGLE_CLOUD_PROJECT kwit-gemini-api
+set -gx GOOGLE_CLOUD_LOCATION us-central1
