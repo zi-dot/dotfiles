@@ -4,3 +4,8 @@ font-family = HackGen35 Console
 font-feature = -dlig
 
 alpha-blending = linear
+
+# custom-shader = ./shaders/in-game-ctr.glsl
+# custom-shader = ./shaders/tft.glsl
+
+keybind = shift+enter=text:\x1b\r
