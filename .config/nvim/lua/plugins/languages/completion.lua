@@ -8,6 +8,12 @@ return {
 			completion = {
 				accept = { auto_brackets = { enabled = true } },
 				documentation = { auto_show = true, window = { border = "rounded" } },
+				list = {
+					selection = {
+						preselect = false,
+						auto_insert = true,
+					},
+				},
 				menu = {
 					auto_show = true,
 					border = "rounded",
@@ -31,6 +37,12 @@ return {
 			cmdline = {
 				keymap = { preset = "inherit", ["<CR>"] = { "accept_and_enter", "fallback" } },
 				completion = {
+					list = {
+						selection = {
+							preselect = false,
+							auto_insert = true,
+						},
+					},
 					menu = {
 						auto_show = function(ctx)
 							return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())

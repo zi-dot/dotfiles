@@ -65,6 +65,7 @@ return {
 				"actionlint",
 				"astro",
 				"eslint_d",
+				"gdtoolkit",
 				"goimports",
 				"gopls",
 				"lua_ls",
@@ -129,6 +130,10 @@ return {
 
 			vim.lsp.config("*", opts)
 			vim.lsp.enable(require("mason-lspconfig").get_installed_servers())
+
+			-- GDScript LSP (Godot's built-in language server, not from Mason)
+			vim.lsp.config("gdscript", opts)
+			vim.lsp.enable("gdscript")
 
 			-- vim.lsp.config("tsgo", {
 			-- 	cmd = { "tsgo", "--lsp", "--stdio" },
@@ -297,6 +302,7 @@ return {
 					typescript = { "eslint_d", "prettier" },
 					typescriptreact = { "eslint_d", "prettier" },
 					rust = { "rustfmt" },
+					gdscript = { "gdformat" },
 				},
 				format_on_save = {
 					timeout_ms = 5000,
