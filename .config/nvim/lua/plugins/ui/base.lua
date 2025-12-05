@@ -56,38 +56,177 @@ return {
 		main = "ibl",
 	},
 	{
-		"akinsho/bufferline.nvim",
+		"b0o/incline.nvim",
 		event = "VeryLazy",
-		keys = {
-			{ "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
-			{ "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-			{ "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-		},
-		opts = {
-			options = {
-				diagnostics = "nvim_lsp",
-				always_show_bufferline = true,
-				offsets = {
-					{
-						filetype = "neo-tree",
-						text = "Neo-tree",
-						highlight = "Directory",
-						text_align = "left",
-					},
-				},
-			},
-		},
-		config = function(_, opts)
-			require("bufferline").setup(opts)
-			-- Fix bufferline when restoring a session
-			vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
-				callback = function()
-					vim.schedule(function()
-						pcall(nvim_bufferline)
-					end)
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			local devicons = require("nvim-web-devicons")
+
+			-- 一般的すぎるファイル名のリスト
+			local common_filenames = {
+				["index.ts"] = true,
+				["index.tsx"] = true,
+				["index.js"] = true,
+				["index.jsx"] = true,
+				["init.lua"] = true,
+				["mod.rs"] = true,
+				["main.go"] = true,
+				["main.py"] = true,
+			}
+
+			require("incline").setup({
+				render = function(props)
+					local bufname = vim.api.nvim_buf_get_name(props.buf)
+					local filename = vim.fn.fnamemodify(bufname, ":t")
+					if filename == "" then
+						filename = "[No Name]"
+					end
+
+					-- 一般的なファイル名の場合は親ディレクトリも表示
+					local display_name = filename
+					if common_filenames[filename] then
+						local parent = vim.fn.fnamemodify(bufname, ":h:t")
+						display_name = parent .. "/" .. filename
+					end
+
+					local ft_icon, ft_color = devicons.get_icon_color(filename)
+					local modified = vim.bo[props.buf].modified
+
+					-- LSP Diagnosticsを取得
+					local diagnostics = vim.diagnostic.get(props.buf)
+					local errors = #vim.tbl_filter(function(d)
+						return d.severity == vim.diagnostic.severity.ERROR
+					end, diagnostics)
+					local warnings = #vim.tbl_filter(function(d)
+						return d.severity == vim.diagnostic.severity.WARN
+					end, diagnostics)
+					local hints = #vim.tbl_filter(function(d)
+						return d.severity == vim.diagnostic.severity.HINT
+					end, diagnostics)
+					local info = #vim.tbl_filter(function(d)
+						return d.severity == vim.diagnostic.severity.INFO
+					end, diagnostics)
+
+					-- inactiveの場合は存在感を弱める
+					local gui = modified and "bold,italic" or "bold"
+
+					local buffer = { " " }
+
+					-- 診断情報を左側に表示 (Nerd Font icons)
+					local icons = {
+						error = "\u{f057}", -- nf-fa-times_circle (× in circle)
+						warn = "\u{f071}", -- nf-fa-warning (! in triangle)
+						info = "\u{f05a}", -- nf-fa-info_circle (i in circle)
+						hint = "\u{f0eb}", -- nf-fa-lightbulb_o (bulb)
+					}
+					if errors > 0 then
+						table.insert(buffer, { icons.error .. " " .. errors .. " ", guifg = "#e06c75" })
+					end
+					if warnings > 0 then
+						table.insert(buffer, { icons.warn .. " " .. warnings .. " ", guifg = "#e5c07b" })
+					end
+					if info > 0 then
+						table.insert(buffer, { icons.info .. " " .. info .. " ", guifg = "#61afef" })
+					end
+					if hints > 0 then
+						table.insert(buffer, { icons.hint .. " " .. hints .. " ", guifg = "#98c379" })
+					end
+
+					-- ファイルアイコンとファイル名
+					if ft_icon then
+						table.insert(buffer, { ft_icon .. " ", guifg = ft_color })
+					end
+					table.insert(buffer, { display_name, gui = gui, blend = props.focused and 0 or 50 })
+
+					-- 未保存マーク
+					if modified then
+						table.insert(buffer, { " ●", guifg = "#d19a66" })
+					end
+
+					table.insert(buffer, " ")
+					return buffer
 				end,
+				window = {
+					padding = 0,
+					margin = { horizontal = 0, vertical = 0 },
+				},
 			})
 		end,
+	},
+	{
+		"mvllow/modes.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("modes").setup({
+				colors = {
+					copy = "#f5c359",
+					delete = "#c75c6a",
+					insert = "#78ccc5",
+					visual = "#9745be",
+				},
+				line_opacity = 0.15,
+				set_cursor = true,
+				set_cursorline = true,
+				set_number = true,
+				ignore_filetypes = { "NvimTree", "neo-tree", "TelescopePrompt" },
+			})
+		end,
+	},
+	{
+		"WilliamHsieh/overlook.nvim",
+		event = "VeryLazy",
+		keys = {
+			{
+				"<leader>pd",
+				function()
+					require("overlook.api").peek_definition()
+				end,
+				desc = "Peek definition",
+			},
+			{
+				"<leader>pp",
+				function()
+					require("overlook.api").peek_cursor()
+				end,
+				desc = "Peek cursor",
+			},
+			{
+				"<leader>pc",
+				function()
+					require("overlook.api").close_all()
+				end,
+				desc = "Close all peeks",
+			},
+			{
+				"<leader>pu",
+				function()
+					require("overlook.api").restore_popup()
+				end,
+				desc = "Restore popup",
+			},
+			{
+				"<leader>pf",
+				function()
+					require("overlook.api").switch_focus()
+				end,
+				desc = "Switch focus",
+			},
+			{
+				"<leader>ps",
+				function()
+					require("overlook.api").open_in_vsplit()
+				end,
+				desc = "Open in split",
+			},
+			{
+				"<leader>po",
+				function()
+					require("overlook.api").open_in_original_window()
+				end,
+				{ desc = "Open popup in current window" },
+			},
+		},
+		opts = {},
 	},
 	{
 		"j-hui/fidget.nvim",
@@ -126,7 +265,7 @@ return {
 						local recording = vim.fn.reg_recording()
 						local recording_status = ""
 						if recording ~= "" then
-							recording_status = " 🔴 REC @" .. recording
+							recording_status = " \u{f192} REC @" .. recording  -- nf-fa-dot_circle_o
 						end
 
 						return statusline.combine_groups({
@@ -135,12 +274,16 @@ return {
 							"%<", -- Mark general truncate point
 							{ hl = "MiniStatuslineFilename", strings = { filename } },
 							"%=", -- End left alignment
-							{ hl = "MiniStatuslineFileinfo", strings = { recording_status, fileinfo } },
+							{ hl = recording ~= "" and "MiniStatuslineRecording" or "MiniStatuslineFileinfo", strings = { recording_status } },
+							{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
 							{ hl = mode_hl, strings = { search, location } },
 						})
 					end,
 				},
 			})
+
+			-- 録画用ハイライトグループを定義
+			vim.api.nvim_set_hl(0, "MiniStatuslineRecording", { fg = "#e06c75", bold = true })
 
 			-- 録画開始/終了時にステータスラインを更新
 			vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {

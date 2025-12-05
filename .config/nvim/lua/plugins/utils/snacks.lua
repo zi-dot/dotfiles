@@ -96,14 +96,6 @@ return {
 			end,
 			desc = "Search [h]elp",
 		},
-		-- Bufdelete
-		{
-			"<leader>bd",
-			function()
-				Snacks.bufdelete.delete()
-			end,
-			desc = "Delete buffer",
-		},
 		-- Zen
 		{
 			"<leader>zz",
