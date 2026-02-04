@@ -1,0 +1,172 @@
+{
+  "env": {
+    "BASH_DEFAULT_TIMEOUT_MS": "600000",
+    "BASH_MAX_TIMEOUT_MS": "1200000",
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "false",
+    "DISABLE_ERROR_REPORTING": "true",
+    "DISABLE_TELEMETRY": "true"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(* --help *)",
+      "Bash(* --version)",
+      "Bash(* -h *)",
+      "Bash(bat *)",
+      "Bash(cargo *)",
+      "Bash(cat *)",
+      "Bash(chmod *)",
+      "Bash(cp *)",
+      "Bash(curl *)",
+      "Bash(date *)",
+      "Bash(deno *)",
+      "Bash(diff *)",
+      "Bash(direnv *)",
+      "Bash(docker *)",
+      "Bash(docker-compose *)",
+      "Bash(du *)",
+      "Bash(echo *)",
+      "Bash(env)",
+      "Bash(fd *)",
+      "Bash(find *)",
+      "Bash(gh api *)",
+      "Bash(gh issue list *)",
+      "Bash(gh issue view *)",
+      "Bash(gh pr checks *)",
+      "Bash(gh pr create *)",
+      "Bash(gh pr diff *)",
+      "Bash(gh pr list *)",
+      "Bash(gh pr view *)",
+      "Bash(gh run list *)",
+      "Bash(gh run view *)",
+      "Bash(gh run watch *)",
+      "Bash(git add *)",
+      "Bash(git checkout *)",
+      "Bash(git commit *)",
+      "Bash(git diff *)",
+      "Bash(git fetch *)",
+      "Bash(git log *)",
+      "Bash(git ls-tree *)",
+      "Bash(git merge-base *)",
+      "Bash(git mv *)",
+      "Bash(git push *)",
+      "Bash(git reset *)",
+      "Bash(git rev-list *)",
+      "Bash(git rev-parse *)",
+      "Bash(git show *)",
+      "Bash(git stash *)",
+      "Bash(git status *)",
+      "Bash(grep *)",
+      "Bash(head *)",
+      "Bash(jq *)",
+      "Bash(ln *)",
+      "Bash(ls *)",
+      "Bash(lsd *)",
+      "Bash(make *)",
+      "Bash(mise *)",
+      "Bash(mkdir *)",
+      "Bash(mv *)",
+      "Bash(node *)",
+      "Bash(npm *)",
+      "Bash(nvim *)",
+      "Bash(pnpm *)",
+      "Bash(prettier *)",
+      "Bash(ps *)",
+      "Bash(pwd)",
+      "Bash(readlink *)",
+      "Bash(rg *)",
+      "Bash(rm *)",
+      "Bash(sed *)",
+      "Bash(sort *)",
+      "Bash(tail *)",
+      "Bash(tar *)",
+      "Bash(tee *)",
+      "Bash(touch *)",
+      "Bash(tr *)",
+      "Bash(tree *)",
+      "Bash(tsc *)",
+      "Bash(tsx *)",
+      "Bash(vitest *)",
+      "Bash(wc *)",
+      "Bash(which *)",
+      "Bash(whoami)",
+      "Bash(xargs *)",
+      "Bash(zellij *)",
+      "Edit(**)",
+      "Glob(**)",
+      "Grep(**)",
+      "LS(**)",
+      "Read(**)",
+      "Search",
+      "Skill",
+      "Task",
+      "WebFetch(domain:*.github.com)",
+      "WebFetch(domain:developer.mozilla.org)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:localhost)",
+      "WebFetch(domain:npmjs.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:stackoverflow.com)",
+      "WebSearch",
+      "mcp__codex",
+      "mcp__playwright",
+      "mcp__kw_server"
+    ],
+    "deny": [
+      "Bash(cargo publish *)",
+      "Bash(chmod 777 /*)",
+      "Bash(dd *)",
+      "Bash(deno publish *)",
+      "Bash(docker system prune -af)",
+      "Bash(fdisk *)",
+      "Bash(git push --force-with-lease origin main)",
+      "Bash(git push -f origin main)",
+      "Bash(mkfs *)",
+      "Bash(npm publish *)",
+      "Bash(pnpm publish *)",
+      "Bash(rm -rf .git)",
+      "Bash(rm -rf /)",
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf ~)",
+      "Bash(sudo *)",
+      "Edit(//etc/**)",
+      "Edit(~/.ssh/*)",
+      "Write(//etc/**)",
+      "Write(~/.ssh/*)"
+    ]
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/bin/osascript -e 'display notification \"Claude Codeが許可を求めています\" with title \"Claude Code\" subtitle \"確認待ち\" sound name \"Glass\"'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/bin/osascript -e 'display notification \"作業が完了しました\" with title \"Claude Code\" subtitle \"確認してください\" sound name \"Hero\"'"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.js"
+  },
+  "alwaysThinkingEnabled": false,
+  "language": "japanese"
+}
