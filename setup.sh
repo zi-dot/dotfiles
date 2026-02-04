@@ -75,10 +75,9 @@ ln -sf ~/dotfiles/.config/fish/config-osx.fish ~/.config/fish/config-osx.fish
 
 ln -sf ~/dotfiles/wezterm/wezterm.lua ~/.wezterm.lua
 
-mkdir -p ~/.config/zellij/layouts ~/.config/zellij/plugins
+mkdir -p ~/.config/zellij/layouts
 ln -sf ~/dotfiles/.config/zellij/config.kdl ~/.config/zellij/config.kdl
 ln -sf ~/dotfiles/.config/zellij/layouts/default.kdl ~/.config/zellij/layouts/default.kdl
-ln -sf ~/dotfiles/.config/zellij/plugins/zellij-send-keys.wasm ~/.config/zellij/plugins/zellij-send-keys.wasm
 ln -sf ~/dotfiles/.config/ghostty/config ~/.config/ghostty/config
 
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"

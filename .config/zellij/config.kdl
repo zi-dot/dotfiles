@@ -267,6 +267,7 @@ plugins {
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
+    "https://github.com/atani/zellij-send-keys/releases/download/v0.2.0/zellij-send-keys.wasm"
 }
 web_client {
     font "monospace"
