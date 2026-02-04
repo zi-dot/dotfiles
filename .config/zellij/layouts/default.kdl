@@ -1,0 +1,51 @@
+layout {
+  default_tab_template {
+    pane size=1 borderless=true {
+      plugin location="zellij:tab-bar"
+    }
+    children
+    pane size=1 borderless=true {
+      plugin location="zellij:status-bar"
+    }
+  }
+
+  pane_template name="fish" {
+    command "fish"
+  }
+
+  // Claude Code用タブ - 3列2行の6ペイン
+  tab name="claude" {
+    pane split_direction="vertical" {
+      pane split_direction="horizontal" {
+        pane cwd="/Users/ryoji.kono/Documents/dev/knowledgework/code" name="code" command="fish"
+        pane cwd="/Users/ryoji.kono/Documents/dev/knowledgework/code4" name="code4" command="fish"
+      }
+      pane split_direction="horizontal" {
+        pane cwd="/Users/ryoji.kono/Documents/dev/knowledgework/code2" name="code2" command="fish"
+        pane cwd="/Users/ryoji.kono/Documents/dev/knowledgework/code5" name="code5" command="fish"
+      }
+      pane split_direction="horizontal" {
+        pane cwd="/Users/ryoji.kono/Documents/dev/knowledgework/code3" name="code3" command="fish"
+        pane cwd="/Users/ryoji.kono/Documents/dev/knowledgework/code6" name="code6" command="fish"
+      }
+    }
+  }
+
+  // 人間用タブ - 3列2行の6ペイン
+  tab name="human" {
+    pane split_direction="vertical" {
+      pane split_direction="horizontal" {
+        pane cwd="/Users/ryoji.kono/Documents/dev/knowledgework/code" name="code" command="fish"
+        pane cwd="/Users/ryoji.kono/Documents/dev/knowledgework/code4" name="code4" command="fish"
+      }
+      pane split_direction="horizontal" {
+        pane cwd="/Users/ryoji.kono/Documents/dev/knowledgework/code2" name="code2" command="fish"
+        pane cwd="/Users/ryoji.kono/Documents/dev/knowledgework/code5" name="code5" command="fish"
+      }
+      pane split_direction="horizontal" {
+        pane cwd="/Users/ryoji.kono/Documents/dev/knowledgework/code3" name="code3" command="fish"
+        pane cwd="/Users/ryoji.kono/Documents/dev/knowledgework/code6" name="code6" command="fish"
+      }
+    }
+  }
+}
