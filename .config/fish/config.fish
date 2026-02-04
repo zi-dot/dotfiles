@@ -52,7 +52,6 @@ end
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
-    set -x PATH ~/dotfiles/commands/ $PATH
 end
 
 set -gx DENO_INSTALL $HOME/.deno
@@ -65,7 +64,7 @@ set -gx PATH $PNPM_HOME $PATH
 
 # cargo
 set -gx PATH $HOME/.cargo/bin $PATH
-eval "$(mise activate)"
+mise activate fish | source
 
 # Gemini
 set -gx GOOGLE_GENAI_USE_VERTEXAI true

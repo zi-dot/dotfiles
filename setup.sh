@@ -1,84 +1,45 @@
 #!/bin/sh
 
-brew install neovim
-brew uninstall --force node
-brew tap homebrew/cask-fonts
-brew install --cask homebrew/cask-fonts/font-hackgen
-brew install --cask font-hack-nerd-font
-brew install --cask font-zed-mono
-brew install --cask slack
-brew install starship
-brew install diff-so-fancy
-npm install -g typescript typescript-language-server import-js
+# Dotfiles setup script
+# Usage: ./setup.sh [options]
+#   --all           Run all scripts (default)
+#   --packages      Install Homebrew packages only
+#   --tools         Install npm, cargo, fisher tools only
+#   --symlinks      Create symbolic links only
+#   --git           Configure git only
 
-brew install ripgrep
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-brew install deno
-brew install peco jq
-brew install --cask 1password
-brew tap wez/wezterm
-brew install --cask wezterm-nightly --no-quarantine
-brew install --cask raycast
-brew install --cask docker
-brew install --cask visual-studio-code
-brew install --cask google-chrome
-brew install --cask firefox
-brew install --cask google-drive
+run_script() {
+    local script="$1"
+    echo "Running $script..."
+    sh "$SCRIPT_DIR/scripts/$script"
+}
 
-brew install direnv
+case "${1:-all}" in
+    --all|all)
+        run_script "install-packages.sh"
+        run_script "install-tools.sh"
+        run_script "create-symlinks.sh"
+        run_script "configure-git.sh"
+        ;;
+    --packages)
+        run_script "install-packages.sh"
+        ;;
+    --tools)
+        run_script "install-tools.sh"
+        ;;
+    --symlinks)
+        run_script "create-symlinks.sh"
+        ;;
+    --git)
+        run_script "configure-git.sh"
+        ;;
+    *)
+        echo "Unknown option: $1"
+        echo "Usage: ./setup.sh [--all|--packages|--tools|--symlinks|--git]"
+        exit 1
+        ;;
+esac
 
-brew install mise
-
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \                                                                             
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-brew install python3
-pip3 install --user pynvim
-
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
-
-brew install lsd
-brew install wget
-brew install rust
-
-curl -fsSL https://get.pnpm.io/install.sh | sh -
-
-export PNPM_HOME="/Users/zi/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-
-ln -sf ~/dotfiles/.zprezto/runcoms/zshrc ~/.zshrc
-ln -sf ~/dotfiles/.zprezto/runcoms/zshenv ~/.zshenv
-ln -sf ~/dotfiles/.zprezto/runcoms/zprofile ~/.zprofile
-ln -sf ~/dotfiles/.zprezto/runcoms/zpreztorc ~/.zpreztorc
-ln -sf ~/dotfiles/.zprezto/runcoms/zlogout ~/.zlogout
-ln -sf ~/dotfiles/.zprezto/runcoms/zlogin ~/.zlogin
-
-ln -sf ~/dotfiles/.vim ~/.vim
-ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
-ln -sf ~/dotfiles/.tmux.powerline.conf ~/.tmux.powerline.conf
-
-npm install -g prettier
-cargo install stylua
-
-brew install fish
-curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-fish -c "fisher install ilancosman/tide"
-fish -c "fisher install jethrokuan/z"
-fish -c "fisher install jethrokuan/fzf"
-
-ln -sf ~/dotfiles/.config/fish/config.fish ~/.config/fish/config.fish
-ln -sf ~/dotfiles/.config/nvim ~/.config/nvim
-
-ln -sf ~/dotfiles/.config/fish/config-osx.fish ~/.config/fish/config-osx.fish
-
-ln -sf ~/dotfiles/wezterm/wezterm.lua ~/.wezterm.lua
-
-mkdir -p ~/.config/zellij/layouts
-ln -sf ~/dotfiles/.config/zellij/config.kdl ~/.config/zellij/config.kdl
-ln -sf ~/dotfiles/.config/zellij/layouts/default.kdl ~/.config/zellij/layouts/default.kdl
-ln -sf ~/dotfiles/.config/ghostty/config ~/.config/ghostty/config
-
-git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
-git config --global interactive.diffFilter "diff-so-fancy --patch"
+echo "Setup completed!"
