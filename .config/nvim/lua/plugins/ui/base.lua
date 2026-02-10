@@ -159,16 +159,16 @@ return {
 		config = function()
 			require("modes").setup({
 				colors = {
-					copy = "#f5c359",
-					delete = "#c75c6a",
-					insert = "#78ccc5",
-					visual = "#9745be",
+					copy = "#ffdd55",    -- 明るい黄色
+					delete = "#ff6b6b",  -- 明るい赤
+					insert = "#5cffb7",  -- 明るい緑
+					visual = "#e0d0ff",  -- 淡い紫（白に近い）
 				},
 				line_opacity = 0.15,
 				set_cursor = true,
 				set_cursorline = true,
 				set_number = true,
-				ignore_filetypes = { "NvimTree", "neo-tree", "TelescopePrompt" },
+				ignore = { "NvimTree", "neo-tree", "TelescopePrompt" },
 			})
 		end,
 	},
