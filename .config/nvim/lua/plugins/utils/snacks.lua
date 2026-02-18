@@ -20,13 +20,7 @@ return {
 		zen = {
 			enabled = true,
 		},
-		scroll = {
-			enabled = true,
-			animate = {
-				duration = { step = 10, total = 400 },
-				easing = "linear",
-			},
-		},
+		scroll = { enabled = false },
 	},
 	keys = {
 		-- Buffers and Files
